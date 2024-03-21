@@ -1,6 +1,6 @@
 # Lab07 - Lab Server Core & Remote Administrator Tools
 
-### joining fs01-nathan to domain
+### Join fs01-nathan to domain
 
 * `sconfig` - server configuration
 * edit default configs to match the screenshots below

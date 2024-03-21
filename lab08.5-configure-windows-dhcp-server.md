@@ -1,3 +1,9 @@
+---
+description: >-
+  In this lab, we configured a Windows DHCP Server on FS01, which is accessible
+  via AD02 RSAT
+---
+
 # Lab08.5 - Configure Windows DHCP Server
 
 ## Install DHCP on FS01

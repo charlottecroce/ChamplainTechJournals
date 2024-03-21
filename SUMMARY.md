@@ -10,3 +10,5 @@
 * [Lab07 - Lab Server Core & Remote Administrator Tools](lab07-lab-server-core-and-remote-administrator-tools.md)
 * [Lab08 - Apache](lab08-apache.md)
 * [Lab08.5 - Configure Windows DHCP Server](lab08.5-configure-windows-dhcp-server.md)
+* [Lab09 - BASH Scripting](lab09-bash-scripting.md)
+* [Lab10 - PowerShell](lab10-powershell.md)

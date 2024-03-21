@@ -1,6 +1,6 @@
 # Lab07 - Lab Server Core & Remote Administrator Tools
 
-### Join fs01-nathan to domain
+### Join FS01-nathan to domain
 
 * `sconfig` - server configuration
 * edit default configs to match the screenshots below
@@ -9,24 +9,24 @@
 
 * join domain nathan.local using nathan.croce-adm user
 
-### Allowing ad02 remote access to fs01
+### Allow AD02 remote access to FS01
 
-* on ad02 - server manager - manage - add roles and features
+* on AD02 - server manager - manage - add roles and features
 * skip to features section
 * check remote server administration tools / role administration tools / file services tools / file server resource manager tools
 * install
-* add fs01 to all servers
+* add FS01 to all servers
 
 ### Use RSAT to add to FS01 and create a Sales Users share
 
-* on ad02 - all servers - rc fs01 - add roles and features
+* on AD02 - all servers - rc FS01 - add roles and features
 * skip to server roles
 * file and storage services / file and iSCSI services / check file server & file server resource manager
 * install
 * Run the following Net Shell command on fs01 to open the firewall for managing the File Server `netsh advfirewall firewall set rule group=”Remote File Server Resource Manager Management” new enable=yes`
-* on ad02 - server manager - file and storage services - servers - rc fs01 - file server resource manager
-* on ad02 - server manager - file and storage services - shares - new share
-* SMB quick share - located on fs01
+* on AD02 - Server Manager - file and storage services - servers - rc fs01 - file server resource manager
+* on AD02 - Server Manager - file and storage services - shares - new share
+* SMB quick share - located on FS01
 
 ![image](https://github.com/nathancroce/TechJournalsSYS-255/assets/90940521/0f0e8792-547e-4d09-b136-416cc68f8a48)
 
@@ -37,7 +37,7 @@
 
 ### mapping network share to drive letter
 
-* on ad02 - group policy management - ... - SYS255 - groups - Create GPO and link it here (I name it 'Mapped Drive')
+* on AD02 - group policy management - ... - SYS255 - groups - Create GPO and link it here (I name it 'Mapped Drive')
 * check enforced on the GPO (not shown in ss below)
 
 ![image](https://github.com/nathancroce/TechJournalsSYS-255/assets/90940521/c41c4ff7-9c7e-48e3-8531-3cc93e995dd7)

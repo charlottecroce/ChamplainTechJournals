@@ -1,3 +1,7 @@
+---
+description: In this lab, we set up an Apache web server on WEB01
+---
+
 # Lab08 - Apache
 
 ## Apache Server Installation & Configuration

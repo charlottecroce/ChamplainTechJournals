@@ -12,3 +12,5 @@
 * [Lab08.5 - Configure Windows DHCP Server](lab08.5-configure-windows-dhcp-server.md)
 * [Lab09 - BASH Scripting](lab09-bash-scripting.md)
 * [Lab10 - PowerShell](lab10-powershell.md)
+* [Lab 11 -CMS](lab-11-cms.md)
+* [Lab12 - Automation](lab12-automation.md)

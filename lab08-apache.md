@@ -15,12 +15,15 @@ description: In this lab, we set up an Apache web server on WEB01
 
 ### Install httpd
 
-* `yum install httpd`
-* `firewall-cmd --add-service=http --permanent`
-* `firewall-cmd --add-service=https --permanent`
-* `firewall-cmd --reload`
-* `systemctl start httpd`
-* `systemctl enable httpd`
+```bash
+sudo yum install httpd && \
+sudo firewall-cmd --add-service=http --permanent && \
+sudo firewall-cmd --add-service=https --permanent && \
+sudo firewall-cmd --reload && \
+sudo systemctl start httpd && \
+sudo systemctl enable httpd
+```
+
 * comment out all lines in `/etc/httpd/conf.d/welcome.conf`
 * add _index.html_ file to `/var/www/html/`
 * the contents of _index.html_ should be what searching `http://web01-nathan` in a browser will give you

@@ -8,10 +8,6 @@ description: >-
 
 {% embed url="https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-on-centos-7" %}
 
-## php is not working rn, fix this first
-
-
-
 * connect blog-01 to network (you should be good at this by now)
 * remember DNS!
 * install [Apache](lab08-apache.md)
@@ -41,10 +37,20 @@ exit
 ```
 {% endcode %}
 
+* install PHP
+
+```bash
+yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum install yum-utils
+yum-config-manager --enable remi-php74
+yum update
+sudo yum install php php-gd php-mysql
+php -v
+```
+
 * install WordPress
 
 ```bash
-sudo yum install php-gd
 sudo service httpd restart
 cd ~
 wget http://wordpress.org/latest.tar.gz
@@ -64,8 +70,4 @@ nano wp-config.php
 <figure><img src=".gitbook/assets/wordpressdbss.PNG" alt=""><figcaption></figcaption></figure>
 
 * on WKS, go to http://blog01-nathan/readme.html
-
-
-
-
-
+* follow the installation steps

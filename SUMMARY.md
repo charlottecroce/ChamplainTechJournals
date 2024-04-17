@@ -14,3 +14,4 @@
 * [Lab10 - PowerShell](lab10-powershell.md)
 * [Lab 11 -CMS](lab-11-cms.md)
 * [Lab12 - Automation](lab12-automation.md)
+* [Lab13 - WordPress on Windows Server](lab13-wordpress-on-windows-server.md)

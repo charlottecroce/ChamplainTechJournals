@@ -4,7 +4,7 @@ description: >-
   server
 ---
 
-# Lab13 - WordPress on Windows Server
+# Lab13 - WordPress on Windows
 
 ### MySQL
 
@@ -23,7 +23,7 @@ description: >-
 
 <figure><img src=".gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
 
-### Install PHP
+### PHP
 
 * go to https://windows.php.net/download
 * download the non thread safe zip
@@ -50,12 +50,14 @@ description: >-
 
 
 
-### Install phpmyadmin
+### Install PHPMyAdmin
 
 * go to phpmyadmin.net
 * download the zip on the top right of the page
 
-### Install C++ from Microsoft
+### C++ and URL Rewrite
+
+* download from Microsoft and run the installer
 
 ### Internet Information Services (IIS)
 
@@ -76,7 +78,32 @@ description: >-
 
 * Go to http://localhost to check if IIS is running
 * Tools -> Internet Information Services (IIS) Manager
-*
+* Handler Mappings
+* Add Module Mapping...
 
+<figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
+<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+* IIS Manager -> default documents -> add index.php to top priority
+* IIS Manager -> FastCGI Settings -> Environment Variables
+
+<figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+* IIS Manager -> Application Pools -> Add Application pool... -> name it Wordpress (keep defaults)
+* rc Wordpress -> Set Application Pool Defaults -> Application Pool Identity
+* Sites -> Default Web Site -> Basic Settings...
+
+<figure><img src=".gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+### Install WordPress!!!!
+
+* download zip from website
+* extract into C:\inetpub\wwwroot
+* rename to just wordpress
+* copy paste all files to the root wordpress folder, then delete the internal wordpress folder
+* rename wp-config-sample.php to wp-config.php
+* edit with notepad
+
+<figure><img src=".gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 

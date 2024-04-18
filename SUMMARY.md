@@ -12,6 +12,6 @@
 * [Lab08.5 - Configure Windows DHCP Server](lab08.5-configure-windows-dhcp-server.md)
 * [Lab09 - BASH Scripting](lab09-bash-scripting.md)
 * [Lab10 - PowerShell](lab10-powershell.md)
-* [Lab 11 -CMS](lab-11-cms.md)
+* [Lab 11 - WordPress on Linux](lab-11-wordpress-on-linux.md)
 * [Lab12 - Automation](lab12-automation.md)
-* [Lab13 - WordPress on Windows Server](lab13-wordpress-on-windows-server.md)
+* [Lab13 - WordPress on Windows](lab13-wordpress-on-windows.md)

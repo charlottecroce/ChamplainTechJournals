@@ -45,10 +45,9 @@ description: >-
   * cgi.fix\_pathinfo = 1
   * fastcgi.impersonate = 1
   * fastcgi.logging = 0
+  * extension\_dir = "ext"
   * extension=mysqli
   * extension=pdo\_mysql
-
-
 
 ### Install PHPMyAdmin
 

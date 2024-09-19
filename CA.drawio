@@ -1,9 +1,147 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" version="24.7.14">
   <diagram name="Page-1" id="AiL7bZ7KbTt2Lz5zMGhq">
-    <mxGraphModel>
+    <mxGraphModel dx="1434" dy="732" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="550" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="5FGAoFtcvU65pEh_txBX-4" value="Certificate Authority" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-5" value="Web Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="365" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-7" value="1. Generate a private key" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="20" y="120" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-8" value="2. Generate a self-signed&amp;nbsp;&lt;div&gt;certificate,&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;using that private key&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="15" y="190" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-9" value="" style="points=[[0,0.5,0],[0.24,0,0],[0.5,0.28,0],[0.995,0.475,0],[0.5,0.72,0],[0.24,1,0]];verticalLabelPosition=bottom;sketch=0;html=1;verticalAlign=top;aspect=fixed;align=center;pointerEvents=1;shape=mxgraph.cisco19.key;fillColor=#005073;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="75" y="150" width="50" height="22.5" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-10" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.certificate_manager_2;fillColor=#759C3E;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="150" y="230" width="60" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-11" value="" style="points=[[0,0.5,0],[0.24,0,0],[0.5,0.28,0],[0.995,0.475,0],[0.5,0.72,0],[0.24,1,0]];verticalLabelPosition=bottom;sketch=0;html=1;verticalAlign=top;aspect=fixed;align=center;pointerEvents=1;shape=mxgraph.cisco19.key;fillColor=#005073;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="25" y="240.25" width="50" height="22.5" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-12" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="90" y="251" as="sourcePoint" />
+            <mxPoint x="140" y="250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-13" value="3. Generate a private key" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="345" y="283" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-15" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Key.svg;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="410" y="300" width="31" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-17" value="&lt;div&gt;4. Generate a certificate&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;signing&amp;nbsp;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;request,&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;using that private key&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="325" y="366" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-21" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="334" y="410" width="74.5" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-19" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/App_Service_Certificates.svg;" vertex="1" parent="5FGAoFtcvU65pEh_txBX-21">
+          <mxGeometry x="4.5" width="70" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-20" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/iconoir-vol-3/24/question-mark-circle-128.png" vertex="1" parent="5FGAoFtcvU65pEh_txBX-21">
+          <mxGeometry y="20" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-25" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="442" as="sourcePoint" />
+            <mxPoint x="130" y="442" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-26" value="5. Copy the CSR&amp;nbsp;&lt;div&gt;to the CA server&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="150" y="370" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-27" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="40" y="410" width="74.5" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-28" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/App_Service_Certificates.svg;" vertex="1" parent="5FGAoFtcvU65pEh_txBX-27">
+          <mxGeometry x="4.5" width="70" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-29" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/iconoir-vol-3/24/question-mark-circle-128.png" vertex="1" parent="5FGAoFtcvU65pEh_txBX-27">
+          <mxGeometry y="20" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-31" value="&lt;div&gt;6. Sign the CSR using the CA certificate&amp;nbsp;&lt;/div&gt;&lt;div&gt;and the CA’s private key&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="15" y="503" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-32" value="" style="outlineConnect=0;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;shape=mxgraph.aws3.certificate_manager_2;fillColor=#759C3E;gradientColor=none;" vertex="1" parent="1">
+          <mxGeometry x="120" y="557" width="60" height="53" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-33" value="" style="points=[[0,0.5,0],[0.24,0,0],[0.5,0.28,0],[0.995,0.475,0],[0.5,0.72,0],[0.24,1,0]];verticalLabelPosition=bottom;sketch=0;html=1;verticalAlign=top;aspect=fixed;align=center;pointerEvents=1;shape=mxgraph.cisco19.key;fillColor=#005073;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="205" y="572.25" width="50" height="22.5" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-34" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="25" y="560" width="74.5" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-35" value="" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/App_Service_Certificates.svg;" vertex="1" parent="5FGAoFtcvU65pEh_txBX-34">
+          <mxGeometry x="4.5" width="70" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-36" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/iconoir-vol-3/24/question-mark-circle-128.png" vertex="1" parent="5FGAoFtcvU65pEh_txBX-34">
+          <mxGeometry y="20" width="40" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-38" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=0.621;exitY=1.063;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="5FGAoFtcvU65pEh_txBX-35">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="64.5" y="644.75" as="sourcePoint" />
+            <mxPoint x="120" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-39" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="5FGAoFtcvU65pEh_txBX-32">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="83" y="638" as="sourcePoint" />
+            <mxPoint x="120" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-40" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="230" y="600" as="sourcePoint" />
+            <mxPoint x="130" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-42" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#505050;shape=mxgraph.mscae.intune.certificate" vertex="1" parent="1">
+          <mxGeometry x="85" y="710" width="75" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-44" value="&lt;div&gt;7. Transfer the signed certificate&amp;nbsp;&lt;/div&gt;&lt;div&gt;to the Web Server&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="280" y="680" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-45" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="180" y="750" as="sourcePoint" />
+            <mxPoint x="420" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-46" value="" style="endArrow=none;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="810" as="sourcePoint" />
+            <mxPoint x="280" y="40" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-47" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#505050;shape=mxgraph.mscae.intune.certificate" vertex="1" parent="1">
+          <mxGeometry x="441" y="720" width="75" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-48" value="8. Configure the website to&amp;nbsp;&lt;div&gt;use the signed certificate&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="295" y="820" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-49" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#434445;aspect=fixed;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.vvd.web_browser;" vertex="1" parent="1">
+          <mxGeometry x="334" y="900" width="151" height="107.21" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-50" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;fillColor=#505050;shape=mxgraph.mscae.intune.certificate" vertex="1" parent="1">
+          <mxGeometry x="320" y="880" width="55" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-51" value="" style="image;sketch=0;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/mscae/Key.svg;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="485" y="410" width="31" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="5FGAoFtcvU65pEh_txBX-52" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460" y="435.5" as="sourcePoint" />
+            <mxPoint x="420" y="435" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>

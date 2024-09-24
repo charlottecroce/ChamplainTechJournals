@@ -18,7 +18,7 @@ description: In this lab, we explored basic BASH scripting
 
 * Ping sweeper script
 
-<figure><img src=".gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
 
 * nslookup script
 

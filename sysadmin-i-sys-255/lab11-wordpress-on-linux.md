@@ -4,13 +4,13 @@ description: >-
   machine
 ---
 
-# SYS255: Lab 11 - WordPress on Linux
+# Lab11 - WordPress on Linux
 
 {% embed url="https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-on-centos-7" %}
 
 * connect blog-01 to network (you should be good at this by now)
 * remember DNS!
-* install [Apache](sys255-lab08-apache.md)
+* install [Apache](lab08-apache.md)
 * install MySQL
 
 ```bash
@@ -67,7 +67,7 @@ cp wp-config-sample.php wp-config.php
 nano wp-config.php
 ```
 
-<figure><img src=".gitbook/assets/wordpressdbss.PNG" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/wordpressdbss.PNG" alt=""><figcaption></figcaption></figure>
 
 * on WKS, go to http://blog01-nathan/readme.html
 * follow the installation steps

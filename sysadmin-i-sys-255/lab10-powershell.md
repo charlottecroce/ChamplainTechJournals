@@ -20,10 +20,10 @@ description: In this lab, we explored basic PowerShell scripting
 
 * `Enter-PSSession -ComputerName <computername>` - interactive remote session
 
-<figure><img src=".gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (17).png" alt=""><figcaption></figcaption></figure>
 
 * `Invoke-Command -ComputerName <computername> -ScriptBlock { <command> }` - launch a command remotely
 
-<figure><img src=".gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
 * `Enable-PSRemoting` - allows remote commands to be executed on this machine

@@ -4,13 +4,13 @@ description: >-
   machine
 ---
 
-# Lab 11 -CMS
+# SYS255: Lab 11 - WordPress on Linux
 
 {% embed url="https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-on-centos-7" %}
 
 * connect blog-01 to network (you should be good at this by now)
 * remember DNS!
-* install [Apache](lab08-apache.md)
+* install [Apache](sys255-lab08-apache.md)
 * install MySQL
 
 ```bash

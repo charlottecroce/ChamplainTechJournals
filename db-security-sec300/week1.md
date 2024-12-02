@@ -6,7 +6,7 @@ Summary: Set up mysql, basic queries
 
 * `sudo apt-get install mysql-server`
 
-![](https://github.com/user-attachments/assets/343d1a58-21fa-4b0d-8a37-7576de60c458)
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdPFliHfcxJyOK9EcpTFg086E21yXVxgJZz5gXCXbOkiw8qH8kulFJy4MyjKOoJomBoFtsGkVgGWAMp5z3DMis_Hda2otT6KUCnSJhrDi6sZzykgYYmX3bsgqhLme2bggCzbXi1?key=aDi9OQh-ufWQEzuXd3URpoOQ)
 
 * change bind address via `/etc/mysql/mysql.conf.d/mysqld.cnf`
 

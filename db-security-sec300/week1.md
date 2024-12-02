@@ -33,23 +33,23 @@ PRIMARY KEY (id)
 
 * show table: `DESCRIBE requests;`
 
-![](https://github.com/user-attachments/assets/cc6d2395-e631-4c69-a586-5cea6691d0a2)
+<div align="left"><img src="https://github.com/user-attachments/assets/cc6d2395-e631-4c69-a586-5cea6691d0a2" alt=""></div>
 
 * add data to table: `INSERT INTO requests (fname, email, rdate, uid) VALUES ( 'dummy', 'dummy@dummy.edu', '2024-11-12', 'nsk31fhenfJF024');`
 
-![](https://github.com/user-attachments/assets/060e33d0-03e7-487a-99bd-405356b81628)
+<div align="left"><img src="https://github.com/user-attachments/assets/060e33d0-03e7-487a-99bd-405356b81628" alt=""></div>
 
 ### HW
 
-![](https://github.com/user-attachments/assets/e1886507-5613-4989-b671-a33d393fd9c3)
+<div align="left"><img src="https://github.com/user-attachments/assets/e1886507-5613-4989-b671-a33d393fd9c3" alt=""></div>
 
-![](https://github.com/user-attachments/assets/17cdb1f0-fc18-40fd-900c-e8c31c6c9a25)
+<div align="left"><img src="https://github.com/user-attachments/assets/17cdb1f0-fc18-40fd-900c-e8c31c6c9a25" alt=""></div>
 
-![](https://github.com/user-attachments/assets/3bc52487-c0b8-4ffb-97a5-7c7e710c98bb)
+<div align="left"><img src="https://github.com/user-attachments/assets/3bc52487-c0b8-4ffb-97a5-7c7e710c98bb" alt=""></div>
 
-![](https://github.com/user-attachments/assets/b27c875f-d20f-4147-9846-fd97adbabc2a)
+<div align="left"><img src="https://github.com/user-attachments/assets/b27c875f-d20f-4147-9846-fd97adbabc2a" alt=""></div>
 
-![](https://github.com/user-attachments/assets/04fe45c1-6fc0-44b5-a780-adf70eb295d7)
+<div align="left"><img src="https://github.com/user-attachments/assets/04fe45c1-6fc0-44b5-a780-adf70eb295d7" alt=""></div>
 
 1: Write an SQL query that displays name and birth of cats whose names are Siggy
 

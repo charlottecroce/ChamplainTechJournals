@@ -1,7 +1,6 @@
 # Table of contents
 
-* [Page](README.md)
-* [SYSADMIN I: SYS 255](<README (1).md>)
+* [SYSADMIN I: SYS 255](README.md)
   * [\_Network Configuration](sysadmin-i-sys-255/_network-configuration.md)
   * [Lab01 - Environment Setup](sysadmin-i-sys-255/lab01-environment-setup.md)
   * [Lab02 - DNS+ADDS Role](sysadmin-i-sys-255/lab02-dns+adds-role.md)
@@ -17,9 +16,7 @@
   * [Lab11 - WordPress on Linux](sysadmin-i-sys-255/lab11-wordpress-on-linux.md)
   * [Lab12 - Automation](sysadmin-i-sys-255/lab12-automation.md)
   * [Lab13 - WordPress on Windows](sysadmin-i-sys-255/lab13-wordpress-on-windows.md)
-
-## DB Security: SEC300
-
-* [Week1](db-security-sec300/week1.md)
-* [Week2](db-security-sec300/week2.md)
-* [Week3](db-security-sec300/week3.md)
+* [DB Security: SEC300](db-security-sec300/README.md)
+  * [Week1](db-security-sec300/week1.md)
+  * [Week2](db-security-sec300/week2.md)
+  * [Week3](db-security-sec300/week3.md)

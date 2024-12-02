@@ -80,14 +80,14 @@ description: >-
 * Handler Mappings
 * Add Module Mapping...
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 * IIS Manager -> default documents -> add index.php to top priority
 * IIS Manager -> FastCGI Settings -> Environment Variables
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 * IIS Manager -> Application Pools -> Add Application pool... -> name it Wordpress (keep defaults)
 * rc Wordpress -> Set Application Pool Defaults -> Application Pool Identity

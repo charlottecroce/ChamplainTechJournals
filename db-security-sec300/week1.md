@@ -8,10 +8,7 @@ Summary: Set up mysql, basic queries
 
 ![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdPFliHfcxJyOK9EcpTFg086E21yXVxgJZz5gXCXbOkiw8qH8kulFJy4MyjKOoJomBoFtsGkVgGWAMp5z3DMis_Hda2otT6KUCnSJhrDi6sZzykgYYmX3bsgqhLme2bggCzbXi1?key=aDi9OQh-ufWQEzuXd3URpoOQ)
 
-* change bind address via `/etc/mysql/mysql.conf.d/mysqld.cnf`
-
-![](https://github.com/user-attachments/assets/a3e74ced-e150-4892-b6e4-2945edbc1aac)
-
+* change bind address via `/etc/mysql/mysql.conf.d/mysqld.cnf`![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXeGjZtbVFOHn9cjlkkew7w_A0YNNaGV5XepJ15r091W4LaWaj51D4BBdPFjT5N2TV6hhuMhYUaBPsrtPg9NfMVwhWyAK18DrNFUqG3HYBcgamPCs45LGOFHl2zGWdaO9t0-fLY?key=aDi9OQh-ufWQEzuXd3URpoOQ)
 * remember! `sudo systemctl restart mysql`
 * default password is found in `/etc/mysql/debian.cnf`
 * first login: `sudo mysql -u root -p`
@@ -33,23 +30,13 @@ PRIMARY KEY (id)
 
 * show table: `DESCRIBE requests;`
 
-<div align="left"><img src="https://github.com/user-attachments/assets/cc6d2395-e631-4c69-a586-5cea6691d0a2" alt=""></div>
+![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXdlvLE49RvjHQiyucG79dyVIohHu3qnyrDPOEFOOvUJEhIb8bxhtCT7ba8SkgWT-nVApwqg22IDQ5w8hx1TNCiSlhA9HMIgE_4mMvw8Ji-lz7CKvN33oG-ZdxW6NzVwJk_Vkcn8?key=aDi9OQh-ufWQEzuXd3URpoOQ)
 
-* add data to table: `INSERT INTO requests (fname, email, rdate, uid) VALUES ( 'dummy', 'dummy@dummy.edu', '2024-11-12', 'nsk31fhenfJF024');`
-
-<div align="left"><img src="https://github.com/user-attachments/assets/060e33d0-03e7-487a-99bd-405356b81628" alt=""></div>
+* add data to table: `INSERT INTO requests (fname, email, rdate, uid) VALUES ( 'dummy', 'dummy@dummy.edu', '2024-11-12', 'nsk31fhenfJF024');`![](https://lh7-rt.googleusercontent.com/docsz/AD_4nXc_GuGlbOQitjuCJbrgURaAGcqcndwuWmBpjxnpkbHUQ6x58zJtF2Q_xA9PyCKEbs9aOsatZAL6u80-fQHTBI1Eca5HpWurp8hSwfLD5sL_JoQNfaYJ8u8OwWmcbtxMDlZ2yFbI?key=aDi9OQh-ufWQEzuXd3URpoOQ)
 
 ### HW
 
-<div align="left"><img src="https://github.com/user-attachments/assets/e1886507-5613-4989-b671-a33d393fd9c3" alt=""></div>
-
-<div align="left"><img src="https://github.com/user-attachments/assets/17cdb1f0-fc18-40fd-900c-e8c31c6c9a25" alt=""></div>
-
-<div align="left"><img src="https://github.com/user-attachments/assets/3bc52487-c0b8-4ffb-97a5-7c7e710c98bb" alt=""></div>
-
-<div align="left"><img src="https://github.com/user-attachments/assets/b27c875f-d20f-4147-9846-fd97adbabc2a" alt=""></div>
-
-<div align="left"><img src="https://github.com/user-attachments/assets/04fe45c1-6fc0-44b5-a780-adf70eb295d7" alt=""></div>
+![](<../.gitbook/assets/image (2).png>)
 
 1: Write an SQL query that displays name and birth of cats whose names are Siggy
 

@@ -2,7 +2,7 @@
 
 * [Page](README.md)
 * [SYSADMIN I: SYS 255](<README (1).md>)
-  * [\_Network Configuration](sysadmin-i-sys-255/_network-configuration.md)
+  * [0\_Network Configuration](sysadmin-i-sys-255/0_network-configuration.md)
   * [Lab01 - Environment Setup](sysadmin-i-sys-255/lab01-environment-setup.md)
   * [Lab02 - DNS+ADDS Role](sysadmin-i-sys-255/lab02-dns+adds-role.md)
   * [Lab03 - Linux](sysadmin-i-sys-255/lab03-linux.md)

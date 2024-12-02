@@ -16,3 +16,9 @@
   * [Lab11 - WordPress on Linux](sysadmin-i-sys-255/lab11-wordpress-on-linux.md)
   * [Lab12 - Automation](sysadmin-i-sys-255/lab12-automation.md)
   * [Lab13 - WordPress on Windows](sysadmin-i-sys-255/lab13-wordpress-on-windows.md)
+
+## DB Security: SEC300
+
+* [Week1](db-security-sec300/week1.md)
+* [Week2](db-security-sec300/week2.md)
+* [Week3](db-security-sec300/week3.md)

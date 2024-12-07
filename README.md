@@ -1,2 +1,3 @@
-# SYSADMIN I: SYS 255
+# Champlain College Tech Journals
+
 

@@ -16,10 +16,10 @@ net adapter 2: LAN
 
 IP address: 10.0.5.100\
 Default Gateway: 10.0.5.2\
-DNS: 10.0.5.6
+DNS: 10.0.5.2
 
 ### ad01-charlotte - Windows server
 
-IP Address: 10.0.5.6\
+IP Address: 10.0.5.5\
 Gateway: 10.0.5.2\
 DNS 10.0.5.2

@@ -45,14 +45,15 @@ Select Option 2 again.
 - Do you want to enable the DHCP server on LAN?: **n**
 - Do you want to revert to HTTP as the webConfigurator protocol? : **n**
 
-![alt text](screenshots/image.png)
+![image](https://github.com/user-attachments/assets/5bde20db-9f06-4891-b5f1-22cea0ab2014)
 
 
 ### GUI (web)
 The default username/password is admin/pfsense
 
-![alt text](image.png)
-![alt text](image-1.png)
+![image](https://github.com/user-attachments/assets/cb27b4f7-abd2-489e-a465-fadf7005c57a)
+![image](https://github.com/user-attachments/assets/1ea4dc4a-a2e4-4518-ae35-6ad320a8cf06)
+
 
 new admin password: password123
 

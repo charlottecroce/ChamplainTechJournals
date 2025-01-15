@@ -1,10 +1,4 @@
-
-
-### vSphere
-
-https://vcenter02.cyber.local\
-Username: charlotte.croce@cyber.local\
-Password: cyber.local password
+# SYS265 - Network Configuration
 
 ## pfsense router/gateway/firewall
 upstream gateway: 10.0.17.2

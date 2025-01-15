@@ -6,9 +6,7 @@ description: >-
 
 # Lab01 - Environment Setup
 
-
 ## Add a Network Adapters in VSphere:
-
 - Power off the machine
 - VM Hardware Section -> Edit
 - Add New Device -> Network Adapter
@@ -16,9 +14,9 @@ description: >-
 
 
 ## FW01
-Before powering on, check network interface configuration (1:WAN   2:LAN)
+Before powering on, check the network interface configuration (1:WAN   2:LAN)
 
-Configure IP Addresses
+### Configure IP Addresses
 - Should VLANs be set up no: **n**
 - Enter the WAN interface name: **em0**
 - Enter the LAN interface name:**em1**
@@ -48,36 +46,36 @@ Select Option 2 again.
 ![image](https://github.com/user-attachments/assets/5bde20db-9f06-4891-b5f1-22cea0ab2014)
 
 
-### GUI (web)
+## WKS01
+
+### Rename this Windows Computer
+* In File Explorer, right-click on “This PC”
+* “Properties” -> “Change Settings”
+* Click “Change” next to “To rename this computer…”
+* rename to `wks01-charlotte`
+
+### Add a user
+* Computer Management -> Local Users and Groups -> Users
+* Right Click -> New User
+* `charlotte:password123`
+![image](https://github.com/user-attachments/assets/383fc178-8815-4a57-90f3-7138d8bbf02b)
+
+### Add a User to a Group
+* Go to user Properties -> Member Of -> Add
+* Type the group name: `WKS01-CHARLOTTE\Adminstrators`
+* Check names, if the text entered is a valid group, the text should underline
+
+### Change IP Address
+* Go to Network and Internet settings -> Change adapter options
+* Right-click on network adapter - “properties”
+* Double-click IPv4 setting
+![image](https://github.com/user-attachments/assets/1b3f68db-04b0-42dc-837e-c9d0623132d4)
+
+
+### PFSense GUI (web)
 The default username/password is admin/pfsense
 
 ![image](https://github.com/user-attachments/assets/cb27b4f7-abd2-489e-a465-fadf7005c57a)
 ![image](https://github.com/user-attachments/assets/1ea4dc4a-a2e4-4518-ae35-6ad320a8cf06)
 
-
 new admin password: password123
-
-## WKS01
-
-### Rename a Windows Computer
-
-* In File Explorer, right-click on “This PC”
-* “Properties” -> “Change Settings”
-* Click “Change” next to “To rename this computer…”
-
-### Add a user on Windows
-
-* Computer Management -> Local Users and Groups -> Users
-* Right Click -> New User
-
-### Add a User to a Group on Windows
-
-* Go to user Properties -> Member Of -> Add
-* Type the group name i.e. WKS01-NATHAN\Adminstrators
-* Check names, if the text entered is a valid group, the text should underline
-
-### Change IP Address on Windows
-
-* Go to Network and Internet settings -> Change adapter options
-* Right-click on network adapter - “properties”
-* Double-click IPv4 setting

@@ -44,3 +44,35 @@ commit
 save
 ```
 
+### Configuring NAT and DNS Forwarding
+```
+configure
+set nat source rule 10 description "NAT FROM DMZ to WAN"
+set nat source rule 10 outbound-interface eth0
+set nat source rule 10 source address 172.16.50.0/29
+set nat source rule 10 translation address masquerade
+set service dns forwarding listen-address 172.16.50.2
+set service dns forwarding allow-from 172.16.50.0/29
+set service dns forwarding system
+commit
+save
+```
+![image](https://github.com/user-attachments/assets/2fe9dd01-e8e0-48c6-86a0-6f41fba39886)
+
+
+## web01
+Set adapter to DMZ: \
+![image](https://github.com/user-attachments/assets/a2abea31-7eb8-486a-b563-3962d086ab44) \
+default creds: `root:Ch@mpl@1n!22`
+```
+adduser charlotte
+passwd charlotte (password123!)
+usermod -aG wheel charlotte
+```
+
+nmtui \
+![image](https://github.com/user-attachments/assets/c69680f9-be75-4b5e-976b-cf6b508f6553) \
+![image](https://github.com/user-attachments/assets/06fa4ee7-ce28-40d2-8193-3f84b03b41d1) \
+
+
+

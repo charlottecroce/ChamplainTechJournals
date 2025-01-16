@@ -8,7 +8,7 @@
 ![image](https://github.com/user-attachments/assets/46252357-1387-45bd-a4ae-ede9e12417c9)
 
 
-## Configuring fw01
+## fw01
 ![image](https://github.com/user-attachments/assets/723c16dc-f130-4f61-9508-b0fe70adbca5) \
 default creds: `vyoz:Ch@mpla1n!22`
 
@@ -74,5 +74,26 @@ nmtui \
 ![image](https://github.com/user-attachments/assets/c69680f9-be75-4b5e-976b-cf6b508f6553) \
 ![image](https://github.com/user-attachments/assets/06fa4ee7-ce28-40d2-8193-3f84b03b41d1) \
 
+install httpd ([use this doc](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab08-apache.md#install-httpd))
+
+## log01
+![image](https://github.com/user-attachments/assets/b7112a43-e0e0-4d8c-af36-a7a925ccc1d8) \
+```
+adduser charlotte
+passwd charlotte (password123!)
+usermod -aG wheel charlotte
+```
+
+![image](https://github.com/user-attachments/assets/4b9ac768-72f6-4ef4-92ed-5be231e63c7b) \
+![image](https://github.com/user-attachments/assets/cd26c18f-74b8-481c-bc37-8c602f7f46c7) \
+log01 will be initially in the DMZ, later we will change this to a segmented network area
 
 
+## on rw01, testing web service
+- any address in your DMZ should route via fw01’s WAN interface. We do this with a static route on rw01
+- anything addressed to the 172.16.50.0/29 network will go through the 10.0.17.151 router \
+```
+sudo ip route add 172.16.50.0/29 via 10.0.17.151
+sudo systemctl restart NetworkManager
+traceroute 172.16.50.3
+```

@@ -16,11 +16,11 @@ description: In this lab, we set up an Apache web server on WEB01
 ### Install httpd
 
 ```bash
-sudo yum install httpd && \
-sudo firewall-cmd --add-service=http --permanent && \
-sudo firewall-cmd --add-service=https --permanent && \
-sudo firewall-cmd --reload && \
-sudo systemctl start httpd && \
+sudo yum install httpd
+sudo firewall-cmd --add-service=http --permanent
+sudo firewall-cmd --add-service=https --permanent
+sudo firewall-cmd --reload
+sudo systemctl start httpd
 sudo systemctl enable httpd
 ```
 

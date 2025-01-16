@@ -3,7 +3,7 @@
 Our goal is to build a realistic server environment consisting of a routed network (LAN and WAN) as well as introduce Server 2019 Desktop and Core and the systems required to manage them.
 
 ## FW01 and WKS01
-- [use this doc](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab01-environment-setup.md)
+- [use this doc](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab01-environment-setup.md), configuration is exactly the same
 
 ## AD01 
 - (admin password is `password123!`)

@@ -14,6 +14,11 @@ https://docs.vyos.io/en/sagitta/
 - commit current set of changes `commit`
 - save current changes: `save`
   - `commit`, followed by `save` will save configuration changes
+
+### Set Hostname
+```
+set system host-name fw01-charlotte
+```
  
 ### Interfaces
 - set IP: `set interfaces ethernet ethX address 172.16.50.X./24`

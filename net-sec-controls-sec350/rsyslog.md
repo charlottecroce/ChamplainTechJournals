@@ -11,7 +11,7 @@ sudo firewall-cmd --reload
 ```
 
 ### enable log input modules
-the `/etc/rsyslog.conf` file needs to be modified to receive syslog messages over ports 514 tcp and udp. Uncomment the appropriate lines (see below) and restart the rsyslog service.
+the `/etc/rsyslog.conf` file needs to be modified to receive syslog messages over ports 514 tcp and udp. Uncomment the appropriate lines (see below) and restart the rsyslog service. \
 ![image](https://github.com/user-attachments/assets/48994d9b-0f17-4626-ab9d-985d37c5e506) 
 
 ### monitor for incoming logs

@@ -1,14 +1,14 @@
 # Lab 1.1, Routing and DMZ
 
 ## Configuring rw01
-- Secure your champuser default account by changing the password: `password123!`
-- Add a new sudo user `charlotte:password123!` - `sudo usermod -aG sudo charlotte`
-- Set your hostname: `sudo hostnamectl set-hostname rw01-charlotte`
-- Make sure you have a static ip that matches the one in the IP assignments spreadsheet: use nmtui, set IP to `10.0.17.51/24` and gateway/DNS to `10.0.17.2` \
+- changing the champuser password: `password123!`
+- set hostname to `rw01-charlotte`([reference](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab03-linux.md#set-hostname))
+- add sudo user `charlotte:password123!` ([reference](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab03-linux.md#creating-privileged-user))
+- Make sure you have a static ip that matches the one in the IP assignments spreadsheet: use **nmtui**, set IP to `10.0.17.51/24` and gateway/DNS to `10.0.17.2` \
 ![image](https://github.com/user-attachments/assets/46252357-1387-45bd-a4ae-ede9e12417c9)
 
 
-## fw01, gateway/router/firewall
+## fw01, gateway/router/firewall ([VyOS doc](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/vyos.md))
 ![image](https://github.com/user-attachments/assets/723c16dc-f130-4f61-9508-b0fe70adbca5) \
 default creds: `vyoz:Ch@mpla1n!22`
 
@@ -62,21 +62,18 @@ save
 
 ## web01, web server
 ### basics
-Set adapter to DMZ: \
+- Set adapter to DMZ: \
 ![image](https://github.com/user-attachments/assets/a2abea31-7eb8-486a-b563-3962d086ab44) \
 default creds: `root:Ch@mpl@1n!22`
-```
-adduser charlotte
-passwd charlotte (password123!)
-usermod -aG wheel charlotte
-```
 
-`sudo nmtui` \
+- set hostname to `web01-charlotte`([reference](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab03-linux.md#set-hostname))
+- add sudo user `charlotte:password123!` ([reference](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab03-linux.md#creating-privileged-user))
+- `nmtui` \
 ![image](https://github.com/user-attachments/assets/c69680f9-be75-4b5e-976b-cf6b508f6553) \
 ![image](https://github.com/user-attachments/assets/06fa4ee7-ce28-40d2-8193-3f84b03b41d1) \
 
 ### configure httpd
-- install httpd ([use this doc](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab08-apache.md#install-httpd))
+- install httpd ([reference](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab08-apache.md#install-httpd))
 
 
 ### on rw01, testing web service
@@ -93,11 +90,9 @@ traceroute 172.16.50.3
 log01 will be initially in the DMZ, later we will change this to a segmented network area \
 ### basics
 ![image](https://github.com/user-attachments/assets/b7112a43-e0e0-4d8c-af36-a7a925ccc1d8) \
-```
-adduser charlotte
-passwd charlotte (password123!)
-usermod -aG wheel charlotte
-```
+- set hostname to `log01-charlotte`([reference](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab03-linux.md#set-hostname))
+- add sudo user `charlotte:password123!` ([reference](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab03-linux.md#creating-privileged-user))
+
 
 ### rsyslog setup
 ![image](https://github.com/user-attachments/assets/4b9ac768-72f6-4ef4-92ed-5be231e63c7b) \
@@ -112,7 +107,7 @@ sudo firewall-cmd --reload
 ```
 ![image](https://github.com/user-attachments/assets/62b95926-6b2a-42e2-a12f-610b1a3336b8) \
 
-On log01, the /etc/rsyslog.conf file needs to be modified to receive syslog messages over ports 514 tcp and udp.  Uncomment the appropriate lines (see below) and restart the rsyslog service.
+On log01, the `/etc/rsyslog.conf` file needs to be modified to receive syslog messages over ports 514 tcp and udp.  Uncomment the appropriate lines (see below) and restart the rsyslog service.
 ![image](https://github.com/user-attachments/assets/48994d9b-0f17-4626-ab9d-985d37c5e506) \
 ![image](https://github.com/user-attachments/assets/b7c9efbf-0819-4381-99f7-14826220bb8a) \
 

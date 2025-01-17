@@ -4,31 +4,24 @@ description: >-
   functionality yet, just networking configurations and adding a user
 ---
 
-# Lab03 - Linux
-
-## Network Configuration
-
-* login as root
-* `nmtui`
-  * Edit a connection -> enter configs (remember to set search domain to nathan.local)
-  * Set system hostname: dhcp01-nathan
-* `systemctl restart network`
-* `exit`
-* login as root again
-* if not done already, create a privileged user so you're not always using root
+# Lab03 - Linux Setup
 
 ## mntui
-
 * network manager TUI
-* used to set up network configuration
+* used to set up network configuration & can change hostname
+* (remember to set search domain to charlotte.local)
+* `systemctl restart network` or `systemctl restart NetworkManager` to restart network after config change
 
-## creating privileged user in Linux
 
-* `useradd nathan`
-* `passwd nathan`
-* `usermod -aG wheel nathan`
+## set hostname
+`hostnamectl set-hostname dhcp01-charlotte`
+
+## creating privileged user
+* `useradd charlotte`
+* `passwd charlotte`
+* `usermod -aG (wheel/sudo) charlotte` - RH=wheel, Debain=sudo
+
 
 ## ipconfig DNS commands
-
 * `/flushdns`: clears DNS cache and forces the computer to regain all DNS entries from the DNS server
 * `/registerdns`: re-registers all domain names and IP addresses

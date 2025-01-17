@@ -25,13 +25,13 @@ do
 	read userInput
 	echo ""
 
-	elif [[ "$userInput" == "1" ]]; then
+	if [[ "$userInput" == "1" ]]; then
 		sethostname
 
 	elif [[ "$userInput" == "2" ]]; then
 		echo "IP:"
 
-	if [[ "$userInput" == "7" ]]; then
+	elif [[ "$userInput" == "7" ]]; then
 		echo "Exiting,,."
 		break
 	fi

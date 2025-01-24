@@ -24,8 +24,10 @@ mgmt01 should now be able to ping google.com
 - open chrome
 - sign in with school email and turn on sync
 - go to remotedesktop.google.com, install the app if you want
-- on main host (laptop, go to `https://g.co/crd/headless`)
-- download and install the package: `sudo dpkg -i google-chrome-stable_current_amd64` (if main host is debian)
-
-one time command: 
-`DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0ASVgi3Kp753gs5WPJR7cb1GgfBcjqGV4BT7_qdejdOUowdLjGIejWvrPCBTd4vBxjyULPA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)`
+- on main host (laptop, go to `https://g.co/crd/headless`), download and install the package: 
+  - there might be dependency issues, this command worked on my computer: `sudo apt install libutempter0 xbase-clients xserver-xorg-video-dummy xvfb`
+  - `sudo dpkg -i google-chrome-stable_current_amd64`
+- still on main host, click next and copy the command for the remote OS (in our case, debian)
+- paste it in the remote terminal, and create a PIN
+- at this point you should be able to access mgmt01 via chrome remote desktop, you might need to update CRD on mgmt01 first though, but we know how to do that ^
+- IMPORTANT: log out of the remote computer before attempting to connect

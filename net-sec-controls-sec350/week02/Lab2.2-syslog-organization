@@ -1,2 +1,31 @@
 # Lab 2.2 - Syslog Organization on log01
 
+## setup mgmt01
+- on LAN
+- ip: 172.16.150.10
+- DG & DNS: 172.16.150.2
+
+## configure fw01 with the LAN
+### NAT rules on fw01, to set NAT for LAN to WAN
+```
+set nat source rule 20 description "NAT FROM LAN to WAN"
+set nat source rule 20 outbound-interface eth0
+set nat source rule 20 source address 172.16.150.0/24
+set nat source rule 20 translation address masquerade
+```
+### DNS forwarding from LAN to WAN
+```
+set service dns forwarding listen-address 172.16.150.2
+set service dns forwarding allow-from 172.16.150.0/24
+```
+mgmt01 should now be able to ping google.com
+
+## Install chrome remote desktop on mgmt01
+- open chrome
+- sign in with school email and turn on sync
+- go to remotedesktop.google.com, install the app if you want
+- on main host (laptop, go to `https://g.co/crd/headless`)
+- download and install the package: `sudo dpkg -i google-chrome-stable_current_amd64` (if main host is debian)
+
+one time command: 
+`DISPLAY= /opt/google/chrome-remote-desktop/start-host --code="4/0ASVgi3Kp753gs5WPJR7cb1GgfBcjqGV4BT7_qdejdOUowdLjGIejWvrPCBTd4vBxjyULPA" --redirect-url="https://remotedesktop.google.com/_/oauthredirect" --name=$(hostname)`

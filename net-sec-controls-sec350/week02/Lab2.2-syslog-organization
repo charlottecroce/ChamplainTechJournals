@@ -34,8 +34,9 @@ mgmt01 should now be able to ping google.com
 
 ## log organization on log01
 ```
-💡Having all of our remote logs stuffed into log01's  /var/log/messages or /var/log/secure is not helpful. 
+Having all of our remote logs stuffed into log01's  /var/log/messages or /var/log/secure is not helpful. 
 Remote logs should be segregated and ideally stored on reliable and redundant storage in a manner that supports 
 dealing with discrete event types. We are going to store logs in a directory hierarchy in order to provide this organization.
 ```
+
 

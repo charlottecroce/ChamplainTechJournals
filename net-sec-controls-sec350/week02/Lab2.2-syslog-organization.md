@@ -38,5 +38,18 @@ Having all of our remote logs stuffed into log01's  /var/log/messages or /var/lo
 Remote logs should be segregated and ideally stored on reliable and redundant storage in a manner that supports 
 dealing with discrete event types. We are going to store logs in a directory hierarchy in order to provide this organization.
 ```
+- re-comment the input modules from lab 1.1
+![image](https://github.com/user-attachments/assets/a51c6beb-41a7-4885-a285-61885f073995)
+- create a new config file call sec350.conf:
+![Uploading image.png…]()
+- copy that file to /etc/rsyslod.d/: `sudo cp sec350.conf /etc/rsyslog.d/`
+
+```
+This configuration file (03-sec350.conf) will dynamically create and name files based upon hostname,
+date and process name. Input over udp 514 is associated with the RemoteDevice ruleset which in turn
+uses the dynamic template configuration called “DynFile”.
+```
+
+
 
 

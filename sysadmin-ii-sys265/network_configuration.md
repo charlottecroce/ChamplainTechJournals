@@ -1,9 +1,9 @@
 # SYS265 - Network Configuration
 
 ## pfsense router/gateway/firewall
-upstream gateway: 10.0.17.2
-my unique WAN IP: 10.0.17.104
-net adapter 1: WAN
+upstream gateway: 10.0.17.2 \
+my unique WAN IP: 10.0.17.104 \
+net adapter 1: WAN \
 net adapter 2: LAN
 
 ### wks01-charlotte - Windows workstation

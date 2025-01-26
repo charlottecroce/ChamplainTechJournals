@@ -30,5 +30,9 @@ the `/etc/rsyslog.conf` file needs to be modified to receive syslog messages ove
 > @=UDP, @@ means TCP, so we are only going to send UDP \
 > 172.16.50.5 = Remote Syslog Server
 
+#### loggin authpriv messages on linux systems
+![image](https://github.com/user-attachments/assets/77c2b1f5-6aa2-4e76-8db6-59feb31cb4fb)
+
+
 ### create test log
 - `logger -t test TESTLOG123`

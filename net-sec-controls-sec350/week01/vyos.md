@@ -17,7 +17,7 @@ https://docs.vyos.io/en/sagitta/
 
 ### Change Password
 ```
-set system login user charlotte authentication plaintext-password [password]
+set system login user vyos authentication plaintext-password [password]
 ```
 
 ### Set Hostname

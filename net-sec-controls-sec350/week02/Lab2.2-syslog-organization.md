@@ -33,23 +33,27 @@ mgmt01 should now be able to ping google.com
 - IMPORTANT: log out of the remote computer before attempting to connect
 
 ## log organization on log01
-```
-Having all of our remote logs stuffed into log01's  /var/log/messages or /var/log/secure is not helpful. 
-Remote logs should be segregated and ideally stored on reliable and redundant storage in a manner that supports 
-dealing with discrete event types. We are going to store logs in a directory hierarchy in order to provide this organization.
-```
+Having all of our remote logs stuffed into log01's  /var/log/messages or /var/log/secure is not helpful. Remote logs should be segregated and ideally stored on reliable and redundant storage in a manner that supports dealing with discrete event types. We are going to store logs in a directory hierarchy in order to provide this organization.
+
 - re-comment the input modules from lab 1.1
 ![image](https://github.com/user-attachments/assets/a51c6beb-41a7-4885-a285-61885f073995)
 - create a new config file call sec350.conf:
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/c12ab0af-4ef2-4904-9ede-9d4d96a65122)
 - copy that file to /etc/rsyslod.d/: `sudo cp sec350.conf /etc/rsyslog.d/`
 
 ```
 This configuration file (03-sec350.conf) will dynamically create and name files based upon hostname,
 date and process name. Input over udp 514 is associated with the RemoteDevice ruleset which in turn
 uses the dynamic template configuration called “DynFile”.
-```
+``` 
+testing \
+![image](https://github.com/user-attachments/assets/37f2c335-0611-42c9-962a-62a4681eeae5)
+![image](https://github.com/user-attachments/assets/3b863e99-1ae4-4d29-91cb-1a3b187aab5f)
 
+## web01: Logging Authorization Events
+Modify the rsyslog client configuration on web01 so that authentication events are forwarded to our log server.
+![image](https://github.com/user-attachments/assets/59be1bd2-d915-4360-9595-f0d32d68e030) \
+after sshing from rw01>web01(with failed attempts), we can see this in the sshd.log file \
+![image](https://github.com/user-attachments/assets/f45b745c-6aff-4cd6-86dd-0ddb13256267)
 
-
-
+## fw01: Logging Authorization Events

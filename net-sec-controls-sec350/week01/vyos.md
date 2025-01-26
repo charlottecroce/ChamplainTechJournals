@@ -15,6 +15,11 @@ https://docs.vyos.io/en/sagitta/
 - save current changes: `save`
   - `commit`, followed by `save` will save configuration changes
 
+### Change Password
+```
+set system login user charlotte authentication plaintext-password [password]
+```
+
 ### Set Hostname
 ```
 set system host-name fw01-charlotte

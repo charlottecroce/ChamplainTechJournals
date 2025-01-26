@@ -51,9 +51,16 @@ testing \
 ![image](https://github.com/user-attachments/assets/3b863e99-1ae4-4d29-91cb-1a3b187aab5f)
 
 ## web01: Logging Authorization Events
-Modify the rsyslog client configuration on web01 so that authentication events are forwarded to our log server.
+Modify the rsyslog client configuration on web01 so that authentication events are forwarded to our log server. the line `authpriv.* @172.16.50.5` will send all authpriv logs to the remote server(log01)
 ![image](https://github.com/user-attachments/assets/59be1bd2-d915-4360-9595-f0d32d68e030) \
 after sshing from rw01>web01(with failed attempts), we can see this in the sshd.log file \
 ![image](https://github.com/user-attachments/assets/f45b745c-6aff-4cd6-86dd-0ddb13256267)
 
 ## fw01: Logging Authorization Events
+We are going to adjust the vyos configuration to send authentication messages from fw01 to log01.  Note, vyos does produce a ton of useless authentication messages which we are going to have to deal with at some point.
+- first, [change the default password](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/week01/vyos.md#change-password) : `set system login user vyos authentication plaintext-password password123!`
+- `set system syslog host 172.16.50.5 facility authpriv level info` \
+![image](https://github.com/user-attachments/assets/57d3e4d5-2d74-45c7-91e1-7e0066bcaf10) \
+![image](https://github.com/user-attachments/assets/26d035b6-8587-4277-ac33-3b4824459cc8)
+
+

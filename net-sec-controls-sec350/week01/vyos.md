@@ -49,3 +49,9 @@ set service dns forwarding allow-from 172.16.50.0/29
 set service dns forwarding system
 ```
 
+### Forward authentication events from vyos to a remote syslog server
+```
+set system syslog host 172.16.50.5 facility authpriv level info
+```
+
+

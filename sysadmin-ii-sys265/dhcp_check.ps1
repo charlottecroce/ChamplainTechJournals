@@ -14,10 +14,10 @@ function get_ip(){
 
 # Get DHCP Server Address
 function get_dhcp(){
-$dhcp_address = (Get-CimInstance Win32_NetworkAdapterConfiguration | Select DHCPServer | Format-Table -HideTableHeaders | Out-String).Trim()
-Write-Host 'DHCP Server:'$dhcp_address
-$dhcp_lease = (Get-CimInstance Win32_NetworkAdapterConfiguration | Select DHCPLeaseExpires | Format-Table -HideTableHeaders | Out-String).Trim()
-Write-Host 'Lease Expiration:'$dhcp_lease
+    $dhcp_address = (Get-CimInstance Win32_NetworkAdapterConfiguration | Select DHCPServer | Format-Table -HideTableHeaders | Out-String).Trim()
+    Write-Host 'DHCP Server:'$dhcp_address
+    $dhcp_lease = (Get-CimInstance Win32_NetworkAdapterConfiguration | Select DHCPLeaseExpires | Format-Table -HideTableHeaders | Out-String).Trim()
+    Write-Host 'Lease Expiration:'$dhcp_lease
 }
 
 # Get Gateway IP

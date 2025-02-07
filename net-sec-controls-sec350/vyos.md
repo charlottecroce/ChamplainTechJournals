@@ -57,3 +57,7 @@ set system syslog host 172.16.50.5 facility authpriv level info
 ```
 
 
+### Export configuration
+```
+show configuration commands | grep -v "syslog global\|ntp\|login\|console\|config\|hw-id\|loopback\|conntrack"
+```

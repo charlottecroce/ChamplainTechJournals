@@ -28,6 +28,7 @@ set system host-name fw01-charlotte
 ### Interfaces
 - set IP: `set interfaces ethernet ethX address 172.16.50.X./24`
 - add description: `set interfaces ethernet ethX description SEC350-WAN`
+- `show interfaces`
 
 ### Gateway and DNS Server
 - create default route (gateway): `set protocols static route 0.0.0.0/0 next-hop 10.0.17.2`

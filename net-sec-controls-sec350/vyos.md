@@ -40,6 +40,7 @@ set nat source rule 10 description "NAT FROM DMZ to WAN"
 set nat source rule 10 outbound-interface eth0
 set nat source rule 10 source address 172.16.50.0/29
 set nat source rule 10 translation address masquerade
+show nat source translations
 ```
 
 ### DNS Forwarding

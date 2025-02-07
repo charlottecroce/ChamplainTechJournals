@@ -1,3 +1,23 @@
-cover the installation of the server, including the firewall commands required as well as agent installation. 
-Find out where the agent files are located and peruse that directory structure. 
-At some point we will need to tweak these agents when log01 makes yet another move in the upcoming weeks. 
+# Wazuh
+
+## Installing Server
+- run the following command: `curl -sO https://packages.wazuh.com/4.7/wazuh-install.sh && sudo bash ./wazuh-install.sh -a -i`
+- remember to save the auto-generated password
+
+## Installing Agents
+- Wazuh dropdown > Agents > enter agent configurations
+- run the generated command on the remote system to install the agent:
+- start agent service:
+```
+sudo systemctl daemon-reload
+sudo systemctl enable wazuh-agent
+sudo systemctl start wazuh-agent
+```
+
+## Agent directory structure
+Wazuh agent files are stored in /var/ossec/. Key directories include:
+- `/var/ossec/etc/` - Configuration files
+  - `/var/ossec/etc/ossec.conf` - agent IP settings
+- `/var/ossec/logs/` - Log files
+- `/var/ossec/queue/` - Communication queue
+- `/var/ossec/agentless/` - Agentless monitoring

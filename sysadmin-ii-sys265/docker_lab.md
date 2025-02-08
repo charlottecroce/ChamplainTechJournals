@@ -1,10 +1,10 @@
 # Containerization with Docker
+![image](https://github.com/user-attachments/assets/7a571e73-76f3-4efe-a4dd-644c0c856011)
 
 ## set up docker01 - Ubuntu 20.04 cloud server
-IP Address: 10.0.5.12 (change web01 address to 10.0.5.20)\
-Default Gateway: 10.0.5.2\
-DNS: 10.0.5.5\
-
+IP Address: 10.0.5.12 (change web01 address to 10.0.5.20) \
+Default Gateway: 10.0.5.2 \
+DNS: 10.0.5.5 \
 ![image](https://github.com/user-attachments/assets/e8491101-e466-4046-be31-eb397ee2f159)
 
 ### changing hostname. it is different on Ubuntu Cloud

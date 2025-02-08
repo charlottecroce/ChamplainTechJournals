@@ -1,26 +1,28 @@
 # Containerization with Docker
 
-## docker01 - Ubuntu 20.04 cloud server
-IP Address: 10.0.5.12 (change web01 address to 10.0.5.20)
-Default Gateway: 10.0.5.2
-DNS: 10.0.5.5
+## set up docker01 - Ubuntu 20.04 cloud server
+IP Address: 10.0.5.12 (change web01 address to 10.0.5.20)\
+Default Gateway: 10.0.5.2\
+DNS: 10.0.5.5\
 
 ![image](https://github.com/user-attachments/assets/e8491101-e466-4046-be31-eb397ee2f159)
 
-in `/etc/cloud/cloud.cfg`
+### changing hostname. it is different on Ubuntu Cloud
+- in `/etc/cloud/cloud.cfg`:
 ```
 preserve_hostname: true
 hostname: docker01-charlotte (add this line under)
 fqdn: docker01-charlotte.charlotte.local (add this line under)
 ```
-
+- change `/etc/hosts` file
 ![image](https://github.com/user-attachments/assets/c921d829-5bc4-4048-a4fb-de42b1f413a7)
 
-finally, `sudo hostnamectl hostname docker01-charlotte`
+- finally, `sudo hostnamectl hostname docker01-charlotte`
 - update DNS records on mgmt01 (remember to change web01 record too)
 
 ## docker installation
-- https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+
 update and install prerequisite packages, this will let apt use packages over HTTPS
 ```
 sudo apt update
@@ -96,11 +98,83 @@ The following command pulls down an Arch Linux based docker image, invokes it in
 docker run --rm archlinux:latest /bin/echo "HELLO SYS265 SNOWY DAYS"
 ```
 
-## containers use the same kernel as the host
-e.x. the following commands will
-- Print out the current version of Ubuntu on docker01. `cat /etc/lsb-release`
-- Print out the current version of docker01's linux kernel. `echo "Current Kernel is: $(uname -a)"`
-- Invoke a container of the stored Ubuntu image as well as an interactive bash command prompt, and print out the kernel being used by the Ubuntu container. `docker run -it archlinux /bin/uname -a`
+
+___
+
+## docker run command syntax (example)
+- e.g. The following command will pull down the image, application and dependencies associated with a simple python web application. `docker run -d -P training/webapp python app.py`
+- `docker`: CLI for interacting with docker
+- `run`: create and start a new container
+- `-d` (or `--detach`): the container runs in the background.
+  - useful for non-interactive services, like webservers and databases  
+- `-P` (or `--publich-all`): automatically publishes all exposed ports of the container to random host ports.
+  - This allows external access to the services running in the container without having to specify port mappings manually.
+- `training/webapp`: the docker image from which the container is created
+  -  In this case, an image named `webapp` that is located in the `training` repository 
+- `python`: command that will be executed inside the container once it starts
+- `app.py`: argument passed to the python command
+  - the Python script `app.py` should be executed by the Python interpreter when the container starts. 
+ 
+
+- `docker run httpd` will automatically set up an apache web server in the container
+
+### to stop docker process
+```
+docker stop <container ID>
+```
+
+## dockerized WordPress
+https://github.com/docker/awesome-compose/tree/master/wordpress-mysql
+
+- create a directory `docker-wp`
+- create compose.yml
+>[!Caution]
+> Absolutely never use a tab in a docker-compose.yml file
+
+```
+services:
+  db:
+    # We use a mariadb image which supports both amd64 & arm64 architecture
+    image: mariadb:10.6.4-focal
+    # If you really want to use MySQL, uncomment the following line
+    #image: mysql:8.0.27
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    expose:
+      - 3306
+      - 33060
+  wordpress:
+    image: wordpress:latest
+    ports:
+      - 80:80
+    restart: always
+    environment:
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
+volumes:
+  db_data:
+```
+
+- `docker compose up -d`
+- wait...it's really that easy?
+  - yes
+
+___
+
+### showing how containers use the same kernel as the host
+- example: the following commands will:
+  - Print out the current version of Ubuntu on docker01. `cat /etc/lsb-release`
+  - Print out the current version of docker01's linux kernel. `echo "Current Kernel is: $(uname -a)"`
+  - Invoke a container of the stored Ubuntu image as well as an interactive bash command prompt, and print out the kernel being used by the Ubuntu container. `docker run -it archlinux /bin/uname -a`
 ![image](https://github.com/user-attachments/assets/4df08b6e-cbf7-474b-8301-f2f52e65ba4d)
 - as you can see, both the docker container(archlinux) and the host(docker01-charlotte) are using the same kernels
 

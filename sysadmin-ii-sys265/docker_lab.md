@@ -14,7 +14,8 @@ preserve_hostname: true
 hostname: docker01-charlotte (add this line under)
 fqdn: docker01-charlotte.charlotte.local (add this line under)
 ```
-- change `/etc/hosts` file
+- change hostname for 127.0.1.1 in `/etc/hosts` file
+
 ![image](https://github.com/user-attachments/assets/c921d829-5bc4-4048-a4fb-de42b1f413a7)
 
 - finally, `sudo hostnamectl hostname docker01-charlotte`

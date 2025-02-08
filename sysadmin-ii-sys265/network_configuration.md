@@ -28,6 +28,11 @@ Gateway: 10.0.5.2 \
 DNS: 10.0.5.5
 
 ### web01-charlotte - web server
+IP address: 10.0.5.20/24
+Gateway: 10.0.5.2 \ 
+DNS: 10.0.5.5 \
+
+### docker01-charlotte - 
 IP address: 10.0.5.12/24
 Gateway: 10.0.5.2 \ 
 DNS: 10.0.5.5 \

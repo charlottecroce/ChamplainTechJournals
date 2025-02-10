@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>sys265 chat</title>
+</head>
+
+
+<body>
+<ul id="messages"></ul>
+<input id="message_input" type="text">
+<button onclick="sendMessage()">send</button>
+
+<!-- import javascript sockets.io library-->
+<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+
+<script>
+
+// create websocket object
+const socket = io()
+
+// update html when a message is sent/received
+socket.on('message', function(msg) {
+  let li = document.createElement('li');
+  li.textContent = msg;
+  document.getElementById('messages').appendChild(li);
+});
+
+// send message on socket when button is clicked
+function sendMessage() {
+  const message = document.getElementById('message_input').value;
+  socket.send(message);
+  document.getElementById('message_input').value = '';
+}
+
+</script>
+
+</body>
+</html>

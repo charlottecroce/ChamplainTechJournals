@@ -14,7 +14,5 @@ project structure
 │   │   └── script.js
 │   ├── docker-compose.yml
 │   └── Dockerfile
-└── docker-wp
-    └── compose.yml
 ```
 

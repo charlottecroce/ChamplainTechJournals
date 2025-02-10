@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  chat-server:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./app:/app
+    networks:
+      - chat-net
+
+networks:
+  chat-net:
+    driver: bridge

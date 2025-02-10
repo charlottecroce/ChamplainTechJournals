@@ -140,3 +140,4 @@ CMD ["python", "app.py"]
 cd docker-chat
 docker-compose up -d
 ```
+![image](https://github.com/user-attachments/assets/5e739863-3710-4ea0-8988-2a9c56ddb981)

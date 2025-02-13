@@ -8,7 +8,12 @@ def area_code(phone_number):
             (XXX)-XXX-XXXX
     return: (string) The area code
     """
-    pass
+    if phone_number[0] == '(':
+        return phone_number[1:4]
+    elif phone_number[0] == '1':
+        return phone_number[2:5]
+    else:
+        return phone_number[:3]
 
 
 

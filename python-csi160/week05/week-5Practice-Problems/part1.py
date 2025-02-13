@@ -1,6 +1,8 @@
 def first_element(list_to_search):
     """Returns the first element of the supplied list.  Returns None if the list was empty"""
-    pass
+    if len(list_to_search) == 0:
+        return None
+    return list_to_search[0]
 
 
 # Leave this part for easily testing your function

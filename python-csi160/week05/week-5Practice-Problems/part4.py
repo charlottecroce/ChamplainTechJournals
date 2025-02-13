@@ -5,7 +5,7 @@ def area_code(phone_number):
     :param phone_number: (str) Must be formatted "XXX-XXX-XXXX"
     :return: (str) 3 digit area_code
     """
-    pass
+    return phone_number[:3]
 
 
 # Leave this part for easily testing your function

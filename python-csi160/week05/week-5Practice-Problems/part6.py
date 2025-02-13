@@ -5,7 +5,7 @@ def first_last_name(full_name):
                             There is only a single space in the full_name.
     :return: (tuple) Tuple containing first and last names
     """
-    pass
+    return tuple(full_name.split(" "))
 
 
 # Leave this part for easily testing your function

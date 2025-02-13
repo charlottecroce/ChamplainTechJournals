@@ -4,7 +4,7 @@ def last_four_digits(phone_number):
     :param phone_number: (str) May be formatted "XXX-XXX-XXXX" or "1-XXX-XXX-XXXX"
     :return: (str) last four digits
     """
-    pass
+    return phone_number[-4:]
 
 
 # Leave this part for easily testing your function

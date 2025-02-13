@@ -4,7 +4,8 @@ def second_smallest(numbers):
     :param numbers: (list) List of numbers of at least size 2
     :return: (int or float) The second smallest number
     """
-    pass
+    numbers.sort()
+    return numbers[1]
 
 
 # Leave this part for easily testing your function

@@ -124,7 +124,6 @@ set firewall name LAN-to-DMZ rule 10 protocol tcp
 set firewall name LAN-to-DMZ rule 20 description "Allow SSH from MGMT-01 to DMZ"
 set firewall name LAN-to-DMZ rule 20 action accept
 set firewall name LAN-to-DMZ rule 20 source address 172.16.150.10
-set firewall name LAN-to-DMZ rule 20 source port 22
 set firewall name LAN-to-DMZ rule 20 destination port 22
 set firewall name LAN-to-DMZ rule 20 protocol tcp
 ```

@@ -1,0 +1,6 @@
+# Git and Linux SSH
+
+## docker-01
+- `sudo apt install git`
+- 'git clone https://github.com/charlottecroce/champlaintechjournals'
+- 'sudo mv

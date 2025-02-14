@@ -75,7 +75,14 @@ set firewall name DMZ-to-LAN rule 10 destination port 1514,1515
 set firewall name DMZ-to-LAN rule 10 protocol tcp
 ```
 
-### allow return traffic
+### allow return traffic from DMZ
+```
+set firewall name DMZ-to-LAN rule 1 action accept
+set firewall name DMZ-to-LAN rule 1 state established enable
+```
+
+
+### allow return traffic from LAN
 ```
 set firewall name LAN-to-DMZ rule 1 action accept
 set firewall name LAN-to-DMZ rule 1 state established enable
@@ -99,5 +106,26 @@ set firewall name WAN-to-LAN rule 1 action accept
 set firewall name WAN-to-LAN rule 1 state established enable
 ```
 
+## LAN to DMZ
+As communication between LAN and DMZ is currently broken, we need to create a firewall, assign to the appropriate zone policy and adjust it to only allow the traffic we want to go through.  We want wks01 to be able to browse to web01 and we want mgmt01 to ssh into anything on the DMZ.
 
+With that in mind, create firewall rules on LAN-TO-DMZ that allows 
+- 80/tcp from LAN to web01.
+
+```
+set firewall name LAN-to-DMZ rule 10 description "Allow HTTP from LAN to DMZ"
+set firewall name LAN-to-DMZ rule 10 action accept
+set firewall name LAN-to-DMZ rule 10 destination address 172.16.50.3
+set firewall name LAN-to-DMZ rule 10 destination port 80
+set firewall name LAN-to-DMZ rule 10 protocol tcp
+```
+- 22/tcp from mgmt01 to the DMZ
+```
+set firewall name LAN-to-DMZ rule 20 description "Allow SSH from MGMT-01 to DMZ"
+set firewall name LAN-to-DMZ rule 20 action accept
+set firewall name LAN-to-DMZ rule 20 source address 172.16.150.10
+set firewall name LAN-to-DMZ rule 20 source port 22
+set firewall name LAN-to-DMZ rule 20 destination port 22
+set firewall name LAN-to-DMZ rule 20 protocol tcp
+```
 

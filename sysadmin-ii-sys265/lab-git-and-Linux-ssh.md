@@ -35,3 +35,6 @@ ___
 - `git commit -m "added a readme"`
 - `git push`
 
+create PAT and add creds in control panel
+![image](https://github.com/user-attachments/assets/0f121ff2-21a4-44c1-9846-ab6e51d53ac2)
+

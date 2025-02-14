@@ -34,7 +34,14 @@ ___
 - cd ~/champlaintechjournals/sysadmin-ii-sys265/configs/mgmt-01
 - `git commit -m "added a readme"`
 - `git push`
+- login with token
 
-create PAT and add creds in control panel
-![image](https://github.com/user-attachments/assets/0f121ff2-21a4-44c1-9846-ab6e51d53ac2)
-
+# web-01
+- `sudo yum install git`
+- create ssh key and connect to git with it
+- git clone https://github.com/charlottecroce/champlaintechjournals
+- cd sysadmin-ii
+- mkdir -p linux/public-keys
+- - mkdir -p linux/ubuntu- - mkdir -p linux/centos7
+  - 
+  - 

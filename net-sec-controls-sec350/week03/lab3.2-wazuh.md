@@ -24,6 +24,7 @@ For a single node installation on wazuh, run the following command.
 ```
 curl -o wazuh-agent-4.7.5-1.x86_64.rpm https://packages.wazuh.com/4.x/yum/wazuh-agent-4.7.5-1.x86_64.rpm && sudo WAZUH_MANAGER='172.16.200.10' WAZUH_AGENT_GROUP='linux' WAZUH_AGENT_NAME='web01-charlotte' rpm -ihv wazuh-agent-4.7.5-1.x86_64.rpm
 ```
+- if you can't access through a web browser. try going to http://172.16.200.10/app/login. for some reason this worked for me
 ![image](https://github.com/user-attachments/assets/c6c6ae88-635e-4db1-a1d3-e1473bf63653)
 ![image](https://github.com/user-attachments/assets/1609a92a-ffe2-4d93-8477-f6669a95c2f5)
 

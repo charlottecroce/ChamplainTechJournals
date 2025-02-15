@@ -1,3 +1,5 @@
+#!/bin/bash
+#
 # secure-ssh.sh
 # author: charlottecroce
 #
@@ -37,16 +39,17 @@ mkdir -p $AUTHORIZED_KEYS_DIR
 chmod 700 $AUTHORIZED_KEYS_DIR
 
 # try to get SSH pubkey from local repo
-if [ -f "~/champlaintechjournals/sysadmin-ii-sys265/linux/public-keys/id_rsa.pub" ]; then
+if [ -f "/home/charlotte/champlaintechjournals/sysadmin-ii-sys265/linux/public-keys/id_rsa.pub" ]; then
     echo "key found in local repo"
+    cat /home/charlotte/champlaintechjournals/sysadmin-ii-sys265/linux/public-keys/id_rsa.pub >> $AUTHORIZED_KEYS_FILE
 else
     # if local key doesn't exist, get from github repo...
     echo "no key found in local repo, cloning from github..."
-    git clone https://github.com/charlottecroce/champlaintechjournals ~/
+    git clone https://github.com/charlottecroce/champlaintechjournals /home/$USERNAME
     echo "retreived key from github repo"
+    cat /home/$USERNAME/champlaintechjournals/sysadmin-ii-sys265/linux/public-keys/id_rsa.pub >> $AUTHORIZED_KEYS_FILE
 fi
 
-cat ~/champlaintechjournals/sysadmin-ii-sys265/linux/public-keys/id_rsa.pub >> $AUTHORIZED_KEYS_FILE
 echo "added key to $AUTHORIZED_KEYS_FILE"
 
 # set perms, set new user as directory owner

@@ -1,5 +1,8 @@
 # Git and Linux SSH
 
+>[!Note]
+>This entry is pretty empty because I've already written [this journal Entry for using git/github](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/automation-sys320/week01/github_setup.md)
+
 # Automating ssh authentication
 - generate SSH key pair on your management node (in this case, web-01)
 - push pubkey to github repo
@@ -37,7 +40,7 @@ ___
   # mgmt-01
 - install git from web
 - `git clone https://github.com/charlottecroce/champlaintechjournals`
-- - `git config user.email charlotte.croce@mymail.champlain.edu`
+- `git config user.email charlotte.croce@mymail.champlain.edu`
 - `git config user.name charlottecroce`
 - `cd ~/champlaintechjournals/sysadmin-ii-sys265/configs/mgmt-01`
 - `git commit -m "added a readme"`

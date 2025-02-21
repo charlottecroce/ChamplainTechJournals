@@ -192,13 +192,10 @@ Allows MGMT to initiate any connection to the LAN
 set firewall name MGMT-to-LAN rule 10 description "allows MGMT to LAN"
 set firewall name MGMT-to-LAN rule 10 action accept
 set firewall name MGMT-to-LAN rule 10 destination address 172.16.150.0/24
-set firewall name MGMT-to-LAN rule 10 protocol tcp
 ```
-Allows MGMT to initiate any connection to the DMZ
+Allows MGMT to initiate any connection to the DMZ (yes, this is in the MGMT-to-LAN zone-policy, because MGMT is not directly connected to DMZ)
 ```
 set firewall name MGMT-to-LAN rule 20 description "allows MGMT to DMZ"
 set firewall name MGMT-to-LAN rule 20 action accept
 set firewall name MGMT-to-LAN rule 20 destination address 172.16.50.0/29
-set firewall name MGMT-to-LAN rule 20 protocol tcp
 ```
-

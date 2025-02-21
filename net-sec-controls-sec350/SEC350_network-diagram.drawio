@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0" version="26.0.16">
   <diagram name="Page-1" id="vxOPZugNCJ2shPD0R46R">
-    <mxGraphModel dx="1750" dy="953" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="550" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1500" dy="817" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="550" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -65,17 +65,12 @@
           <mxGeometry x="466.01" y="170" width="80" height="80" as="geometry" />
         </mxCell>
         <mxCell id="WV4KZU-K2HEF4Ivt-XvY-26" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
-          <mxGeometry x="250" y="210" width="50" height="80" as="geometry" />
+          <mxGeometry x="190" y="210" width="50" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="WV4KZU-K2HEF4Ivt-XvY-27" value="" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=0;" parent="1" source="WV4KZU-K2HEF4Ivt-XvY-25" target="WV4KZU-K2HEF4Ivt-XvY-26" edge="1">
+        <mxCell id="WV4KZU-K2HEF4Ivt-XvY-27" value="" style="endArrow=none;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="8yr2mNF9FMK26sW0gYA2-48" target="WV4KZU-K2HEF4Ivt-XvY-26" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="460" y="390" as="sourcePoint" />
             <mxPoint x="510" y="340" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="6gv1575Ye6TbEdJx1Vt9-1" value="access via vSphere" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="WV4KZU-K2HEF4Ivt-XvY-27" vertex="1" connectable="0">
-          <mxGeometry x="0.1309" y="-2" relative="1" as="geometry">
-            <mxPoint x="5" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="WV4KZU-K2HEF4Ivt-XvY-29" value="sec350.cyber.local&lt;div&gt;10.0.17.100&lt;/div&gt;" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" parent="1" vertex="1">
@@ -265,6 +260,15 @@
         </mxCell>
         <mxCell id="8yr2mNF9FMK26sW0gYA2-47" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://www.apache.org/foundation/press/kit/feather.png;" vertex="1" parent="1">
           <mxGeometry x="250" y="687.5" width="56.58" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="8yr2mNF9FMK26sW0gYA2-48" value="access via vSphere" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://raw.githubusercontent.com/pulumiverse/pulumi-esxi-native/main/docs/esxi-logo.png;clipPath=inset(3% 4.33% 5% 2%);" vertex="1" parent="1">
+          <mxGeometry x="320" y="215.71" width="69.82" height="68.58" as="geometry" />
+        </mxCell>
+        <mxCell id="8yr2mNF9FMK26sW0gYA2-51" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="8yr2mNF9FMK26sW0gYA2-48" target="WV4KZU-K2HEF4Ivt-XvY-25">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="490" y="330" as="sourcePoint" />
+            <mxPoint x="540" y="280" as="targetPoint" />
+          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>

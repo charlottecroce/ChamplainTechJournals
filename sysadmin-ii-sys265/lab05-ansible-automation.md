@@ -4,42 +4,95 @@ Demonisioning: web01, nmon-01, docker-01 😢
 ___
 ## New Machines
 ### controller-charlotte - Ubuntu
-![image](https://github.com/user-attachments/assets/536fa018-b4aa-4f51-8a29-329a367f7e74)
+configure with netplan
+```
+network:
+  ethernets:
+    ens160:
+      dhcp4: no
+      addresses:
+        - 10.0.5.90/24
+      routes:
+        - to: default
+          via: 10.0.5.2
+      nameservers:
+        addresses:
+          - 10.0.5.5
+  version: 2
+```
 #### to reset DNS
-`dhclient -r`
-`dhclient`
+```
+dhclient -r
+dhclient
+```
 ### ansible1-charlotte - CentOS
-setup with nmtui: 10.0.5.91
+configure with nmtui
+- IP: 10.0.5.91
+- DG: 10.0.5.2
+- DNS: 10.0.5.5
 ### ansible2-charlotte - CentOS
-setup with nmtui: 10.0.5.92
+configure with nmtui
+- IP: 10.0.5.92
+- DG: 10.0.5.2
+- DNS: 10.0.5.5
 
-- on each machine, create a sudo account named deployer (have the same password for all of them)
-
-## installing ansible
+## Initial Configuration
+- on all machines, create a sudo account named deployer (use same password across all systems)
+- install ansible on controller
+```
 sudo apt install ansible sshpass python3-paramiko
+```
+- Configure sudo access:
+  - create `/etc/sudoers.d/sys265` on all systems
+  - add the following line to allow passwordless sudo for deployer:
+   ```
+   deployer ALL=(ALL) NOPASSWD:ALL
+   ```
 
-Create /etc/sudoers.d/sys265 on all Linux systems.
-💣 Although it is not uncommon to update /etc/sudoers directly, it is far easier to script the addition of a file to /etc/sudoers.d.  The following line allows the deployer sudo user to elevate without a password.
+> [!Note]
+> Although it is not uncommon to update `/etc/sudoers` directly, it is far easier to script the addition of a file to `/etc/sudoers.d`
 
-![image](https://github.com/user-attachments/assets/0bc22606-bdd2-405b-bd14-70d0e308fb38)
 
-As the deployer user on controller, create an RSA keypair with a passphrase protected private key and using ssh-copy-id, add deployer@controller's public key to the deployer accounts on ansible1 and ansible2.
+## SSH Key Setup
+As the deployer user on controller:
+- Create RSA keypair with passphrase:
+```
+ssh-keygen -t rsa
+```
+- copy pukey to ansible1 and ansible2
+```
+ssh-copy-id deployer@ansible1-charlotte
+ssh-copy-id deployer@ansible2-charlotte
+```
+-configure `ssh-agent` to avoid typing passphrase for 4 hours
+```
+eval(ssh-agent) # test to see if ssh-agent is running, and if not,run it
+ssh-add -t 14400
+```
+## Ansible Configuration
+in `deployer@controller:/home/deployer/`
+- make directory structure
+```
+mkdir -p ansible/roles
+cd ansible/
+```
+- create inventory and test conection
+```
+echo ansible1-charlotte >> inventory.txt
+echo ansible2-charlotte >> inventory.txt
+cat inventory.txt
+```
+```
+ansible all -m ping -i inventory.txt
+```
 
-`ssh-add -t 14400` - for 4 hours, you won't need to retype the key passphrase
+- add webmin tag to `inventory.txt` and test
 
-💡ssh-agent allows you to decrypt your private key, in this case for 4 hours so that you only have to type your passphrase once every four hours. The eval command will test to see if ssh-agent is running, and if not, it will run it.
-
-in deployer@controller home dir
- mkdir -p ansible/roles
-   cd ansible/
-   echo ansible1-charlotte >> inventory.txt
-   echo ansible2-charlotte >> inventory.txt
-   cat inventory.txt
-  ansible all -m ping -i inventory.txt
-
-![image](https://github.com/user-attachments/assets/e66fec43-6a85-4935-8aa6-d371db1ac2be)
-
-![Uploading image.png…]()
+```
+ansible1-charlotte
+[webmin]
+ansible2-charlotte
+```
 
 ```
 deployer@controller-charlotte:~/ansible$ ansible webmin -m ping -i inventory.txt
@@ -52,9 +105,70 @@ ansible2-charlotte | SUCCESS => {
 }
 ```
 
-install webadmin
+## webmin installation
+- install required role
+```
+ansible-galaxy install semuadmin.webmin -p roles/
+```
+- create `webmin.yml` playbook to handle repository setup, installation, and firewall configuration
+```
+# Playbook to install and configure Webmin on CentOS 7 hosts
+- name: webmin sys265
+ hosts: webmin
+ become: true    # Run all tasks with sudo/root privileges
+ vars:
+   install_utilities: false
+   firewalld_enable: true
 
- ansible-galaxy install semuadmin.webmin -p roles/
+ pre_tasks: # before role execution. we need the repo/key before executing webmin installation role
+   - name: add webmin repo and GPG key
+     yum_repository:
+       name: webmin
+       description: Webmin Distribution Neutral
+       baseurl: http://download.webmin.com/download/yum
+       enabled: true
+       gpgcheck: true
+       gpgkey: http://www.webmin.com/jcameron-key.asc
 
+   # update YUM cache to recognize new repository
+   - name: clean and update YUM cache
+     yum:
+       update_cache: yes
 
-Create a playbook called webmin.yml within the roles directory that has the displayed content. Don't use tabs, use two spaces for indentation. 
+ roles:
+   - semuadmin.webmin    # apply the webmin installation role
+
+ handlers: # will run when a task has notify:name parameter
+   - name: reload firewall # runs after adding firewall rule
+     command: firewall-cmd --reload
+
+ tasks:
+   # open port 10000 in firewall for webmin web interface
+   - name: add firewall rule
+     firewalld:
+       port: 10000/tcp
+       permanent: true
+       state: enabled
+     notify: reload firewall
+
+   - name: install webmin
+     yum:
+       name: webmin
+       state: present
+
+   - name: enable and start webmin service
+     systemd:
+       name: webmin
+       enabled: true
+       state: started
+       daemon_reload: yes # reload systemd to recognize new service
+```
+- run playbook
+```
+ansible-playbook -i inventory.txt roles/webmin.yml
+```
+- change webmin root password
+```
+ sudo /usr/libexec/webmin/changepass.pl /etc/webmin root newpassword
+```
+

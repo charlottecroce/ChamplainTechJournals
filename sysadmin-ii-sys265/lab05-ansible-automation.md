@@ -1,5 +1,4 @@
 # Automation with Ansible
-
 Demonisioning: web01, nmon-01, docker-01 😢
 ___
 ## New Machines
@@ -106,62 +105,61 @@ ansible2-charlotte | SUCCESS => {
 ```
 
 ## webmin installation
-- install required role
+- install webmin role
 ```
 ansible-galaxy install semuadmin.webmin -p roles/
 ```
 - create `webmin.yml` playbook to handle repository setup, installation, and firewall configuration
 ```
-# Playbook to install and configure Webmin on CentOS 7 hosts
 - name: webmin sys265
- hosts: webmin
- become: true    # Run all tasks with sudo/root privileges
- vars:
-   install_utilities: false
-   firewalld_enable: true
+  hosts: webmin
+  become: true    # Run all tasks with sudo/root privileges
+  vars:
+    install_utilities: false
+    firewalld_enable: true
 
- pre_tasks: # before role execution. we need the repo/key before executing webmin installation role
-   - name: add webmin repo and GPG key
-     yum_repository:
-       name: webmin
-       description: Webmin Distribution Neutral
-       baseurl: http://download.webmin.com/download/yum
-       enabled: true
-       gpgcheck: true
-       gpgkey: http://www.webmin.com/jcameron-key.asc
+  pre_tasks: # before role execution. we need the repo/key before executing webmin installation role
+    - name: add webmin repo and GPG key
+      yum_repository:
+        name: webmin
+        description: Webmin Distribution Neutral
+        baseurl: http://download.webmin.com/download/yum
+        enabled: true
+        gpgcheck: true
+        gpgkey: http://www.webmin.com/jcameron-key.asc
 
    # update YUM cache to recognize new repository
-   - name: clean and update YUM cache
-     yum:
-       update_cache: yes
+    - name: clean and update YUM cache
+      yum:
+        update_cache: yes
 
- roles:
-   - semuadmin.webmin    # apply the webmin installation role
+  roles:
+    - semuadmin.webmin    # apply the webmin installation role
 
- handlers: # will run when a task has notify:name parameter
-   - name: reload firewall # runs after adding firewall rule
-     command: firewall-cmd --reload
+  handlers: # will run when a task has notify:name parameter
+    - name: reload firewall # runs after adding firewall rule
+      command: firewall-cmd --reload
 
- tasks:
-   # open port 10000 in firewall for webmin web interface
-   - name: add firewall rule
-     firewalld:
-       port: 10000/tcp
-       permanent: true
-       state: enabled
-     notify: reload firewall
+  tasks:
+    # open port 10000 in firewall for webmin web interface
+    - name: add firewall rule
+      firewalld:
+        port: 10000/tcp
+        permanent: true
+        state: enabled
+      notify: reload firewall
 
-   - name: install webmin
-     yum:
-       name: webmin
-       state: present
+    - name: install webmin
+      yum:
+        name: webmin
+        state: present # will only install if not already
 
-   - name: enable and start webmin service
-     systemd:
-       name: webmin
-       enabled: true
-       state: started
-       daemon_reload: yes # reload systemd to recognize new service
+    - name: enable and start webmin service
+      systemd:
+        name: webmin
+        enabled: true
+        state: started
+        daemon_reload: yes # reload systemd to recognize new service
 ```
 - run playbook
 ```
@@ -171,4 +169,68 @@ ansible-playbook -i inventory.txt roles/webmin.yml
 ```
  sudo /usr/libexec/webmin/changepass.pl /etc/webmin root newpassword
 ```
+
+
+## apache isntallation
+- edit inventory.txt
+```
+[apache]
+ansible1-charlotte
+[webmin]
+ansible2-charlotte
+```
+- install apache role
+```
+ansible-galaxy install geerlingguy.apache -p roles/
+```
+- create `apache.yml` file
+```
+- name: apache sys265
+  hosts: apache
+  become: true    # Run all tasks with sudo/root privileges
+  vars:
+    install_utilities: false
+    firewalld_enable: true
+    ansible_os_family: RedHat
+    ansible_distribution: CentOS # required because role searches for Rocky config files
+  roles:
+    - geerlingguy.apache    # apply the apache installation role
+
+  handlers: # will run when a task has notify:name parameter
+    - name: reload firewall # runs after adding firewall rule
+      command: firewall-cmd --reload
+
+  tasks:
+    # open port 443 in firewall for apache web interface
+    - name: add firewall rule
+      firewalld:
+        port: "{{ item }}"
+        permanent: true
+        immediate: true
+        state: enabled
+      loop:
+        - 80/tcp
+        - 443/tcp
+      notify: reload firewall
+
+    - name: install apache
+      yum:
+        name: httpd
+        state: present # will only install if not already
+
+    - name: enable and start apache service
+      systemd:
+        name: httpd
+        enabled: true
+        state: started
+        daemon_reload: yes # reload systemd to recognize new service
+
+```
+- run playbook
+```
+ansible-playbook -i inventory.txt roles/webmin.yml
+```
+
+# Ansible on Windows
+- Make sure OpenSSH is running on mgmt01
 

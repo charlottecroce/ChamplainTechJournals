@@ -234,3 +234,30 @@ ansible-playbook -i inventory.txt roles/webmin.yml
 # Ansible on Windows
 - Make sure OpenSSH is running on mgmt01
 
+Powershell as Admin
+Deliverable 9.  Provide a screenshot that shows a successful ssh login to a powershell prompt from controller to mgmt01 similar to the one below.
+- install OpenSSH
+```
+wget https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.1.0p1-Preview/OpenSSH-Win32.zip -O 'C:\Program Files\OpenSSH.zip'
+Expand-Archive -Path 'C:\Program Files\OpenSSH.zip' -DestinationPath 'C:\Program Files\OpenSSH'
+rm 'C:\Program Files\OpenSSH.zip'
+powershell.exe -ExecutionPolicy Bypass -File 'C:\Program Files\OpenSSH\OpenSSH-Win32\install-sshd.ps1'
+```
+- start service
+```
+Start-Service sshd
+Set-Service -Name sshd -StartupType 'Automatic'
+Get-Service -Name sshd # check if running
+```
+- add firewall rule
+```
+New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
+Get-NetFirewallRule | Where-Object DisplayName -Like '*ssh*'
+```
+- change the ssh shell to powershell
+```
+Set-ItemProperty "HKLM:\Software\Microsoft\Powershell\1\ShellIds" -Name ConsolePrompting -Value $true
+New-ItemProperty -Path HKLM:\SOFTWARE\OpenSSH -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
+```
+
+

@@ -7,6 +7,9 @@
 - ID needed to commit: `git config --global user.email "charlotte.croce@mymail.champlain.edu"`
 - Push changes to repo: `git push`
 
+- `git remote -v`
+  - if git is using https and not authenticating. you might have to change it to use ssh
+  - `git remote set-url origin git@github.com:charlottecroce/champlaintechjournals`
 
 # Ubuntu Setup
 Install Git

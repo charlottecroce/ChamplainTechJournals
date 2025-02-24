@@ -294,3 +294,21 @@ ansible windows -i inventory.txt -m win_ping -u charlotte.croce-adm@charlotte.lo
 host_key_checking = false
 ```
 
+
+## Software deployment using win_chocolatey
+roles/windows_software.yml
+```
+- name: install windows applications
+  hosts: windows
+  tasks:
+    - name: install firefox and 7zip
+      win_chocolatey:
+        name:
+        - firefox
+        - 7zip
+        state: present
+```
+```
+ansible-playbook -i inventory.txt roles/windows_software.yml -u charlotte.croce-adm@charlotte.local --ask-pass
+```
+this caused an error that NEt 4.8 isn't installed

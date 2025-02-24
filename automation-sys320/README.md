@@ -1,7 +1,7 @@
 # Automation and Scripting
 Fall 2024
 ## Powershell
-- [week01]((https://github.com/charlottecroce/ChamplainTechJournals/tree/main/automation-sys320/week01)): Introduction
+- [week01](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/automation-sys320/week01): Introduction
 - [week02](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/automation-sys320/week02): Cmdlets and Members
 - [week03](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/automation-sys320/week03): Flow Control
 - [week04](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/automation-sys320/week04): Access to File Content

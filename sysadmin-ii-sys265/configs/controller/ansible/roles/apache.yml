@@ -1,0 +1,39 @@
+- name: apache sys265
+  hosts: apache
+  become: true    # Run all tasks with sudo/root privileges
+  vars:
+    install_utilities: false
+    firewalld_enable: true
+    ansible_os_family: RedHat
+    ansible_distribution: CentOS # required because role searches for Rocky config files
+  roles:
+    - geerlingguy.apache    # apply the apache installation role
+
+  handlers: # will run when a task has notify:name parameter
+    - name: reload firewall # runs after adding firewall rule
+      command: firewall-cmd --reload
+
+  tasks:
+    # open port 443 in firewall for apache web interface
+    - name: add firewall rule
+      firewalld:
+        port: "{{ item }}"
+        permanent: true
+        immediate: true
+        state: enabled
+      loop:
+        - 80/tcp
+        - 443/tcp
+      notify: reload firewall
+
+    - name: install apache
+      yum:
+        name: httpd
+        state: present # will only install if not already
+
+    - name: enable and start apache service
+      systemd:
+        name: httpd
+        enabled: true
+        state: started
+        daemon_reload: yes # reload systemd to recognize new service

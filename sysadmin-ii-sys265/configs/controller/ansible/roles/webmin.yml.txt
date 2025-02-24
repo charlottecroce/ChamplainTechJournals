@@ -1,0 +1,49 @@
+- name: webmin sys265
+  hosts: webmin
+  become: true    # Run all tasks with sudo/root privileges
+  vars:
+    install_utilities: false
+    firewalld_enable: true
+
+  pre_tasks: # before role execution. we need the repo/key before executing webmin installation role
+    - name: add webmin repo and GPG key
+      yum_repository:
+        name: webmin
+        description: Webmin Distribution Neutral
+        baseurl: http://download.webmin.com/download/yum
+        enabled: true
+        gpgcheck: true
+        gpgkey: http://www.webmin.com/jcameron-key.asc
+
+   # update YUM cache to recognize new repository
+    - name: clean and update YUM cache
+      yum:
+        update_cache: yes
+
+  roles:
+    - semuadmin.webmin    # apply the webmin installation role
+
+  handlers: # will run when a task has notify:name parameter
+    - name: reload firewall # runs after adding firewall rule
+      command: firewall-cmd --reload
+
+  tasks:
+    # open port 10000 in firewall for webmin web interface
+    - name: add firewall rule
+      firewalld:
+        port: 10000/tcp
+        permanent: true
+        state: enabled
+      notify: reload firewall
+
+    - name: install webmin
+      yum:
+        name: webmin
+        state: present # will only install if not already
+
+    - name: enable and start webmin service
+      systemd:
+        name: webmin
+        enabled: true
+        state: started
+        daemon_reload: yes # reload systemd to recognize new service

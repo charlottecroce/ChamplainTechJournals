@@ -235,14 +235,20 @@ ansible-playbook -i inventory.txt roles/webmin.yml
 - Make sure OpenSSH is running on mgmt01
 
 Powershell as Admin
-Deliverable 9.  Provide a screenshot that shows a successful ssh login to a powershell prompt from controller to mgmt01 similar to the one below.
+
+>[!Caution]
+> DO NOT INSTALL 32 BIT VERSION
 - install OpenSSH
+
 ```
-wget https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.1.0p1-Preview/OpenSSH-Win32.zip -O 'C:\Program Files\OpenSSH.zip'
+wget https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.1.0p1-Preview/OpenSSH-Win64.zip -O 'C:\Program Files\OpenSSH.zip'
 Expand-Archive -Path 'C:\Program Files\OpenSSH.zip' -DestinationPath 'C:\Program Files\OpenSSH'
 rm 'C:\Program Files\OpenSSH.zip'
-powershell.exe -ExecutionPolicy Bypass -File 'C:\Program Files\OpenSSH\OpenSSH-Win32\install-sshd.ps1'
+powershell.exe -ExecutionPolicy Bypass -File 'C:\Program Files\OpenSSH\OpenSSH-Win64\install-sshd.ps1'
 ```
+or
+
+
 - start service
 ```
 Start-Service sshd
@@ -259,5 +265,32 @@ Get-NetFirewallRule | Where-Object DisplayName -Like '*ssh*'
 Set-ItemProperty "HKLM:\Software\Microsoft\Powershell\1\ShellIds" -Name ConsolePrompting -Value $true
 New-ItemProperty -Path HKLM:\SOFTWARE\OpenSSH -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
 ```
+add charlotte.croce-adm to Remote Management Users groups
 
+Add/uncomment the following lines in C:\ProgramFiles\ssh\sshd_config
+```
+AllowUsers charlotte\charlotte.croce-adm
+StrictModes no
+PubkeyAuthentication yes
+```
+
+
+add mgmt01-charlotte to inventory.txt
+```
+[windows]
+mgmt01-charlotte
+[windows:vars]
+ansible_shell_type=powershell
+```
+- test connection
+```
+ansible windows -i inventory.txt -m win_ping -u charlotte.croce-adm@charlotte.local --ask-pass
+```
+
+- to add wks01 without needing to ssh first:
+- create ansible.cfg in ansible directory
+```
+[defaults]
+host_key_checking = false
+```
 

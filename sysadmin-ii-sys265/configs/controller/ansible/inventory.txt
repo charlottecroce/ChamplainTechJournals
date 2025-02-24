@@ -1,0 +1,9 @@
+[apache]
+ansible1-charlotte
+[webmin]
+ansible2-charlotte
+[windows]
+mgmt01-charlotte
+wks01-charlotte
+[windows:vars]
+ansible_shell_type=powershell

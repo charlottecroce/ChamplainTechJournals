@@ -1,6 +1,6 @@
 # network firewalls 1
 
-## Configuring fw01
+# Configure fw01
 - Create and link firewall zones to interfaces (eth0, eth1, eth2)
 ```
 set zone-policy zone WAN interface eth0
@@ -128,3 +128,74 @@ set firewall name LAN-to-DMZ rule 20 destination port 22
 set firewall name LAN-to-DMZ rule 20 protocol tcp
 ```
 
+# Configure fw-mgmt
+## LAN-to-MGMT
+```
+set zone-policy zone LAN interface eth0
+set zone-policy zone MGMT interface eth1
+```
+Firewalls for WAN and DMZ
+```
+set firewall name LAN-to-MGMT default-action drop
+set firewall name MGMT-to-LAN default-action drop
+set firewall name LAN-to-MGMT enable-default-log 
+set firewall name MGMT-to-LAN enable-default-log
+```
+
+Assigning Firewalls to Zones
+```
+set zone-policy zone MGMT from LAN firewall name LAN-to-MGMT
+set zone-policy zone LAN from MGMT firewall name MGMT-to-LAN
+```
+
+### LAN-to-MGMT firewall
+allow established traffic
+```
+set firewall name LAN-to-MGMT rule 1 action accept
+set firewall name LAN-to-MGMT rule 1 state established enable
+```
+allow SSH MGMT-01->wazuh
+```
+set firewall name LAN-to-MGMT rule 10 description "wazuh SSH access from MGMT-01"
+set firewall name LAN-to-MGMT rule 10 action accept
+set firewall name LAN-to-MGMT rule 10 source address 172.16.150.10
+set firewall name LAN-to-MGMT rule 10 destination address 172.16.200.10
+set firewall name LAN-to-MGMT rule 10 destination port 22
+set firewall name LAN-to-MGMT rule 10 protocol tcp
+```
+allow HTTPS MGMT-01->wazuh
+```
+set firewall name LAN-to-MGMT rule 20 description "wazuh HTTPS access from MGMT-01"
+set firewall name LAN-to-MGMT rule 20 action accept
+set firewall name LAN-to-MGMT rule 20 source address 172.16.150.10
+set firewall name LAN-to-MGMT rule 20 destination address 172.16.200.10
+set firewall name LAN-to-MGMT rule 20 destination port 443
+set firewall name LAN-to-MGMT rule 20 protocol tcp
+```
+allow wazuh agent communication
+```
+set firewall name LAN-to-MGMT rule 30 description "wazuh agent communication with server"
+set firewall name LAN-to-MGMT rule 30 action accept
+set firewall name LAN-to-MGMT rule 30 destination address 172.16.200.10
+set firewall name LAN-to-MGMT rule 30 destination port 1514,1515
+set firewall name LAN-to-MGMT rule 30 protocol tcp
+```
+
+## MGMT-to-LAN
+Allows established traffic back again
+```
+set firewall name MGMT-to-LAN rule 1 action accept
+set firewall name MGMT-to-LAN rule 1 state established enable
+```
+Allows MGMT to initiate any connection to the LAN
+```
+set firewall name MGMT-to-LAN rule 10 description "allows MGMT to LAN"
+set firewall name MGMT-to-LAN rule 10 action accept
+set firewall name MGMT-to-LAN rule 10 destination address 172.16.150.0/24
+```
+Allows MGMT to initiate any connection to the DMZ (yes, this is in the MGMT-to-LAN zone-policy, because MGMT is not directly connected to DMZ)
+```
+set firewall name MGMT-to-LAN rule 20 description "allows MGMT to DMZ"
+set firewall name MGMT-to-LAN rule 20 action accept
+set firewall name MGMT-to-LAN rule 20 destination address 172.16.50.0/29
+```

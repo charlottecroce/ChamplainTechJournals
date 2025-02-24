@@ -232,23 +232,20 @@ ansible-playbook -i inventory.txt roles/webmin.yml
 ```
 
 # Ansible on Windows
-- Make sure OpenSSH is running on mgmt01
-
-Powershell as Admin
+## OpenSSH Server Setup
 
 >[!Caution]
 > DO NOT INSTALL 32 BIT VERSION
-- install OpenSSH
 
+### Install OpenSSH
+Run these commands in PowerShell as Administrator:
 ```
 wget https://github.com/PowerShell/Win32-OpenSSH/releases/download/v9.8.1.0p1-Preview/OpenSSH-Win64.zip -O 'C:\Program Files\OpenSSH.zip'
 Expand-Archive -Path 'C:\Program Files\OpenSSH.zip' -DestinationPath 'C:\Program Files\OpenSSH'
 rm 'C:\Program Files\OpenSSH.zip'
 powershell.exe -ExecutionPolicy Bypass -File 'C:\Program Files\OpenSSH\OpenSSH-Win64\install-sshd.ps1'
 ```
-or
-
-
+### Configure OpenSSH
 - start service
 ```
 Start-Service sshd
@@ -260,43 +257,40 @@ Get-Service -Name sshd # check if running
 New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
 Get-NetFirewallRule | Where-Object DisplayName -Like '*ssh*'
 ```
-- change the ssh shell to powershell
+- set PowerShell as default SSH shell
 ```
 Set-ItemProperty "HKLM:\Software\Microsoft\Powershell\1\ShellIds" -Name ConsolePrompting -Value $true
 New-ItemProperty -Path HKLM:\SOFTWARE\OpenSSH -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
 ```
-add charlotte.croce-adm to Remote Management Users groups
-
-Add/uncomment the following lines in C:\ProgramData\ssh\sshd_config
+- add `charlotte.croce-adm` to the **Remote Management Users** groups
+- Add/uncomment the following lines in C:\ProgramData\ssh\sshd_config
+  - `StrictModes no` is sometimes needed on Windows systems because Windows permissions don't map perfectly to the UNIX-style permissions that OpenSSH expects
 ```
 AllowUsers charlotte\charlotte.croce-adm
 StrictModes no
-PubkeyAuthentication yes
 ```
-
-
-add mgmt01-charlotte to inventory.txt
+## Ansible Setup
+### Inventory Setup
+- add windows machines to `inventory.txt`
 ```
 [windows]
 mgmt01-charlotte
+wks01-charlotte
 [windows:vars]
 ansible_shell_type=powershell
+```
+- create ansible.cfg in ansible directory, to skip host key checking
+```
+[defaults]
+host_key_checking = false
 ```
 - test connection
 ```
 ansible windows -i inventory.txt -m win_ping -u charlotte.croce-adm@charlotte.local --ask-pass
 ```
 
-- to add wks01 without needing to ssh first:
-- create ansible.cfg in ansible directory
-```
-[defaults]
-host_key_checking = false
-```
-
-
 ## Software deployment using win_chocolatey
-roles/windows_software.yml
+- create playbook `roles/windows_software.yml`
 ```
 - name: install windows applications
   hosts: windows
@@ -308,7 +302,21 @@ roles/windows_software.yml
         - 7zip
         state: present
 ```
+- run playbook
 ```
 ansible-playbook -i inventory.txt roles/windows_software.yml -u charlotte.croce-adm@charlotte.local --ask-pass
 ```
-this caused an error that NEt 4.8 isn't installed
+- If you encounter .NET Framework errors, install version 4.8 (in my case I needed version 4.8, it will probably be a different version in the future)
+```
+Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/?linkid=2088631" -OutFile "C:\dotNetFx48.exe"
+Start-Process -FilePath "C:\dotNetFx48.exe" -ArgumentList "/quiet /norestart" -Wait
+Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" -Name Release # verify installation
+```
+> [!Note]:
+> Installation may take several minutes. System restart required after installation.
+
+- list packages installed with chocolatey
+```
+'C:\ProgramData\chocolatey\bin\choco.exe' list
+```
+

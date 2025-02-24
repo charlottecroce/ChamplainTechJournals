@@ -267,7 +267,7 @@ New-ItemProperty -Path HKLM:\SOFTWARE\OpenSSH -Name DefaultShell -Value "C:\Wind
 ```
 add charlotte.croce-adm to Remote Management Users groups
 
-Add/uncomment the following lines in C:\ProgramFiles\ssh\sshd_config
+Add/uncomment the following lines in C:\ProgramData\ssh\sshd_config
 ```
 AllowUsers charlotte\charlotte.croce-adm
 StrictModes no

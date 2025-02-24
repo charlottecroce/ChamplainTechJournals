@@ -312,7 +312,7 @@ Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/?linkid=2088631" -OutFil
 Start-Process -FilePath "C:\dotNetFx48.exe" -ArgumentList "/quiet /norestart" -Wait
 Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" -Name Release # verify installation
 ```
-> [!Note]:
+> [!Note]
 > Installation may take several minutes. System restart required after installation.
 
 - list packages installed with chocolatey

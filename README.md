@@ -1,4 +1,4 @@
-# Champlain College Tech Journals
+# Champlain College Tech Journals 🦫
 Notes, code, and lab write-ups from my Champlain College courses
 
 ### CYBER

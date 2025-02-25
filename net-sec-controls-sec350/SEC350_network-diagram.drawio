@@ -246,8 +246,8 @@
         <mxCell id="JkLcdCIDIRtKrtIc7PYW-3" value="mgmt01&lt;div&gt;172.16.150.10&lt;/div&gt;" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn1.iconfinder.com/data/icons/operating-system-flat-1/30/ubuntu-128.png" parent="1" vertex="1">
           <mxGeometry x="1080" y="502.6" width="70" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="8yr2mNF9FMK26sW0gYA2-38" value="&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;SEC 350 - Enterprise and Network Security Controls&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;font&gt;Network Diagram - Charlotte Croce&lt;/font&gt;&lt;font&gt;&lt;br&gt;&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="660" y="180" width="411" height="110" as="geometry" />
+        <mxCell id="8yr2mNF9FMK26sW0gYA2-38" value="&lt;div&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;SEC 350 -&amp;nbsp; Network Security Controls&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Network Diagram - Charlotte Croce&lt;/font&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="679" y="190" width="356" height="100" as="geometry" />
         </mxCell>
         <mxCell id="8yr2mNF9FMK26sW0gYA2-44" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://wazuh.com/uploads/2022/05/wazuh-logo.png;" parent="1" vertex="1">
           <mxGeometry x="820.66" y="1040" width="89.68" height="30" as="geometry" />

@@ -18,3 +18,6 @@ Check listening network ports:
 SELECT pid, address, port FROM listening_ports;
 ```
 
+___
+|[<<<<](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/02_install_rocky.md)|[>>>>](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/04_wazuh_integration.md)|
+|-|-|

@@ -3,3 +3,7 @@
 
 # Research
 test 123
+
+___
+|[<<<<](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/README.md)|[>>>>](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/02_install_rocky.md)|
+|-|-|

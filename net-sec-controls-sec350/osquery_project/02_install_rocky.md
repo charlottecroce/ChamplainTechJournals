@@ -26,7 +26,7 @@ sudo cp /opt/osquery/share/osquery/osquery.example.conf /etc/osquery/osquery.con
 
 ## Running osquery
 ### Standalone/Client App (osqueryi)
-To start a standalone osquery use: `osqueryi`. This does not need an osquery server or service. [osqueryi docs](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/03_client_app.md)
+To start a standalone osquery use: `osqueryi`. This does not need an osquery server or service. [osqueryi page](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/03_client_app.md)
 
 ### Daemon Service (osqueryd)
 ```bash

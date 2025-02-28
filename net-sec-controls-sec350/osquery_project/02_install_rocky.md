@@ -4,7 +4,7 @@
 # Install osquery on Rocky Linux (web01)
 
 ## Installation
-- Install via yum repository (current version: 15.5.0) -- commands found at https://osquery.io/downloads/official/5.15.0
+- Install via yum repository (current version: 15.5.0) -- [source](https://osquery.io/downloads/official/5.15.0)
 ```bash
 curl -L https://pkg.osquery.io/rpm/GPG | sudo tee /etc/pki/rpm-gpg/RPM-GPG-KEY-osquery
 sudo yum-config-manager --add-repo https://pkg.osquery.io/rpm/osquery-s3-rpm.repo
@@ -14,10 +14,10 @@ sudo yum install osquery
 ## Configuration
 > [!Warning]
 > Linux systems running journald will collect logging data originating from the kernel audit subsystem (something that osquery enables) from several sources, including audit records. To avoid performance problems on busy boxes (specially when osquery event tables are enabled), it is recommended to mask audit logs from entering the journal with the following command
-> 
-> `systemctl mask --now systemd-journald-audit.socket`
->
-> from [docs](https://osquery.readthedocs.io/en/latest/installation/install-linux/)
+> ```bash
+> systemctl mask --now systemd-journald-audit.socket
+> ```
+> -- [source](https://osquery.readthedocs.io/en/latest/installation/install-linux/)
 
 The `/etc/init.d/osqueryd` script does not automatically start the daemon until a configuration file is created. Create the default config file
 ```bash

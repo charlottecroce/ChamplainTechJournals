@@ -2,3 +2,6 @@
 |-|-|-|-|-|-|-|
 
 # Wazuh Integration
+___
+|[<<<<](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/03_client_app.md)|[>>>>](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/05_demonstration.md)|
+|-|-|

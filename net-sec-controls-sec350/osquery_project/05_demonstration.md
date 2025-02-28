@@ -2,3 +2,6 @@
 |-|-|-|-|-|-|-|
 
 # Demonstration
+___
+|[<<<<](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/04_wazuh_integration.md)|[>>>>](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/06_conclusion.md)|
+|-|-|

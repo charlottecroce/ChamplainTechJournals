@@ -2,3 +2,19 @@
 |-|-|-|-|-|-|-|
 
 # osquery Client Application (osqueryi)
+`osqueryi` is an interactive shell for osquery that uses SQL-like queries to gather system information. It allows you to query various aspects of an operating system as if they were tables in a database.
+
+## Common queries:
+Inspect system processes:
+```sql
+SELECT name, path, pid FROM processes WHERE name = 'httpd';
+```
+List installed packages:
+```sql
+SELECT name, version FROM rpm_packages;
+```
+Check listening network ports:
+```sql
+SELECT pid, address, port FROM listening_ports;
+```
+

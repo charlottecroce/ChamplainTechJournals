@@ -18,3 +18,7 @@
 
 **Deliverable 2:** Provide a link to an exceptionally well prepared build document that covers the specific installation and configuration tasks associated with this project.
 
+
+___
+||[>>>>](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/01_research.md)|
+|-|-|

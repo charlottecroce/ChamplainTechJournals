@@ -38,3 +38,7 @@ sudo systemctl start osqueryd
 > The interactive shell and daemon do NOT communicate!
 
 
+
+___
+|[<<<<](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/01_research.md)|[>>>>](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/03_client_app.md)|
+|-|-|

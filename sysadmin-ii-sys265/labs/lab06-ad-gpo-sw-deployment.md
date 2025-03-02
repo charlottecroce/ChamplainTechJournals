@@ -6,7 +6,7 @@ Before we get into configuring a Group Policy Object (GPO) within Active Directo
 
 ![image](https://github.com/user-attachments/assets/a5a9d811-0e27-48e2-b25d-97cb9e345e56)
 
-use Powershell on AD01 via MGMT01 to figure out how to create another OU called “Software Deploy”, move WKS01 and your regular named account into it, and then delete the Test OU.
+Use Powershell on AD01 via MGMT01 to create another OU called “Software Deploy”, move WKS01 and your regular named account into it, and then delete the Test OU.
 ```powershell
 # Create another OU called Software Deploy under charlotte.local
 # Move WKS01 and your regular named account into it, and then
@@ -47,21 +47,15 @@ if($testOU){
 
 ## Deploying Software via GPO
 
-On MGMT01, download the current Putty x64-bit Windows Installer Package.
-
-Next, create a Share on MGMT01 named ‘Software’ and place Putty’s .msi in it, so users and computers (via GPO) can access & install it shortly.
-see SYS255 file share docs [here](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab07-lab-server-core-and-remote-administrator-tools.md#use-rsat-to-add-to-fs01-and-create-a-sales-users-share). No need to map drive to letter rn
-
-
-Via Group Policy Management feature on MGMT (You need to install this), create a new GPO named ‘Deploy SW’ within the Software Deploy OU. \
+- On MGMT01, download the current Putty x64-bit Windows Installer Package.
+- Next, create a Share on MGMT01 named ‘Software’ and place Putty’s .msi in it, so users and computers (via GPO) can access & install it shortly.
+  - see SYS255 file share docs [here](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/sysadmin-i-sys255/lab07-lab-server-core-and-remote-administrator-tools.md#use-rsat-to-add-to-fs01-and-create-a-sales-users-share). No need to map drive to letter
+- Via Group Policy Management feature on MGMT (You need to install this), create a new GPO named ‘Deploy SW’ within the Software Deploy OU. \
 ![image](https://github.com/user-attachments/assets/64d738b7-1b8e-45ea-9f7d-474fc6679cfb)
 ![image](https://github.com/user-attachments/assets/dccadcee-10f4-4fce-ac7b-0f7b9b87f0cd)
-Edit the new GPO by creating a new Software installation, and assign Putty’s .msi package to deploy. \
+- Edit the new GPO by creating a new Software installation, and assign Putty’s .msi package to deploy. \
 ![image](https://github.com/user-attachments/assets/45ad5e35-665c-4861-a8be-e9aa17d6b676)
-
-
-With the new GPO setting, run “gpupdate /force” on WKS01, and then allow the restart when prompted. PuTTY Should be installed
-
+- With the new GPO setting, run `gpupdate /force` on WKS01, and then allow the restart when prompted. PuTTY should now be installed
 
 > [!Note]
 > An extremely common issue you’ll encounter in MS Window environments are the differences between Local Permissions vs. Share Permissions: 

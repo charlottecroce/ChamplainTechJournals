@@ -11,7 +11,7 @@ Osquery is an open-source OS instrumentation framework that uses SQL-like syntax
 - **Query packs**: Pre-built collections of queries for specific tasks like incident response, vulnerability management, or compliance monitoring
 
 ## Components
-1. [**Osqueryi**](03_install_rocky.md): An interactive console shell for running ad-hoc queries and exploring the system
+1. [**Osqueryi**](03_client_app.md): An interactive console shell for running ad-hoc queries and exploring the system
 2. [**Osqueryd**](02_install_rocky.md): A daemon that schedules queries and monitors system changes
 
 > [!Warning]

@@ -3,12 +3,6 @@
 
 # Wazuh Integration
 
-
-
-___
-|[<<<<](03_client_app.md)|[>>>>](05_demonstration.md)|
-|-|-|
-
 ## Configuration 
 
 # Install yum-utils 
@@ -31,4 +25,10 @@ Run these commads to start osquery
 
 
 Source: https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/osquery.html#configuration 
+
+
+
+___
+|[<<<<](03_client_app.md)|[>>>>](05_demonstration.md)|
+|-|-|
 

@@ -1,4 +1,4 @@
-|[HOME](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/README.md)|[RESEARCH](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/01_research.md)|[INSTALLATION](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/02_install_rocky.md)|[CLIENT APP](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/03_client_app.md)|[INTEGRATION](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/04_wazuh_integration.md)|[DEMONSTRATION](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/05_demonstration.md)|[CONCLUSION](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/06_conclusion.md)|
+|[HOME](README.md)|[RESEARCH](01_research.md)|[INSTALLATION](02_install_rocky.md)|[CLIENT APP](03_client_app.md)|[INTEGRATION](04_wazuh_integration.md)|[DEMONSTRATION](05_demonstration.md)|[CONCLUSION](06_conclusion.md)|
 |-|-|-|-|-|-|-|
 
 # Install osquery on Rocky Linux (web01)
@@ -26,7 +26,7 @@ sudo cp /opt/osquery/share/osquery/osquery.example.conf /etc/osquery/osquery.con
 
 ## Running osquery
 ### Standalone/Client App (osqueryi)
-To start a standalone osquery use: `osqueryi`. This does not need an osquery server or service. [osqueryi page](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/03_client_app.md)
+To start a standalone osquery use: `osqueryi`. This does not need an osquery server or service. [osqueryi page](03_client_app.md)
 
 ### Daemon Service (osqueryd)
 ```bash
@@ -40,5 +40,5 @@ sudo systemctl start osqueryd
 
 
 ___
-|[<<<<](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/01_research.md)|[>>>>](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/03_client_app.md)|
+|[<<<<](01_research.md)|[>>>>](03_client_app.md)|
 |-|-|

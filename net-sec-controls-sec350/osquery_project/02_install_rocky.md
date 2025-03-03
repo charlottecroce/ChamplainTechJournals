@@ -4,7 +4,14 @@
 # Install osquery on Rocky Linux (web01)
 
 ## Installation
-- Install via yum repository (current version: 15.5.0) -- [source](https://osquery.io/downloads/official/5.15.0)
+### DMZ-to-WAN temporary firewall rule
+Add a temporary rule for software updates that we either delete, disable or discard when complete
+```bash
+set firewall name DMZ-to-WAN rule 999 action accept
+set firewall name DMZ-to-WAN rule 999 source address 172.16.50.3
+```
+### Install via yum repository
+- (current version: 15.5.0) -- [source](https://osquery.io/downloads/official/5.15.0)
 ```bash
 curl -L https://pkg.osquery.io/rpm/GPG | sudo tee /etc/pki/rpm-gpg/RPM-GPG-KEY-osquery
 sudo yum install yum-utils -y

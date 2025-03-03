@@ -2,12 +2,6 @@
 |-|-|-|-|-|-|-|
 
 # Wazuh Integration
-## DMZ-to-WAN temporary firewall rule
-Add a temporary rule for software updates that we either delete, disable or discard when complete
-```bash
-set firewall name DMZ-to-WAN rule 999 action accept
-set firewall name DMZ-to-WAN rule 999 source address 172.16.50.3
-```
 
 
 

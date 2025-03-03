@@ -7,6 +7,7 @@
 - Install via yum repository (current version: 15.5.0) -- [source](https://osquery.io/downloads/official/5.15.0)
 ```bash
 curl -L https://pkg.osquery.io/rpm/GPG | sudo tee /etc/pki/rpm-gpg/RPM-GPG-KEY-osquery
+sudo yum install yum-utils -y
 sudo yum-config-manager --add-repo https://pkg.osquery.io/rpm/osquery-s3-rpm.repo
 sudo yum-config-manager --enable osquery-s3-rpm-repo
 sudo yum install osquery

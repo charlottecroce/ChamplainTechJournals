@@ -22,3 +22,24 @@ set nat destination rule 10 translation address 172.16.50.3
 - IP Address: 172.16.50.4/29
 - hostname: jump-charlotte
 
+
+- Adjust the firewall rules from LAN-TO-DMZ  such that mgmt01 can ssh into any server on the DMZ.
+
+
+- Make sure that fw01 is only listening for SSH on the LAN interface (172.16.150.2) and not on all interfaces (0.0.0.0/0)
+![image](https://github.com/user-attachments/assets/76304685-062f-41df-ac18-092174428aa2)
+
+sudo systemctl restart ssh
+
+
+
+On rw01, create a dedicated keypair that will only be used for ssh access to jump. make sure to name the keypair something other than the default and add a comment indicating its purpose.  Make sure to add a passphrase when prompted.
+
+```
+ssh-keygen -t rsa -b 4096 -C "ssh to jump"
+name of file: jump-charlotte
+```
+
+create a passwordless user called `charlotte-jump` on jump.  Copy over the public component of the jump keypair you just created on rw01 to the new user's `.ssh/authorized_keys` file. 
+
+

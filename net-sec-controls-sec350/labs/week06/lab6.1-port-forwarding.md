@@ -1,5 +1,6 @@
+# Lab 6.1: Port Forwarding and Jump Boxes
 
-# RW01 -> WEB
+## RW01 -> WEB
 security issue:  rw01 knows the internal routing for our DMZ and used this information to create a static route from SEC350-WAN to the DMZ.  A better alternative is to mask the presence of the DMZ altogether with NAT destination rules.
 
 - remove static ip route from rw01 to DMZ
@@ -39,7 +40,29 @@ On rw01, create a dedicated keypair that will only be used for ssh access to jum
 ssh-keygen -t rsa -b 4096 -C "ssh to jump"
 name of file: jump-charlotte
 ```
+(this is a public key! it's okay to share, unlike private keys)
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDLLKDg5fIw8CINt5IOY3vZ6XiudxKn0sXZ1hTWbugfKQ9NZjfSCbboxIlVpyqAwnFzf+3oJcPpnlVLjXpugJe6ghfuLsO/1fdqFQ5/PBcQbJXFvdIH93MJ78sBUhT+SbhHLas6KjShSOhNz5fRYOMOTpCtB7eQhk5q3gqTEvmDejgWZPphyAQJCnB0hw+J76jl3t68Q+FtD57RWhWhp/0ZQPfjY+hnJOfLaD+Zs0tsxvYXqDuPhRt2J2xUHF8LgaqZYkosIllfcX//tmEnQ90nU+zLu3jje8Pqy4mfjGsV8wZ+ug7ModwJwR2ToieqoiyOnDq1ytG0r5sKjeM5RTX6tJTOl8ltr7E51u0bajjym0ZL4kT0W82Eld/DV4+BzbEB6yCSWWVwo/eKoqkGBIHpIibzkjPGCQ4O0tq3s+04DpOpucDqk0J+Yphdj/qmK/mYFLU0xKZnIJl8otyItyVhV2zTIn64PQ3gEE8z0O4GjEJEfhkJ29ydtXXDFIpCfSirmfH7HbXlwgUmxHJqnCBqZ8eKb/n52ekaD0SIOPQE76RmR540cus3mvo3t30Ak79NBSjEh82k2rP42eVx/GhF/o3u8DdCF3xA46dzqt1HMvOpnOjdvbldP076VKkxV/px9nE7mJZysxei8SisrSbwn7vxLem4LrDsAIxfsGcULw== ssh to jump
+```
+
 
 create a passwordless user called `charlotte-jump` on jump.  Copy over the public component of the jump keypair you just created on rw01 to the new user's `.ssh/authorized_keys` file. 
+
+```
+useradd -m -d /home/charlotte-jump -s /bin/bash charlotte-jump
+sudo sed -i 's/PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+
+# create .ssh directory, give perms to user
+mkdir -p /home/charlotte-jump/.ssh
+chmod 700 /home/charlotte-jump/.ssh
+
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDLLKDg5fIw8CINt5IOY3vZ6XiudxKn0sXZ1hTWbugfKQ9NZjfSCbboxIlVpyqAwnFzf+3oJcPpnlVLjXpugJe6ghfuLsO/1fdqFQ5/PBcQbJXFvdIH93MJ78sBUhT+SbhHLas6KjShSOhNz5fRYOMOTpCtB7eQhk5q3gqTEvmDejgWZPphyAQJCnB0hw+J76jl3t68Q+FtD57RWhWhp/0ZQPfjY+hnJOfLaD+Zs0tsxvYXqDuPhRt2J2xUHF8LgaqZYkosIllfcX//tmEnQ90nU+zLu3jje8Pqy4mfjGsV8wZ+ug7ModwJwR2ToieqoiyOnDq1ytG0r5sKjeM5RTX6tJTOl8ltr7E51u0bajjym0ZL4kT0W82Eld/DV4+BzbEB6yCSWWVwo/eKoqkGBIHpIibzkjPGCQ4O0tq3s+04DpOpucDqk0J+Yphdj/qmK/mYFLU0xKZnIJl8otyItyVhV2zTIn64PQ3gEE8z0O4GjEJEfhkJ29ydtXXDFIpCfSirmfH7HbXlwgUmxHJqnCBqZ8eKb/n52ekaD0SIOPQE76RmR540cus3mvo3t30Ak79NBSjEh82k2rP42eVx/GhF/o3u8DdCF3xA46dzqt1HMvOpnOjdvbldP076VKkxV/px9nE7mJZysxei8SisrSbwn7vxLem4LrDsAIxfsGcULw== ssh to jump" >> /home/charlotte-jump/.ssh/authorized_keys
+
+# set perms, set new user as directory owner
+chmod 600 /home/charlotte-jump/.ssh/authorized_keys
+chown -R charlotte-jump:charlotte-jump /home/charlotte-jump/.ssh
+
+systemctl restart sshd
+```
 
 

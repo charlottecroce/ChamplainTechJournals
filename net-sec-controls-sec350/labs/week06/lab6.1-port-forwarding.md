@@ -65,4 +65,21 @@ chown -R charlotte-jump:charlotte-jump /home/charlotte-jump/.ssh
 systemctl restart sshd
 ```
 
+## install wazuh agent on jump
+on mgmt01
+```
+wget https://packages.wazuh.com/4.x/yum/wazuh-agent-4.7.3-1.x86_64.rpm
+scp wazuh-agent-4.7.3-1.x86_64.rpm charlotte@172.16.50.4:~
+```
+
+on jump
+```
+scp wazuh-agent-4.7.3-1.x86_64.rpm charlotte@172.16.50.4:~
+sudo WAZUH_MANAGER='172.16.200.10' WAZUH_AGENT_GROUP='linux' WAZUH_AGENT_NAME='jump-charlotte' rpm -ihv wazuh-agent-4.7.3-1.x86_64.rpm
+sudo systemctl daemon-reload
+sudo systemctl enable wazuh-agent
+sudo systemctl start wazuh-agent
+```
+![image](https://github.com/user-attachments/assets/500def07-6fb1-4fb5-82a8-4c4f433e3861)
+
 

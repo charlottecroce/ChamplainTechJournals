@@ -22,6 +22,7 @@
     "disable_logging": "false",
     "schedule_splay_percent": "10",
     "utc": "true"
+    "output_format": "json"
   },
   "schedule": {
     "system_info": {
@@ -60,6 +61,7 @@ sudo systemctl status osqueryd
 > sudo nano /var/ossec/etc/ossec.conf
 
 # Add these blocks inside the <ossec_config> section
+# make sure this wodle is NOT disabled, as this service is disabled by default
 
 <wodle name="osquery">
   <disabled>no</disabled>
@@ -68,7 +70,8 @@ sudo systemctl status osqueryd
   <config_path>/etc/osquery/osquery.conf</config_path>
   <add_labels>yes</add_labels>
 </wodle>
-  
+
+
 <localfile>
   <log_format>json</log_format>
   <location>/var/log/osquery/osqueryd.results.log</location>
@@ -92,10 +95,10 @@ sudo osqueryi --json "SELECT * FROM processes LIMIT 5;" > /var/log/osquery/osque
 sudo tail -f /var/ossec/logs/ossec.log
 ```
 ### on Wazuh Server
-- check if Wazuh can access Osquery Logs
-```bash
-sudo wazuh-logtest
-```
+- Go to Modules Menu -> Security Events -> Events
+- In left panel, add rule.groups: osquery
+![image](https://github.com/user-attachments/assets/54a8264b-ffac-4f98-be7d-5d1abce24233)
+
 
 ___
 |[<<<<](03_client_app.md)|[>>>>](05_demonstration.md)|

@@ -27,7 +27,7 @@ sudo yum install osquery -y
 > ```
 > -- [source](https://osquery.readthedocs.io/en/latest/installation/install-linux/)
 
-The `/etc/init.d/osqueryd` script does not automatically start the daemon until a configuration file is created. Create the default config file
+The `/etc/init.d/osqueryd` script does not automatically start the daemon until a configuration file is created. This is the command to copy the existing example config file into your working config files directory, this file may need further configuration. 
 ```bash
 sudo cp /opt/osquery/share/osquery/osquery.example.conf /etc/osquery/osquery.conf
 ```
@@ -48,5 +48,7 @@ sudo systemctl start osqueryd
 
 
 ___
+Source: https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/osquery.html 
+
 |[<<<<](01_research.md)|[>>>>](03_client_app.md)|
 |-|-|

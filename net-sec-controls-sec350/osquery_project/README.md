@@ -1,6 +1,8 @@
 |[HOME](README.md)|[RESEARCH](01_research.md)|[INSTALLATION](02_install_rocky.md)|[CLIENT APP](03_client_app.md)|[INTEGRATION](04_wazuh_integration.md)|[DEMONSTRATION](05_demonstration.md)|[CONCLUSION](06_conclusion.md)|
 |-|-|-|-|-|-|-|
 
+Charlotte Croce, Andrei Gorlitsky, Benjamin Tyler
+
 # Project 1 -OSQuery
 
 🚀 Your security engineering technical lead has asked you to investigate a potential security tool called [OSQuery](https://github.com/osquery/osquery).  They have asked that you be prepared to demonstrate the application itself and its integration into the corporate EDR platform (wazuh).  You are expected to demo your results to the full security engineering team in one week.

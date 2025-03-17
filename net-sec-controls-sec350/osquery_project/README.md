@@ -6,8 +6,9 @@
 🚀 Your security engineering technical lead has asked you to investigate a potential security tool called [OSQuery](https://github.com/osquery/osquery).  They have asked that you be prepared to demonstrate the application itself and its integration into the corporate EDR platform (wazuh).  You are expected to demo your results to the full security engineering team in one week.
 
 ## Demonstration Video
-link: https://drive.google.com/file/d/1TmDQrPufHJVOyXyVaR0a5f4StchSyOn2/view?usp=drive_link
+Google Drive link: https://drive.google.com/file/d/1TmDQrPufHJVOyXyVaR0a5f4StchSyOn2/view?usp=drive_link
 
+[download link](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/osquery_project/osqueryproject.webm)
 
 ## Documentation Contents
 - [RESEARCH:](01_research.md) Conduct high level research on OSQuery and explain what it does at a high level

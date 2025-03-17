@@ -36,6 +36,10 @@
     "logged_in_users": {
       "query": "SELECT user, host, time FROM logged_in_users;",
       "interval": 300
+    },
+    "firewall_status": {
+      "query": "SELECT * FROM shell WHERE command = 'firewall-cmd --state';",
+      "interval": 300
     }
   }
 }

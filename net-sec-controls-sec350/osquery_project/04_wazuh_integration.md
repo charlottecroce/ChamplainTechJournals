@@ -16,13 +16,10 @@
 > sudo nano /etc/osquery/osquery.conf
 {
   "options": {
-    "config_plugin": "filesystem",
-    "logger_plugin": "filesystem",
     "logger_path": "/var/log/osquery",
     "disable_logging": "false",
     "schedule_splay_percent": "10",
     "utc": "true"
-    "output_format": "json"
   },
   "schedule": {
     "system_info": {
@@ -41,8 +38,8 @@
       "query": "SELECT * FROM shell WHERE command = 'firewall-cmd --state';",
       "interval": 300
     }
-  }
-}
+  },
+...
 ```
 
 - create log directories with correct permissions for storing osquery results

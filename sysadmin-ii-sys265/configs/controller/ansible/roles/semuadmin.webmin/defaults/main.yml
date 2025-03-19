@@ -1,0 +1,15 @@
+---
+# defaults file for webmin
+
+webmin_dir: /etc/webmin
+webmin_yum_repo: "http://download.webmin.com/download/yum"
+webmin_mirrorlist: "http://download.webmin.com/download/yum/mirrorlist"
+webmin_gpgkey: "http://www.webmin.com/jcameron-key.asc"
+
+webmin_apt_repo: "deb [signed-by=/etc/apt/trusted.gpg.d/jcameron-key.asc] https://download.webmin.com/download/repository sarge contrib"
+
+enable_firewalld: false
+install_utilities: false
+uninstall_webmin: false
+
+webmin_disable_reboot: false

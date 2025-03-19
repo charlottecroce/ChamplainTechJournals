@@ -1,0 +1,94 @@
+---
+# tasks file for webmin#
+
+- name: Install firewalld service template.
+  ansible.builtin.template:
+    src: webmin.xml.j2
+    dest: "/etc/firewalld/services/webmin.xml"
+    owner: root
+    group: root
+    mode: "0644"
+  when: enable_firewalld
+
+- name: Reload firewalld to register new service.
+  ansible.builtin.command: firewall-cmd --reload
+  register: firewall
+  changed_when: "'success' in firewall.stdout"
+  when: enable_firewalld
+
+- name: Enable firewalld service.
+  ansible.posix.firewalld:
+    zone: public
+    service: webmin
+    permanent: true
+    state: enabled
+    immediate: true
+  when: enable_firewalld
+
+- name: Add yum repository and gpg key for Redhat platforms.
+  ansible.builtin.yum_repository:
+    name: webmin
+    description: Webmin yum repo
+    baseurl: "{{ webmin_yum_repo }}"
+    mirrorlist: "{{ webmin_mirrorlist }}"
+    gpgkey: "{{ webmin_gpgkey }}"
+    gpgcheck: true
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Add a gpg key for Debian platforms.
+  ansible.builtin.get_url:
+    url: "{{ webmin_gpgkey }}"
+    dest: /etc/apt/trusted.gpg.d/jcameron-key.asc
+    owner: root
+    group: root
+    mode: "0644"
+  when: ansible_os_family == "Debian"
+
+- name: Add apt repository for Debian platforms.
+  ansible.builtin.apt_repository:
+    repo: "{{ webmin_apt_repo }}"
+    state: present
+    update_cache: true
+  when: ansible_os_family == "Debian"
+
+- name: Install https transport for Debian platforms.
+  ansible.builtin.package:
+    name:
+      - apt-transport-https
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install Webmin.
+  ansible.builtin.package:
+    name:
+      - webmin
+    state: present
+
+- name: Install supporting packages if required.
+  ansible.builtin.package:
+    name:
+      - wget
+      - git
+      - ntpdate
+      - sntp
+      - smartmontools
+    state: present
+  when: install_utilities
+
+- name: Remove old systemd service.
+  ansible.builtin.file:
+    path: /etc/systemd/system/webmin.service
+    state: absent
+
+- name: Enable webmin as systemd service.
+  ansible.builtin.systemd:
+    state: started
+    enabled: true
+    daemon_reload: true
+    name: webmin
+
+- name: Reboot machine.
+  ansible.builtin.reboot:
+    reboot_timeout: 3600
+  when: not webmin_disable_reboot

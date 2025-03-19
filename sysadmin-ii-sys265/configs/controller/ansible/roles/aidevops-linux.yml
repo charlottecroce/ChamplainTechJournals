@@ -1,0 +1,85 @@
+- name: Rocky Linux Security Configuration
+  hosts: ansible1-charlotte
+  become: yes
+  gather_facts: yes
+  tasks:
+    # Create security admin group first
+    - name: Create security admin group
+      group:
+        name: secadmin
+        state: present
+      tags: fs_perms
+    
+    # ============================================================
+    # SYSTEM ADMINISTRATION ELEMENT: File System Permissions
+    # ============================================================
+    # Create parent directory first
+    - name: Create data directory
+      file:
+        path: /data
+        state: directory
+        mode: '0755'
+        owner: root
+        group: root
+      tags: fs_perms
+      
+    - name: Create secure data directory
+      file:
+        path: /data/secure
+        state: directory
+        mode: '0750'
+        owner: root
+        group: secadmin
+      tags: fs_perms
+      
+    - name: Set secure permissions on sensitive files
+      file:
+        path: "{{ item.path }}"
+        mode: "{{ item.mode }}"
+        owner: "{{ item.owner }}"
+        group: "{{ item.group }}"
+      with_items:
+        - { path: '/etc/passwd', mode: '0644', owner: 'root', group: 'root' }
+        - { path: '/etc/shadow', mode: '0400', owner: 'root', group: 'root' }
+        - { path: '/etc/ssh/sshd_config', mode: '0600', owner: 'root', group: 'root' }
+      tags: fs_perms
+    
+    # ============================================================
+    # SYSTEM HARDENING ELEMENT: Firewall Configuration
+    # ============================================================
+    - name: Ensure firewalld is installed
+      dnf:
+        name: firewalld
+        state: present
+      tags: firewall
+      
+    - name: Enable and start firewalld
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+      tags: firewall
+      
+    - name: Allow necessary services
+      firewalld:
+        service: "{{ item }}"
+        permanent: yes
+        state: enabled
+        immediate: yes
+      with_items:
+        - ssh
+        - http
+        - https
+      tags: firewall
+      
+    - name: Block all other ports
+      firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: disabled
+        immediate: yes
+      with_items:
+        - 21/tcp
+        - 23/tcp
+        - 25/tcp
+      tags: firewall

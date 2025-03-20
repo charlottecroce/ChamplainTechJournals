@@ -1,0 +1,42 @@
+---
+# tasks file for uninstall webmin #
+
+- name: Remove Webmin files and directories
+  ansible.builtin.file:
+    path: "/etc/webmin"
+    state: absent
+
+- name: Disable firewalld service.
+  ansible.posix.firewalld:
+    zone: public
+    service: webmin
+    permanent: true
+    state: disabled
+    immediate: true
+  when: enable_firewalld
+
+- name: Remove yum repository for Redhat platforms
+  ansible.builtin.yum_repository:
+    name: webmin
+    description: Webmin yum repo
+    baseurl: "{{ webmin_yum_repo }}"
+    mirrorlist: "{{ webmin_mirrorlist }}"
+    state: absent
+  when: ansible_os_family == "RedHat"
+
+- name: Remove apt repository for Debian platforms
+  ansible.builtin.apt_repository:
+    repo: "{{ webmin_apt_repo }}"
+    state: absent
+  when: ansible_os_family == "Debian"
+
+- name: Unnstall supporting packages if added
+  ansible.builtin.package:
+    name:
+      - wget
+      - git
+      - ntpdate
+      - sntp
+      - smartmontools
+    state: absent
+  when: install_utilities

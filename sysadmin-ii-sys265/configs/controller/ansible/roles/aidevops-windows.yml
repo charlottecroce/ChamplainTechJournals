@@ -1,0 +1,105 @@
+
+- name: Windows Security Configuration
+  hosts: windows
+  gather_facts: yes
+  tasks:
+    # ============================================================
+    # SYSTEM ADMINISTRATION ELEMENT: Shared Folder Management
+    # ============================================================
+    - name: Create secure shared folder
+      win_file:
+        path: C:\SecureShare
+        state: directory
+      tags: file_mgmt
+      
+    - name: Share the secure folder
+      win_share:
+        name: SecureData
+        path: C:\SecureShare
+        description: "Secure data repository"
+        list: yes
+        full: Administrators
+        read: "Domain Users"
+        deny: "Everyone"
+      tags: file_mgmt
+      
+    - name: Set NTFS permissions on secure folder
+      win_acl:
+        path: C:\SecureShare
+        user: Administrators
+        rights: FullControl
+        type: allow
+        state: present
+        inheritance_flags: "ContainerInherit,ObjectInherit"
+      tags: ntfs_perms
+      
+    - name: Add read permissions for authenticated users
+      win_acl:
+        path: C:\SecureShare
+        user: "Authenticated Users"
+        rights: ReadAndExecute
+        type: allow
+        state: present
+        inheritance_flags: "ContainerInherit,ObjectInherit"
+      tags: ntfs_perms
+    
+    # ============================================================
+    # SYSTEM HARDENING ELEMENT: Disable Unnecessary Services
+    # ============================================================
+    - name: Check for service existence
+      win_shell: Get-Service -Name "{{ item }}" -ErrorAction SilentlyContinue
+      register: service_check
+      with_items:
+        - XblGameSave       # Xbox Game Saving Service
+        - XboxNetApiSvc     # Xbox Live Networking Service
+        - DiagTrack         # Connected User Experiences and Telemetry
+        - dmwappushservice  # WAP Push Message Routing Service
+      failed_when: false
+      changed_when: false
+      tags: hardening
+    
+    - name: Disable unnecessary services if they exist
+      win_service:
+        name: "{{ item.item }}"
+        state: stopped
+        start_mode: disabled
+      with_items: "{{ service_check.results }}"
+      when: item.rc == 0
+      tags: hardening
+      
+    - name: Report on services not found
+      debug:
+        msg: "Service {{ item.item }} not found on {{ inventory_hostname }}"
+      with_items: "{{ service_check.results }}"
+      when: item.rc != 0
+      tags: hardening
+    
+    # ============================================================
+    # AD DS GPO ELEMENT 1: Password Policy
+    # ============================================================
+    - name: Configure password policy
+      win_security_policy:
+        section: System Access
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: PasswordComplexity, value: 1 }      # Enable password complexity
+        - { key: MinimumPasswordLength, value: 12 }  # 12 character minimum
+        - { key: PasswordHistorySize, value: 24 }    # Remember 24 passwords
+      when: inventory_hostname in ['wks01-charlotte', 'mgmt01-charlotte']
+      tags: gpo_password
+      
+    # ============================================================
+    # AD DS GPO ELEMENT 2: Account Lockout Policy
+    # ============================================================
+    - name: Configure account lockout policy
+      win_security_policy:
+        section: System Access
+        key: "{{ item.key }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: LockoutBadCount, value: 5 }           # 5 failed attempts
+        - { key: ResetLockoutCount, value: 30 }        # Reset counter after 30 minutes
+        - { key: LockoutDuration, value: 30 }          # Lock for 30 minutes
+      when: inventory_hostname in ['wks01-charlotte', 'mgmt01-charlotte']
+      tags: gpo_lockout

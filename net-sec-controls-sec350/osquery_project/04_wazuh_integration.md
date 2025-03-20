@@ -3,29 +3,102 @@
 
 # Wazuh Integration
 
-## Configuration 
+## Requirements
+- Wazuh manager installed and configured on the wazuh server
+- Wazuh agent installed and connected on WEB01
+- osquery already installed on WEB01 ([installation guide](02_install_rocky.md))
+- root privileges
 
-# Install yum-utils 
+## Configure osquery on web01
+### on WEB01
+- create osquery configuration file. if already created with defaults, edit it
+```json
+> sudo nano /etc/osquery/osquery.conf
+{
+  "options": {
+    "logger_path": "/var/log/osquery",
+    "disable_logging": "false",
+    "schedule_splay_percent": "10",
+    "utc": "true"
+  },
+  "schedule": {
+    "system_info": {
+      "query": "SELECT hostname, cpu_brand, physical_memory FROM system_info;",
+      "interval": 300
+    },
+    "processes": {
+      "query": "SELECT pid, name, path, cmdline FROM processes;",
+      "interval": 300
+    },
+    "logged_in_users": {
+      "query": "SELECT user, host, time FROM logged_in_users;",
+      "interval": 300
+    },
+    "firewall_status": {
+      "query": "SELECT * FROM shell WHERE command = 'firewall-cmd --state';",
+      "interval": 300
+    }
+  },
+...
+```
 
-`curl -L https://pkg.osquery.io/rpm/GPG | tee /etc/pki/rpm-gpg/RPM-GPG-KEY-osquery
-yum-config-manager --add-repo https://pkg.osquery.io/rpm/osquery-s3-rpm.repo
-yum-config-manager --enable osquery-s3-rpm-repo
-yum install osquery`
+- create log directories with correct permissions for storing osquery results
+```bash
+sudo mkdir -p /var/log/osquery
+sudo chown -R root:root /var/log/osquery
+sudo chmod -R 755 /var/log/osquery
+```
 
-# Configuration Setup
+- restart osqueryd
+```bash
+sudo systemctl restart osqueryd
+sudo systemctl status osqueryd
+```
 
-This is the command to copy the existing example config file into your working config files directory, this file may need further configuration. 
+## Configure WEB01 -> Wazuh integration
+### On WEB01
+- configure Wazuh agent to monitor osquery logs
+```xml
+> sudo nano /var/ossec/etc/ossec.conf
 
-`cp /opt/osquery/share/osquery/osquery.example.conf /etc/osquery/osquery.conf`
+# Add these blocks inside the <ossec_config> section
+# make sure this wodle is NOT disabled, as this service is disabled by default
 
-Run these commads to start osquery
+<wodle name="osquery">
+  <disabled>no</disabled>
+  <run_daemon>yes</run_daemon>
+  <log_path>/var/log/osquery/osqueryd.results.log</log_path>
+  <config_path>/etc/osquery/osquery.conf</config_path>
+  <add_labels>yes</add_labels>
+</wodle>
 
-`sysetmctl enable osqueryd`
-`systemctl start osqueryd`
 
+<localfile>
+  <log_format>json</log_format>
+  <location>/var/log/osquery/osqueryd.results.log</location>
+</localfile>
+```
 
-Source: https://documentation.wazuh.com/current/user-manual/capabilities/system-inventory/osquery.html#configuration 
+- restart wazuh agent
+```bash
+sudo systemctl restart wazuh-agent
+sudo systemctl status wazuh-agent
+```
 
+## Validation
+### on WEB01
+- Run a manual query to generate an immediate log entry
+```
+sudo osqueryi --json "SELECT * FROM processes LIMIT 5;" > /var/log/osquery/osqueryd.results.log
+```
+- Check if Wazuh detected it
+```
+sudo tail -f /var/ossec/logs/ossec.log
+```
+### on Wazuh Server
+- Go to Modules Menu -> Security Events -> Events
+- In left panel, add rule.groups: osquery
+![image](https://github.com/user-attachments/assets/54a8264b-ffac-4f98-be7d-5d1abce24233)
 
 
 ___

@@ -1,6 +1,6 @@
 # LOG01 Configuration
 
-> **Note**: This is the original log01 server that will eventually be retired.
+> **Note**: This is the original log01 server that will eventually be retired, then brought back as a jump server.
 
 ## Basic Setup
 - Set hostname to `log01-charlotte`
@@ -83,4 +83,41 @@ tail -f /var/log/messages
 Or check specific remote log files:
 ```
 tail -f /var/log/remote/*/*/*/*/sshd.log
+```
+
+## Recommissioned as Jump Server
+When log01 is repurposed as a jump server:
+
+1. Change IP address to: `172.16.50.4/29`
+2. Change hostname: `sudo hostnamectl set-hostname jump-charlotte`
+
+### SSH Configuration for Passwordless Access
+```bash
+# Create dedicated user for jump access
+useradd -m -d /home/charlotte-jump -s /bin/bash charlotte-jump
+
+# Disable password authentication
+sudo sed -i 's/PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+
+# Create SSH directory structure with proper permissions
+mkdir -p /home/charlotte-jump/.ssh
+chmod 700 /home/charlotte-jump/.ssh
+
+# Add the public key to authorized_keys
+echo "ssh-rsa AAAAB3N...your-public-key..." >> /home/charlotte-jump/.ssh/authorized_keys
+
+# Set proper permissions and ownership
+chmod 600 /home/charlotte-jump/.ssh/authorized_keys
+chown -R charlotte-jump:charlotte-jump /home/charlotte-jump/.ssh
+
+# Restart SSH service
+systemctl restart sshd
+```
+
+### Wazuh Agent Installation
+```bash
+sudo WAZUH_MANAGER='172.16.200.10' WAZUH_AGENT_GROUP='linux' WAZUH_AGENT_NAME='jump-charlotte' rpm -ihv wazuh-agent-4.7.3-1.x86_64.rpm
+sudo systemctl daemon-reload
+sudo systemctl enable wazuh-agent
+sudo systemctl start wazuh-agent
 ```

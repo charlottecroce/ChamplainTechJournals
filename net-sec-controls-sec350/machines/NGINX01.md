@@ -21,6 +21,7 @@ echo "<h1>NGINX01 - Charlotte Croce</h1>" | sudo tee /var/www/html/index.html
 ```
 
 * Remember to add firewall and port forwarding rule for this new IP!
+* Also, add firewall-cmd rules if applicable
 
 ## Install Wazuh Agent
 ```bash

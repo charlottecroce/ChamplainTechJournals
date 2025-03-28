@@ -62,7 +62,7 @@ set nat destination rule 10 description "HTTP->NGINX01"
 set nat destination rule 10 inbound-interface eth0
 set nat destination rule 10 destination port 80
 set nat destination rule 10 protocol tcp
-set nat destination rule 10 translation address 172.16.50.???????
+set nat destination rule 10 translation address 172.16.50.3
 
 commit
 save
@@ -105,7 +105,7 @@ set firewall name WAN-to-DMZ rule 1 action accept
 set firewall name WAN-to-DMZ rule 1 state established enable
 set firewall name WAN-to-DMZ rule 10 description "allow HTTP from WAN to DMZ"
 set firewall name WAN-to-DMZ rule 10 action accept
-?????????????????????set firewall name WAN-to-DMZ rule 10 destination address 172.16.50.??????????????????????
+set firewall name WAN-to-DMZ rule 10 destination address 172.16.50.3
 set firewall name WAN-to-DMZ rule 10 destination port 80
 set firewall name WAN-to-DMZ rule 10 protocol tcp
 
@@ -122,7 +122,7 @@ set firewall name LAN-to-DMZ rule 1 action accept
 set firewall name LAN-to-DMZ rule 1 state established enable
 set firewall name LAN-to-DMZ rule 10 description "Allow HTTP from LAN to DMZ"
 set firewall name LAN-to-DMZ rule 10 action accept
-??????????????set firewall name LAN-to-DMZ rule 10 destination address 172.16.50.???????????????????????????????
+set firewall name LAN-to-DMZ rule 10 destination address 172.16.50.3
 set firewall name LAN-to-DMZ rule 10 destination port 80
 set firewall name LAN-to-DMZ rule 10 protocol tcp
 set firewall name LAN-to-DMZ rule 20 description "Allow SSH from MGMT-01 to DMZ"

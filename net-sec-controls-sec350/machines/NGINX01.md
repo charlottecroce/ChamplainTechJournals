@@ -4,7 +4,7 @@
 - Add sudo user `charlotte`
 
 - Set network via nmtui:
-  - IP Address: `172.16.50.???/29`
+  - IP Address: `172.16.50.3/29`
   - Gateway & DNS: `172.16.50.2`
   - Network adapter: DMZ
 

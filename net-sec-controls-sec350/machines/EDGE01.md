@@ -64,6 +64,13 @@ set nat destination rule 10 destination port 80
 set nat destination rule 10 protocol tcp
 set nat destination rule 10 translation address 172.16.50.3
 
+# Port Forwarding for SSH
+set nat destination rule 20 description "SSH->JUMP"
+set nat destination rule 20 inbound-interface eth0
+set nat destination rule 20 destination port 22
+set nat destination rule 20 protocol tcp
+set nat destination rule 20 translation address 172.16.50.4
+
 commit
 save
 ```
@@ -108,6 +115,13 @@ set firewall name WAN-to-DMZ rule 10 action accept
 set firewall name WAN-to-DMZ rule 10 destination address 172.16.50.3
 set firewall name WAN-to-DMZ rule 10 destination port 80
 set firewall name WAN-to-DMZ rule 10 protocol tcp
+
+set firewall name WAN-to-DMZ rule 20 action accept
+set firewall name WAN-to-DMZ rule 20 description "SSH to JUMP"
+set firewall name WAN-to-DMZ rule 20 destination address 172.16.50.4
+set firewall name WAN-to-DMZ rule 20 destination port 22
+set firewall name WAN-to-DMZ rule 20 protocol tcp
+
 
 # DMZ-to-WAN
 set firewall name DMZ-to-WAN default-action drop

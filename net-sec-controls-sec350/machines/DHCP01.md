@@ -4,7 +4,7 @@
 - Add sudo user `charlotte`
 
 Set network via netplan:
-- IP Address: `172.16.150.???/24`
+- IP Address: `172.16.150.151/24`
 - Gateway & DNS: `172.16.150.2`
 - Network adapter: LAN
 

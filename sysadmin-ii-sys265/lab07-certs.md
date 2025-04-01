@@ -5,24 +5,24 @@ make certain -adm account is in the Enterprise Admins
 Get-ADGroupMember "Enterprise Admins"
 ```
 add RSAT to MGMT01. needs to run as administrator
-```
+```powershell
 Install-WindowsFeature RSAT-ADCS -IncludeManagementTools
 ```
 Start remote PowerShell session
-```
+```powershell
 $session = New-PSSession -ComputerName ad01-charlotte
 ```
-```
+Install AD Certificate Services Role
+```powershell
 Invoke-Command -Session $session -ScriptBlock {
-    # Install AD CS Role
     Install-WindowsFeature -Name AD-Certificate -IncludeManagementTools
 
     # Import the ADCS module
     Import-Module ADCSDeployment
 }
 ```
-```
-Configure AD CS as an Enterprise Root CA remotely
+Configure Enterprise Root CA
+```powershell
 Invoke-Command -Session $session -ScriptBlock {
     Install-AdcsCertificationAuthority `
         -CAType EnterpriseRootCA `
@@ -34,7 +34,8 @@ Invoke-Command -Session $session -ScriptBlock {
         -Force
 }
 ```
-```
+Create Certificate Share
+```powershell
 Invoke-Command -Session $session -ScriptBlock {
     # create the shared folder for certs
     New-Item -Path "C:\Shares\Certs" -ItemType Directory -Force    
@@ -48,15 +49,13 @@ Invoke-Command -Session $session -ScriptBlock {
 }
 ```
 
-
-
 Install AD CS role with Certification Authority and Web Enrollment
 ```
 Install-WindowsFeature -Name ADCS-Cert-Authority, ADCS-Web-Enrollment -IncludeManagementTools
 ```
 
 Configure the Subordinate CA and generate certificate request
-```
+```powershell
 Install-AdcsCertificationAuthority `
     -CAType EnterpriseSubordinateCA `
     -CACommonName "mgmt01-CHARLOTTE-SubCA" `
@@ -67,12 +66,12 @@ Install-AdcsCertificationAuthority `
 ```
 
 Install the Web Enrollment service
-```
+```powershell
 Install-AdcsWebEnrollment
 ```
 
 Move the certificate request to the Root CA, get it signed, and retrieve it
-```
+```powershell
 # Copy request to Root CA's shared folder
 Copy-Item -Path "C:\SubCARequest.req" -Destination "\\ad01-charlotte\Certs\"
 
@@ -85,7 +84,7 @@ Invoke-Command -Session $session -ScriptBlock {
 # Copy the signed certificate back to the Subordinate CA
 Copy-Item -Path "\\ad01-charlotte\Certs\SubCACert.cer" -Destination "C:\"
 ```
-```
+```powershell
 # Start the CA service
 Start-Service -Name CertSvc
 
@@ -106,20 +105,17 @@ Restart-Service -Name CertSvc
 certutil -ping
 ```
 
-
 Clean up the remote session
 ```
 Remove-PSSession $session
 ```
 
-
-
-open the CA console
-  ```powershell
-   certsrv.msc
-   ```
+___
+*at this point I stopped using PS and just used the GUI*
+___
 
 ### Create Certificate Template
+- open the CA console: `certsrv.msc`
 - Expand root cert tree > RC Certificate Templates > Manage
 - Duplicate User template
 - General tab: Set name "Champ Lab User"
@@ -132,7 +128,7 @@ open the CA console
 - Right-click Certificate Templates > New > Certificate Template to Issue > Select "Champ Lab User"
 
 ## Configure Group Policy
-- gpmc.msc
+- `gpmc.msc`
 - Create GPO "Champ Lab Users" at domain level
 - Edit GPO > User Configuration > Policies > Windows Settings > Security Settings > Public Key Policies
 - Enable "Certificate Services Client - Auto-Enrollment"
@@ -140,9 +136,9 @@ open the CA console
 
 ## Test Auto-Enrollment
 - on WKS01:
-- gpupdate /force
-- Verify: gpresult /r
-- certmgr.msc > Personal > Certificates > Verify "Champ Lab User" certificate is present
+- `gpupdate /force`
+- Verify: `gpresult /r`
+- `certmgr.msc` > Personal > Certificates > Verify "Champ Lab User" certificate is present
 
 ## Windows Admin Center Installation
 - Download Windows Admin Center 2019 Evaluation

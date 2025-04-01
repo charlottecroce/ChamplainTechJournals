@@ -143,3 +143,11 @@ open the CA console
 - gpupdate /force
 - Verify: gpresult /r
 - certmgr.msc > Personal > Certificates > Verify "Champ Lab User" certificate is present
+
+## Windows Admin Center Installation
+- Download Windows Admin Center 2019 Evaluation
+  - https://info.microsoft.com/ww-landing-windows-admin-center.html
+  - download the msi
+  - you will have to put in information. i just used fake info
+- Express setup. Generate self-signed cert. Disable updates
+- Logon via -adm account, add ad01 + wks10, install AD + DNS extensions, and uninstall Azure + Cluster extensions

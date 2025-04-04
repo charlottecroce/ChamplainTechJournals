@@ -16,7 +16,7 @@ ssh-keygen -t rsa -b 4096 -C "traveler to jump"
 ```
 To connect to the jump server:
 ```powershell
-ssh -i C:\Users\username\.ssh\jump-charlotte charlotte-jump@10.0.17.151
+ssh -i C:\Users\charlotte\.ssh\jump-charlotte charlotte-jump@10.0.17.151
 ```
 
 Web Access

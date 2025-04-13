@@ -5,12 +5,14 @@ SSH allows you to create a remote port forwarding tunnel such that connections t
 - Create a named local administrator account (charlotte) if not done so already
 - Create the DMZ-to-LAN and LAN-to-MGMT rules necessary for RDP to connect to mgmt02
 ```
+# on edge-02
 set firewall name DMZ-to-LAN rule 40 action 'accept'
 set firewall name DMZ-to-LAN rule 40 description 'jump to RDP'
 set firewall name DMZ-to-LAN rule 40 destination address '172.16.200.11'
 set firewall name DMZ-to-LAN rule 40 destination port '3389'
 set firewall name DMZ-to-LAN rule 40 protocol 'tcp'
 
+# on fw-mgmt
 set firewall name LAN-to-MGMT rule 40 action 'accept'
 set firewall name LAN-to-MGMT rule 40 description 'jump to RDP'
 set firewall name LAN-to-MGMT rule 40 destination address '172.16.200.11'
@@ -47,6 +49,10 @@ source: https://www.cloudthat.com/resources/blog/a-guide-to-access-rdp-through-s
 
 
 
+
+
+___
+### Scrapped Idea Using command (doesn't work)
 
 ```
 ssh -J charlotte@10.0.17.151 -L 3389:172.16.200.11:3389 charlotte@172.16.200.11

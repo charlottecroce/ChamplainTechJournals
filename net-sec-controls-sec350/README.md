@@ -15,7 +15,7 @@
 | [wks01](machines/WKS01.md) | 172.16.150.50/24 | 172.16.150.2 | 172.16.150.2 | LAN | Windows workstation |
 | [rw01](machines/RW01.md) | 10.0.17.51/24 | 10.0.17.2 | 10.0.17.2 | WAN | Ubuntu road warrior |
 | [traveler](machines/TRAVELER.md) | 10.0.17.51/24 | 10.0.17.2 | 10.0.17.2 | WAN | Windows road warrior |
-| [dhcp01](machines/DHCP01.md) | 172.16.150.???/24 | 172.16.150.2 | 172.16.150.2 | LAN | Ubuntu DHCP server |
+| [dhcp01](machines/DHCP01.md) | 172.16.150.151/24 | 172.16.150.2 | 172.16.150.2 | LAN | Ubuntu DHCP server |
 
 *Note: fw01 was replaced by edge01, web01 was replaced by nginx01, log01 was repurposed as jump, and rw01 was replaced by traveler*
 

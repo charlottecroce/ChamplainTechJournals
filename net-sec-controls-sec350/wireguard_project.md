@@ -5,23 +5,23 @@ Andrei Gorlitsky, Benjamin Tyler, Charlotte Croce\
 ---
 
 ## Objective
-Allow remote administrator **Tanisha** to securely access **MGMT02** (`172.16.200.11`) using RDP through a WireGuard VPN hosted on the **jump** server (`172.16.200.10`). Traveler (`10.0.17.55`) will serve as the VPN client.
+Allow remote administrator **Tanisha** to securely access **MGMT02** (`172.16.200.11`) using RDP through a [WireGuard](https://www.wireguard.com/) VPN hosted on the **jump** server (`172.16.200.10`). Traveler (`10.0.17.55`) will serve as the VPN client.
 
 ---
 
-## System Overview
+## Network Overview
 
-| VM         | Role                 | IP Address    | Network |
-| ---------- | -------------------- | ------------- |---------|
-| `jump`     | WireGuard VPN Server | 172.16.200.10 | DMZ     |
-| `traveler` | WireGuard VPN Client | 10.0.17.55    | WAN     |
-| `mgmt02`   | RDP Target           | 172.16.200.11 | MGMT    |
+| VM         | Role                 | IP Address    | OS      | Network |
+| ---------- | -------------------- | ------------- |---------|---------|
+| `jump`     | WireGuard VPN Server | 172.16.200.10 | Ubuntu  |  DMZ    | 
+| `traveler` | WireGuard VPN Client | 10.0.17.55    | Windows |  WAN    |
+| `mgmt02`   | RDP Target           | 172.16.200.11 | Windows |  MGMT   |
 
 ---
 
 ## Configuration
 
-### Install WireGuard on Jump (Ubuntu)
+### Install WireGuard on Jump
 ```bash
 sudo apt update
 sudo apt install wireguard -y
@@ -32,6 +32,7 @@ sudo apt install wireguard -y
 umask 077
 wg genkey | tee server_private.key | wg pubkey > server_public.key
 ```
+
 Example output:
 ```
 PrivateKey = PRIVATEKEYJUMP
@@ -47,7 +48,7 @@ PrivateKey = PRIVATEKEYJUMP
 ListenPort = 51820
 
 [Peer]
-PublicKey = PUBLICKEYWINDOWS
+PublicKey = PUBLICKEYWINDOWS (Windows key generation is a few steps below)
 AllowedIPs = 10.10.10.2/32
 ```
 Start the service:
@@ -56,14 +57,15 @@ sudo systemctl enable wg-quick@wg0
 sudo systemctl start wg-quick@wg0
 ```
 
-###Configure WireGuard on Traveler (Windows)
-1. Install from [https://www.wireguard.com/install/](https://www.wireguard.com/install/)
+### Configure WireGuard on Traveler
+1. Install from https://www.wireguard.com/install/
 2. Open the WireGuard GUI and click "Add Tunnel > Add Empty Tunnel"
 3. Keys auto-generate:
 ```
 PrivateKey = PRIVATEKEYWINDOWS
 PublicKey  = PUBLICKEYWINDOWS
 ```
+
 4. Use the following configuration:
 ```ini
 [Interface]
@@ -76,6 +78,7 @@ Endpoint = 172.16.200.10:51820
 AllowedIPs = 172.16.200.11/32
 PersistentKeepalive = 25
 ```
+
 5. Click "Activate"
 
 ### Enable IP Forwarding and NAT on Jump
@@ -126,20 +129,14 @@ net localgroup "Remote Desktop Users" tanisha /add
 
 ---
 
-## Suggested Screenshots
+## Screenshots
 - `/etc/wireguard/wg0.conf` file on jump
-- Keys (with private blurred)
 - WireGuard tunnel status in traveler GUI
 - Successful ping to MGMT02
 - RDP session connected
-- VyOS firewall rule
 - `wg show` output on jump
 
----
 
-
-## Final Result
+## Conclusion
 Tanisha can now securely access MGMT02 over an encrypted WireGuard tunnel. The VPN is restricted to only the required IP and port.
 
-## Sources
-- https://www.wireguard.com/

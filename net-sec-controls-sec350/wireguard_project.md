@@ -2,6 +2,9 @@
 Andrei Gorlitsky, Benjamin Tyler, Charlotte Croce\
 4/17/25
 
+## Video
+https://drive.google.com/file/d/1ToO6sTFo_p82o78jnW72DnoLOkDqNDE1/view?usp=sharing
+
 ---
 
 ## Objective

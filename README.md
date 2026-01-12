@@ -4,6 +4,7 @@ Notes, code, and lab write-ups from my Champlain College courses
 
 ### CYBER
 - [SEC350 - Network Security Controls](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/net-sec-controls-sec350)
+- [SEC335 - Ethical Hacking](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/eth-hack-sec335)
 - [SEC300 - Database Security (1-credit)](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/db-security-sec300)
 
 ### SYSADMIN

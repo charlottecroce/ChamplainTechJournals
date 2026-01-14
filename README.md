@@ -3,7 +3,7 @@
 Notes, code, and lab write-ups from my Champlain College courses
 
 ### CYBER
-- [SEC300 - Advanced Topics - Virtualization & Advanced Automation](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/adv-topics-sec480)
+- [SEC480 - Advanced Topics - Virtualization & Advanced Automation](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/adv-topics-sec480)
 - [SEC350 - Network Security Controls](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/net-sec-controls-sec350)
 - [SEC335 - Ethical Hacking](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/eth-hack-sec335)
 - [SEC300 - Database Security (1-credit)](https://github.com/charlottecroce/ChamplainTechJournals/tree/main/db-security-sec300)

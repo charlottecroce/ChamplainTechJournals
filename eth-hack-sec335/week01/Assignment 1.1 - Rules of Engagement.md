@@ -2,9 +2,9 @@
 
 ## Question 1:
 
-Review section 1.5.2 (a-i) Conducting the Pen Test.  
+Review section 1.5.2 (a-i) Conducting the Pen Test.
 
-What is the focus and intent of these steps?  What seems to be the priorities?
+*What is the focus and intent of these steps?  What seems to be the priorities?*
 
 The focus is on how to conduct a pentest without disrupting business operation. Before begiining a pentest, you must establish clear communication channels, gain formal authorization, and be controlled in the execution of pentest activities. The section emphasizes documentation and incremental reporting rather than aggressive exploitation. Policy review, compliance, and documentation tasks are equally as important to technical exploitation.
 
@@ -12,7 +12,7 @@ The focus is on how to conduct a pentest without disrupting business operation. 
 
 Review Appendix A. - Penetration Test Plan
 
-How does this Plan relate to the Attack Methodology we covered in class? How does it correspond to the Course Syllabus?
+*How does this Plan relate to the Attack Methodology we covered in class? How does it correspond to the Course Syllabus?*
 
 It maps to the kill chain methodology. "Planning and Enumeration" corresponds to reconnaissance and scanning phases. "Vulnerability Analysis" aligns with enumeration and vulnerability scanning. "Penetration Testing" covers exploitation, post-exploitation, and reporting phases. The methodology follows a progression from passive information gathering to active exploitation to analysis and remediation.
 
@@ -20,7 +20,7 @@ It maps to the kill chain methodology. "Planning and Enumeration" corresponds to
 
 Review Appendix B. Rules to be Followed
 
-Identify 2 rules that may limit the testers from fully identifying all potential vulnerabilities. Briefly explain why NASA requires these limitations.
+*Identify 2 rules that may limit the testers from fully identifying all potential vulnerabilities. Briefly explain why NASA requires these limitations.*
 
 ```
 [Third party's] test procedures will use non-destructive testing techniques (i.e., no files or data
@@ -39,7 +39,7 @@ While this is a good rule for liability reasons, an attacker might be able to fi
 
 ## Question 4: Optional
 
-What is War Dialing?
+*What is War Dialing?*
 
 War dialing is a reconnaissance technique that dials ranges of telephone numbers to identify devices connected to phone lines (modems, fax machines) that could provide unauthorized network access. The scanning tool tries to find which numbers answer with carrier tones, then adds the number as a potential attack vector.
 

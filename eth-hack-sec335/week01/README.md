@@ -1,1 +1,1 @@
-In this week we set up chrome remote desktop on our kali VM and did a lab on passive recoinaissance
+In this week we set up chrome remote desktop on our kali VM and did a lab on passive recoinaissance. tools like theHarvester and Netcraft can give us a lot of information about an organization without interacting with their domain directly

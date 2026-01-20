@@ -22,3 +22,8 @@ fping -g 10.0.5.2 10.0.5.50
 sudo nmap -sn 10.0.5.2-50 -oG sweep3.txt
 ```
 [pingsweep3.sh](pingsweep3.sh)
+
+
+
+# lab reflections
+it tooks a while for me to figure out formatting for nmap scans, i was trying to use sed but it was more complicated than it needed to be. the `-oG` output flag makes grepping the output much easier

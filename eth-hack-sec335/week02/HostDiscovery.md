@@ -4,14 +4,14 @@
 ```
 ping <ip>
 ```
-[pingsweep.sh](week02/pingsweep.sh)
+[pingsweep.sh](pingsweep.sh)
 
 
 ## fping (better for scanning with ICMP)
 ```
 fping -g 10.0.5.2 10.0.5.50
 ```
-[pingsweep2.sh](week02/pingsweep2.sh)
+[pingsweep2.sh](pingsweep2.sh)
 
 
 ## nmap (most efficient)
@@ -21,4 +21,4 @@ fping -g 10.0.5.2 10.0.5.50
 ```
 sudo nmap -sn 10.0.5.2-50 -oG sweep3.txt
 ```
-[pingsweep3.sh](week02/pingsweep3.sh)
+[pingsweep3.sh](pingsweep3.sh)

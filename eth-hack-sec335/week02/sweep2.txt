@@ -1,0 +1,9 @@
+10.0.5.2 is alive
+10.0.5.20 is alive
+10.0.5.21 is alive
+10.0.5.22 is alive
+10.0.5.23 is alive
+10.0.5.24 is alive
+10.0.5.25 is alive
+10.0.5.26 is alive
+10.0.5.27 is alive

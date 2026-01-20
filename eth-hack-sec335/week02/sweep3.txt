@@ -1,0 +1,12 @@
+# Nmap 7.95 scan initiated Tue Jan 20 11:16:50 2026 as: /usr/lib/nmap/nmap -sn -oG sweep3.txt 10.0.5.2-50
+Host: 10.0.5.2 ()	Status: Up
+Host: 10.0.5.20 ()	Status: Up
+Host: 10.0.5.21 ()	Status: Up
+Host: 10.0.5.22 ()	Status: Up
+Host: 10.0.5.23 ()	Status: Up
+Host: 10.0.5.24 ()	Status: Up
+Host: 10.0.5.25 ()	Status: Up
+Host: 10.0.5.26 ()	Status: Up
+Host: 10.0.5.27 ()	Status: Up
+Host: 10.0.5.31 ()	Status: Up
+# Nmap done at Tue Jan 20 11:16:53 2026 -- 49 IP addresses (10 hosts up) scanned in 2.67 seconds

@@ -13,3 +13,9 @@
 - select UEFI: <USB>
 <img width="296" height="281" alt="{9F2BF516-1566-40AD-8C8A-881CEDCBB079}" src="https://github.com/user-attachments/assets/b29106c5-ac59-49d6-9314-72117b70a8e5" />
 
+- install on smaller drive
+<img width="669" height="297" alt="{352C96E1-2EF9-4546-ACF4-4B2B5F2D89CD}" src="https://github.com/user-attachments/assets/8724be06-2573-4ffd-8885-cb554df402b1" />
+
+- REMEMBER ROOT PASSWORD
+- after installation, remove USB from server and reboot from IKVM
+

@@ -18,4 +18,20 @@
 
 - REMEMBER ROOT PASSWORD
 - after installation, remove USB from server and reboot from IKVM
+- once the grey/yellow screen appears: F2 > configure networking
 
+<img width="630" height="328" alt="{6E7D9E98-88D0-4025-9D2E-C9FD207AFEFD}" src="https://github.com/user-attachments/assets/c03adea5-997d-46df-b448-b8eacd29be42" />
+<img width="617" height="303" alt="{DAD9450B-2071-43A6-8570-1868207B531E}" src="https://github.com/user-attachments/assets/f064e30c-692b-4b9b-9b64-be4e12c16c2c" />
+<img width="612" height="263" alt="{2B09B8DC-8510-442B-946F-EF4457A41DCF}" src="https://github.com/user-attachments/assets/41c54f10-8187-4bd3-92ef-6c8233ed1836" />
+<img width="559" height="202" alt="{B9550A70-52EE-4E21-95F8-451FF16DF786}" src="https://github.com/user-attachments/assets/154861f8-4538-4ce1-8020-c0eafc94f8ce" />
+
+- ESXI console: https://192.168.3.205/ui/#/login
+- create new VMFS datastore (datastore2), using the other hard drive
+
+## Create a virtual 480-WAN
+
+
+
+## Deploy your cyber.local gateway system called 480-fw
+
+## Deploy a 480-WAN based virtual machine (xubuntu-wan)

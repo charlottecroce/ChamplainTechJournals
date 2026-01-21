@@ -30,8 +30,30 @@
 
 ## Create a virtual 480-WAN
 
+- Management Network: assigned to ESXi host, dont touch
+- VM Network: Freeman Network
+
+- add new vSwith
+<img width="544" height="253" alt="{B6CF1EE5-A8A2-4D76-9CE1-42296099F6F7}" src="https://github.com/user-
+attachments/assets/64ec66df-a71a-4160-8a77-ec6582df272e" />
+
+- add port group
+<img width="478" height="238" alt="{16EDD717-7CA2-448F-830A-ABF75E64F6B6}" src="https://github.com/user-attachments/assets/00c139d3-6860-43b4-9d0a-152be841ada9" />
+
+## upload ISOs
+- datastore2 > datastore browser > create ISO dir, upload xubuntu, windows, vyos from shared drive
+
+## Deploy your cyber.local gateway system called 480-fw-charlotte
+- 1CPU, 2GB RAM, 10GB disk, thin provisioned
+- add new network adapter, apply to VM Network
+- apply vyos ISO to CD/DVD Drive
+
+## Deploy a 480-WAN based virtual machine (480-mgmt-charlotte)
+- 1CPU, 2GB RAM, 20GB disk, thin provisioned
+- apply xubuntu ISO to CD/DVD Drive
 
 
-## Deploy your cyber.local gateway system called 480-fw
 
-## Deploy a 480-WAN based virtual machine (xubuntu-wan)
+
+
+

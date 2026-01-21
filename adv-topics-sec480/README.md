@@ -4,6 +4,7 @@ network assignments
 |||
 |-|-|
 |#|5|
+|Host|super5|
 |IPMI|192.168.3.155|
 |Host(esxi)|192.168.3.205|
 |fw-eth0|192.168.3.15|

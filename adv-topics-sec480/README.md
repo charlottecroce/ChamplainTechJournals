@@ -7,8 +7,8 @@ network assignments
 |Host|super5|
 |IPMI|192.168.3.155|
 |Host(esxi)|192.168.3.205|
-|fw-eth0|192.168.3.15|
-|fw-eth1|10.0.17.2|
+|fw-eth1|192.168.3.15|
+|fw-eth0|10.0.17.2|
 |xubuntu-wan (MGMT)|10.0.17.100|
 |vcenter-350x|10.0.17.3|
 |dc1|10.0.17.4|

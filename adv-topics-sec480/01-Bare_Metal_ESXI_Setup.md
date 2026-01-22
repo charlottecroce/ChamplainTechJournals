@@ -47,6 +47,53 @@ attachments/assets/64ec66df-a71a-4160-8a77-ec6582df272e" />
 - 1CPU, 2GB RAM, 10GB disk, thin provisioned
 - add new network adapter, apply to VM Network
 - apply vyos ISO to CD/DVD Drive
+- login is `vyos:vyos`
+```
+install image
+```
+
+[vyos commands](https://github.com/charlottecroce/ChamplainTechJournals/blob/main/net-sec-controls-sec350/machines/FW01.md)
+
+set hostname
+```
+configure
+set system host-name 480-fw-charlotte
+commit
+save
+```
+
+deleting hw-id
+```
+configure
+show interfaces
+delete interfaces ethernet eth0 hw-id
+delete interfaces ethernet eth1 hw-id
+commit
+save
+```
+
+set interface ip
+```
+configure
+set interfaces ethernet eth0 description 480-internal
+set interfaces ethernet eth0 address 10.0.17.2/24
+set interfaces ethernet eth1 description freeman
+set interfaces ethernet eth1 address 192.168.3.15/24
+commit
+save
+```
+
+set gateway and DNS
+```
+configure
+set protocols static route 0.0.0.0/0 next-hop 192.168.3.250
+set system name-server 192.168.4.4
+set system name-server 192.168.4.5
+commit
+save
+```
+
+*eth0 and eth1 might be mixed up in ip assignments*
 
 ## Deploy a 480-WAN based virtual machine (480-mgmt-charlotte)
 - 1CPU, 2GB RAM, 20GB disk, thin provisioned

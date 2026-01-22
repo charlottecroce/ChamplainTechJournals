@@ -1,0 +1,15 @@
+set interfaces ethernet eth0 address '10.0.17.2/24'
+set interfaces ethernet eth0 description '480-internal'
+set interfaces ethernet eth1 address '192.168.3.15/24'
+set interfaces ethernet eth1 description 'freeman'
+set nat source rule 10 outbound-interface 'eth1'
+set nat source rule 10 source address '10.0.17.0/24'
+set nat source rule 10 translation address 'masquerade'
+set protocols static route 0.0.0.0/0 next-hop 192.168.3.250
+set service dns forwarding allow-from '10.0.17.0/24'
+set service dns forwarding listen-address '10.0.17.2'
+set service dns forwarding system
+set service ssh port '22'
+set system host-name '480-fw-charlotte'
+set system name-server '192.168.4.4'
+set system name-server '192.168.4.5'

@@ -1,5 +1,7 @@
 # Bare Metal ESXI Setup
 
+in this lab we set up the ESXI server, created virtual networks, and set up a vyos firewall/router and a managment workstation as VMs on the ESXI server
+
 ## installing ESXI on supermicro server
 - download ISO from `CYBER-SHARE(X:)`
 - install to USB via rufus
@@ -34,6 +36,7 @@
 - VM Network: Freeman Network
 
 - add new vSwith
+
 <img width="544" height="253" alt="{B6CF1EE5-A8A2-4D76-9CE1-42296099F6F7}" src="https://github.com/user-
 attachments/assets/64ec66df-a71a-4160-8a77-ec6582df272e" />
 
@@ -67,17 +70,6 @@ allow ssh
 set service ssh port 22
 ```
 
-
-deleting hw-id
-```
-configure
-show interfaces
-delete interfaces ethernet eth0 hw-id
-delete interfaces ethernet eth1 hw-id
-commit
-save
-```
-
 set interface ip
 ```
 configure
@@ -98,21 +90,20 @@ set system name-server 192.168.4.5
 commit
 save
 ```
-
+set up DNS forwarding
 ```
 set service dns forwarding listen-address 10.0.17.2
 set service dns forwarding allow-from 10.0.17.0/24
 set service dns forwarding system
 ```
-
+set up NAT
 ```
 set nat source rule 10 outbound-interface eth1
 set nat source rule 10 source address 10.0.17.0/24
 set nat source rule 10 translation address masquerade
 ```
 
-
-*eth0 and eth1 might be mixed up in ip assignments*
+*eth0 and eth1 are mixed up in ip assignments from what the sheet/video says. not an issue just be aware that freeman-WAN is eth1 and 480-internal is eth0*
 
 ## Deploy a 480-WAN based virtual machine (480-mgmt-charlotte)
 - 1CPU, 2GB RAM, 20GB disk, thin provisioned
@@ -127,4 +118,5 @@ to reset dns
 sudo systemctl restart systemd-resolved
 ```
 
+once networking is working, set up CRD for convenience!
 

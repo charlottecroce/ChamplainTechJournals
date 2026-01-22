@@ -105,6 +105,11 @@ set nat source rule 10 translation address masquerade
 
 *eth0 and eth1 are mixed up in ip assignments from what the sheet/video says. not an issue just be aware that freeman-WAN is eth1 and 480-internal is eth0*
 
+export commands to save for backup
+```
+show configuration commands | grep -v "syslog global\|ntp\|login\|console\|config\|hw-id\|loopback\|conntrack"
+```
+
 ## Deploy a 480-WAN based virtual machine (480-mgmt-charlotte)
 - 1CPU, 2GB RAM, 20GB disk, thin provisioned
 - apply xubuntu ISO to CD/DVD Drive

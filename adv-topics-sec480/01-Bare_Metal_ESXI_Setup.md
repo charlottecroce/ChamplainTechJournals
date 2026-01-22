@@ -62,6 +62,12 @@ commit
 save
 ```
 
+allow ssh
+```
+set service ssh port 22
+```
+
+
 deleting hw-id
 ```
 configure
@@ -111,9 +117,14 @@ set nat source rule 10 translation address masquerade
 ## Deploy a 480-WAN based virtual machine (480-mgmt-charlotte)
 - 1CPU, 2GB RAM, 20GB disk, thin provisioned
 - apply xubuntu ISO to CD/DVD Drive
+- install normally
 
+<img width="547" height="341" alt="image" src="https://github.com/user-attachments/assets/9784dc9a-c50b-4433-b9be-7afaacf289ce" />
+<img width="475" height="131" alt="image" src="https://github.com/user-attachments/assets/7aafd1e0-11d0-4b9a-8d02-9e4fd8738242" />
 
-
-
+to reset dns
+```
+sudo systemctl restart systemd-resolved
+```
 
 

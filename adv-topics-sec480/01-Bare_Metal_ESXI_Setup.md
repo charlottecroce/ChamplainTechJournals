@@ -93,6 +93,19 @@ commit
 save
 ```
 
+```
+set service dns forwarding listen-address 10.0.17.2
+set service dns forwarding allow-from 10.0.17.0/24
+set service dns forwarding system
+```
+
+```
+set nat source rule 10 outbound-interface eth1
+set nat source rule 10 source address 10.0.17.0/24
+set nat source rule 10 translation address masquerade
+```
+
+
 *eth0 and eth1 might be mixed up in ip assignments*
 
 ## Deploy a 480-WAN based virtual machine (480-mgmt-charlotte)

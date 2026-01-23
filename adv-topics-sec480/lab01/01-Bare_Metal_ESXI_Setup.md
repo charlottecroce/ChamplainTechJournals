@@ -37,8 +37,7 @@ in this lab we set up the ESXI server, created virtual networks, and set up a vy
 
 - add new vSwith
 
-<img width="544" height="253" alt="{B6CF1EE5-A8A2-4D76-9CE1-42296099F6F7}" src="https://github.com/user-
-attachments/assets/64ec66df-a71a-4160-8a77-ec6582df272e" />
+<img width="544" height="253" alt="{B6CF1EE5-A8A2-4D76-9CE1-42296099F6F7}" src="https://github.com/user-attachments/assets/64ec66df-a71a-4160-8a77-ec6582df272e" />
 
 - add port group
 <img width="478" height="238" alt="{16EDD717-7CA2-448F-830A-ABF75E64F6B6}" src="https://github.com/user-attachments/assets/00c139d3-6860-43b4-9d0a-152be841ada9" />

@@ -1,3 +1,5 @@
+[nmap docs](../nmap.md)
+
 # opening ports on windows
 ## enable Remote Desktop Services on your windows 10 system using powershell. Run as administrator
 ```PowerShell

@@ -1,0 +1,18 @@
+
+; <<>> DiG 9.20.4-4-Debian <<>> axfr @nsztm1.digi.ninja.
+; (1 server found)
+;; global options: +cmd
+;; Query time: 164 msec
+;; SERVER: 81.4.108.41#53(nsztm1.digi.ninja.) (UDP)
+;; WHEN: Tue Jan 27 11:19:52 EST 2026
+;; MSG SIZE  rcvd: 62
+
+
+; <<>> DiG 9.20.4-4-Debian <<>> axfr @nsztm2.digi.ninja.
+; (1 server found)
+;; global options: +cmd
+;; Query time: 88 msec
+;; SERVER: 5.196.105.10#53(nsztm2.digi.ninja.) (UDP)
+;; WHEN: Tue Jan 27 11:19:58 EST 2026
+;; MSG SIZE  rcvd: 62
+

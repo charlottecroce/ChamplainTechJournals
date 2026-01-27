@@ -13,3 +13,9 @@ nmap <target> <flags>
 - `-O`: OS detection
 - `-A`: aggressive (OS, version, scripts, traceroute)
 
+## other
+- `-Pn`: skip host discovery
+- `-sL`: list targets
+
+## output
+- `-oG`: output greppable format

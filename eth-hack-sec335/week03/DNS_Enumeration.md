@@ -1,6 +1,7 @@
 zone transfer
 ```
-dig axfr <ip>
+dig axfr @<dns-server> <domain>
+dig axfr @nsztm1.digi.ninja. zonetransfer.me
 ```
 
 

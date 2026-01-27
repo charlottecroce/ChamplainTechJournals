@@ -1,1 +1,1 @@
-this week we did labs on DNS enumeration, which is using DNS records to find more information about a domain. this can be done manually via nslookup and dig(although most zone transfers are blocked by default) or with automated tools sucha s nmap
+this week we did labs on DNS enumeration, which is using DNS records to find more information about a domain. this can be done manually via nslookup and dig(although most zone transfers are blocked by default) or with automated tools such as nmap

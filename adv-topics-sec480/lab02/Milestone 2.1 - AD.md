@@ -47,12 +47,17 @@ C:\Windows\System32\Sysprep\sysprep.exe /oobe /generalize /unattend:C:\unattend.
 
 
 ## ad setup - remotely from xubuntu machine via powershell commands
-- Change the network segment to 480-internal (from VM Network): only step that has to be done via ESXI
+- first few steps need to be run on host:
+- change the network segment to 480-internal (from VM Network)
 - set IP / gateway / dns
 ```PowerShell
 Get-NetIPConfiguration
-New-NetIPAddress -InterfaceIndex 12 -IPAddress 10.0.17.4 -PrefixLength 24 -DefaultGateway 10.0.17.2
-Set-DnsClientServerAddress -InterfaceIndex 12 -ServerAddresses "10.0.17.2"
+New-NetIPAddress -InterfaceIndex 5 -IPAddress 10.0.17.4 -PrefixLength 24 -DefaultGateway 10.0.17.2
+```
+- *by now you can access remotely*
+- set dns
+```PowerShell
+Set-DnsClientServerAddress -InterfaceIndex 5 -ServerAddresses "10.0.17.2"
 ```
 - Add the Administrative user password
 ```PowerShell
@@ -64,7 +69,7 @@ Rename-Computer -NewName "dc1" -Restart
 ```
 
 - install adds
-```
+```PowerShell
 # install AD DS role and management tools
 Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
 # create a new forest
@@ -75,7 +80,36 @@ Install-ADDSForest -DomainName "charlotte.local" -InstallDNS
 ```
 # install DNS role and management tools
 Install-WindowsFeature -Name DNS -IncludeManagementTools
+Add-DnsServerPrimaryZone -NetworkID "10.0.17.0/24" -ReplicationScope "Domain" -DynamicUpdate "Secure" -PassThru
+```
+- create records
+```PowerShell
+Add-DnsServerResourceRecordA -Name 480-mgmt-charlotte -ZoneName charlotte.local -IPv4Address 10.0.17.100 -CreatePtr -ComputerName dc1
+Add-DnsServerResourceRecordA -Name 480-fw-charlotte -ZoneName charlotte.local -IPv4Address 10.0.17.2 -CreatePtr -ComputerName dc1
+Add-DnsServerResourceRecordA -Name vcenter.charlotte.local -ZoneName charlotte.local -IPv4Address 10.0.17.3 -CreatePtr -ComputerName dc1
+Add-DnsServerResourceRecordA -Name dc1 -ZoneName charlotte.local -IPv4Address 10.0.17.4 -CreatePtr -ComputerName dc1
 ```
 
+-
 
 
+**currently here**
+
+
+-
+
+
+
+enable RDP connections
+```PowerShell
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0
+
+# Configure Firewall to Allow RDP
+Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+```
+
+configure DHCP
+```PowerShell
+Install-WindowsFeature -Name DHCP -IncludeManagementTools
+Add-DhcpServerv4Scope -Name "480-internal" -StartRange 10.0.17.101 -EndRange 10.0.17.150 -SubnetMask 255.255.255.0 -Router 10.0.17.2 -DnsServer 10.0.17.2
+```

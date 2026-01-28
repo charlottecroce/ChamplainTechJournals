@@ -37,10 +37,11 @@ wget https://raw.githubusercontent.com/gmcyber/RangeControl/main/src/scripts/bas
 # WHEN YOU REACH HERE, STOP AND REBOOT
 
 C:\Windows\System32\Sysprep\sysprep.exe /oobe /generalize /unattend:C:\unattend.xml
-Write-Host "Set Power to High Performance"
-powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+
+
 ```
 - when complete, remove ISO from drive
+- if there's still a mac address, remove network adapter
 - make sure you’re VM is powered off and take a snapshot, name it `Base`
 - now we have a clean snapshot of windows server 2019 we can use in future labs
 

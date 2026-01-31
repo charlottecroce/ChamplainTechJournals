@@ -8,6 +8,11 @@ nmap <target> <flags>
 - `-p 22,3389`
 - `-p 1-6000`
 
+## Scan type
+- `-sT`: TCP connect
+- `-sS`: TCP stealth scan (don't complete connection)
+- `-sU`: UDP Scan
+
 ## Service Detection
 - `-sV`: service version
 - `-O`: OS detection

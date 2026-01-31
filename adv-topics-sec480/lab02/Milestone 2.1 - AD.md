@@ -81,7 +81,7 @@ Import-Module ADDSDeployment
 Install-ADDSForest -DomainName "charlotte.local" -InstallDNS
 ```
 - install dns
-```
+```PowerShell
 # install DNS role and management tools
 Install-WindowsFeature -Name DNS -IncludeManagementTools
 Add-DnsServerPrimaryZone -NetworkID "10.0.17.0/24" -ReplicationScope "Domain" -DynamicUpdate "Secure" -PassThru
@@ -100,6 +100,11 @@ Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' 
 
 # Configure Firewall to Allow RDP
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+```
+to connect to windows server GUI via RDP
+```bash
+sudo apt install freerdp3-x11
+sudo xfreerdp3 /v:10.0.17.4:3389 /u:charlotte-adm /p:'sec480480!' /w:1366 /h:768 +clipboard
 ```
 
 configure DHCP
@@ -131,6 +136,8 @@ Add-ADGroupMember `
 Get-ADUser charlotte-adm | Select Name,Enabled
 Get-ADGroupMember "Domain Admins" | Select Name
 ```
+
+
 
 
 

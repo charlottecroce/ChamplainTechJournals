@@ -111,7 +111,7 @@ Set-DhcpServerv4Scope -ScopeId 10.0.17.0 -State Active
 ```
 
 created named domain admin (charlotte-adm)
-```
+```PowerShell
 $pw = "sec480480!" | ConvertTo-SecureString -AsPlainText -Force
 
 New-ADUser `

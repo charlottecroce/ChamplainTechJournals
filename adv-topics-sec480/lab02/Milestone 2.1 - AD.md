@@ -55,6 +55,10 @@ Get-NetIPConfiguration
 New-NetIPAddress -InterfaceIndex 5 -IPAddress 10.0.17.4 -PrefixLength 24 -DefaultGateway 10.0.17.2
 ```
 - *by now you can access remotely*
+- if not done already, set powershell as default terminal
+```PowerShell
+New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
+```
 - set dns
 ```PowerShell
 Set-DnsClientServerAddress -InterfaceIndex 5 -ServerAddresses "10.0.17.2"
@@ -90,16 +94,6 @@ Add-DnsServerResourceRecordA -Name vcenter.charlotte.local -ZoneName charlotte.l
 Add-DnsServerResourceRecordA -Name dc1 -ZoneName charlotte.local -IPv4Address 10.0.17.4 -CreatePtr -ComputerName dc1
 ```
 
--
-
-
-**currently here**
-
-
--
-
-
-
 enable RDP connections
 ```PowerShell
 Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0
@@ -111,5 +105,34 @@ Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 configure DHCP
 ```PowerShell
 Install-WindowsFeature -Name DHCP -IncludeManagementTools
-Add-DhcpServerv4Scope -Name "480-internal" -StartRange 10.0.17.101 -EndRange 10.0.17.150 -SubnetMask 255.255.255.0 -Router 10.0.17.2 -DnsServer 10.0.17.2
+Add-DhcpServerv4Scope -Name "480-internal" -StartRange 10.0.17.101 -EndRange 10.0.17.150 -SubnetMask 255.255.255.0
+Set-DhcpServerv4OptionValue -ScopeId 10.0.17.0 -Router 10.0.17.2 -DnsServer 10.0.17.4
+Set-DhcpServerv4Scope -ScopeId 10.0.17.0 -State Active
 ```
+
+created named domain admin (charlotte-adm)
+```
+$pw = "sec480480!" | ConvertTo-SecureString -AsPlainText -Force
+
+New-ADUser `
+  -Name "charlotte-adm" `
+  -SamAccountName charlotte-adm `
+  -UserPrincipalName "charlotte-adm@charlotte.local" `
+  -AccountPassword $pw `
+  -Enabled $true `
+  -PasswordNeverExpires $true `
+  -CannotChangePassword $true
+
+Add-ADGroupMember `
+  -Identity "Domain Admins" `
+  -Members charlotte-adm
+
+# verify
+Get-ADUser charlotte-adm | Select Name,Enabled
+Get-ADGroupMember "Domain Admins" | Select Name
+```
+
+
+
+
+

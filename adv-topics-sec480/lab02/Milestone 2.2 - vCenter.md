@@ -37,9 +37,6 @@ sudo nmcli connection up "Wired connection 1"
 - Run through installer (this may take some time, 2 stages…)
 - **Thin Disk!!**, select the new datastore you created (if you have it)
 - `480-internal` network
-Be careful, don’t lose your VCSA root pass OR default SSO admin pass!!
-You can re-use the same pass for both
-Ryan can’t reset it for you
-Create your default vcenter domain & admin
-administrator@vsphere.local is a good default
-
+- wait 10-20mins for stage 1 to complete
+- Create your default vcenter domain & admin
+  - administrator@vsphere.local

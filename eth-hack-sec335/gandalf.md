@@ -1,0 +1,45 @@
+the DNS server was messed up and we ended up attacking the wrong server for an hour
+
+
+## Part 1 - Active Recon (20 minutes)
+
+The target is cupcake.shire.org at 10.0.5.23
+
+What can you find out about the target?
+
+```
+└─$ sudo nmap 10.0.5.23 
+Nmap scan report for cupcake.shire.org (10.0.5.23)
+Host is up (0.0014s latency).
+Not shown: 999 filtered tcp ports (no-response)
+PORT   STATE SERVICE
+80/tcp open  http
+
+└─$ sudo nmap -sV -p 80 10.0.5.23
+Nmap scan report for cupcake.shire.org (10.0.5.23)
+Host is up (0.0015s latency).
+
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.52 ((Ubuntu))                                                                 
+```
+
+- Apache webserver on port 80
+- webpage on port HTTP only
+<img width="974" height="438" alt="{5E8EB5FB-769F-4927-915D-05F09580978D}" src="https://github.com/user-attachments/assets/59f0ff40-c2ce-444d-8d1e-962b80b8bb41" />
+
+## Part 2 - Dealing with Targets and Scans (10 minutes)
+
+- another way to get version info(this is more trustworthy than nmap): using 404 error message to check if there's publicly available information
+<img width="588" height="328" alt="{2F78A219-44DB-416C-8169-E60F0A02D362}" src="https://github.com/user-attachments/assets/23be60a9-9d3d-4ed0-99e1-35d2b2840329" />
+
+- **Apache/2.4.52 (Ubuntu) Server at 10.0.5.23 Port 80**
+- nmap OS version detection gave nothing useful
+
+
+- Install nmaptocsv in virtual environment
+```
+sudo apt update
+sudo python3 -m venv ~/.venv
+source ~/.venv/bin/activate
+sudo ~/.venv/bin/pip install nmaptocsv
+```

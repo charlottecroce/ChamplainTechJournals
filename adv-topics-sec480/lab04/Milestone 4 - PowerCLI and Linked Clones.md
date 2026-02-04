@@ -32,3 +32,23 @@ install vscode (for ease of scripting, min 4GB memory)
 sudo snap install code --classic
 ```
 
+## creating win server 2019 clone via PowerCLI
+```
+#Connect
+$vserver="vcenter.charlotte.local"
+Connect-VIServer($vserver)
+#Source VM
+$vm=Get-VM -Name 480-ad-charlotte
+$snapshot = Get-Snapshot -VM $vm -Name "Base"
+$vmhost = Get-VMHost -Name 192.168.3.205
+$ds=Get-DataStore -Name datastore2
+$linkedname = "{0}.linked" -f $vm.name
+#Create the tempory VM
+$linkedvm = New-VM -LinkedClone -Name $linkedName -VM $vm -ReferenceSnapshot $snapshot -VMHost $vmhost -Datastore $ds
+#Create the Full VM
+$newvm = New-VM -Name "server.2019.base" -VM $linkedvm -VMHost $vmhost -Datastore $ds
+#A new Snap Shot
+$newvm | new-snapshot -Name "Base"
+#Cleanup the temporary linked clone
+$linkedvm | Remove-VM
+```

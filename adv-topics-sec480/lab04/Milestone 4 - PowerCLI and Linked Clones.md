@@ -52,3 +52,45 @@ $newvm | new-snapshot -Name "Base"
 #Cleanup the temporary linked clone
 $linkedvm | Remove-VM
 ```
+
+## creating xubuntu clone via PowerCLI
+```
+#Connect
+$vserver="vcenter.charlotte.local"
+Connect-VIServer($vserver)
+#Source VM
+$vm=Get-VM -Name 480-mgmt-charlotte
+$snapshot = Get-Snapshot -VM $vm -Name "2-4"
+$vmhost = Get-VMHost -Name 192.168.3.205
+$ds=Get-DataStore -Name datastore2
+$linkedname = "{0}.linked" -f $vm.name
+#Create the tempory VM
+$linkedvm = New-VM -LinkedClone -Name $linkedName -VM $vm -ReferenceSnapshot $snapshot -VMHost $vmhost -Datastore $ds
+#Create the Full VM
+$newvm = New-VM -Name "mgmt.base" -VM $linkedvm -VMHost $vmhost -Datastore $ds
+#A new Snap Shot
+$newvm | new-snapshot -Name "Base"
+#Cleanup the temporary linked clone
+$linkedvm | Remove-VM
+```
+
+## creating win server 2019 clone via PowerCLI
+```
+#Connect
+$vserver="vcenter.charlotte.local"
+Connect-VIServer($vserver)
+#Source VM
+$vm=Get-VM -Name 480-fw-charlotte
+$snapshot = Get-Snapshot -VM $vm -Name "2-4"
+$vmhost = Get-VMHost -Name 192.168.3.205
+$ds=Get-DataStore -Name datastore2
+$linkedname = "{0}.linked" -f $vm.name
+#Create the tempory VM
+$linkedvm = New-VM -LinkedClone -Name $linkedName -VM $vm -ReferenceSnapshot $snapshot -VMHost $vmhost -Datastore $ds
+#Create the Full VM
+$newvm = New-VM -Name "fw.base" -VM $linkedvm -VMHost $vmhost -Datastore $ds
+#A new Snap Shot
+$newvm | new-snapshot -Name "Base"
+#Cleanup the temporary linked clone
+$linkedvm | Remove-VM
+```

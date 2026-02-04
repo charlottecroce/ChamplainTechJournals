@@ -90,7 +90,7 @@ Add-DnsServerPrimaryZone -NetworkID "10.0.17.0/24" -ReplicationScope "Domain" -D
 ```PowerShell
 Add-DnsServerResourceRecordA -Name 480-mgmt-charlotte -ZoneName charlotte.local -IPv4Address 10.0.17.100 -CreatePtr -ComputerName dc1
 Add-DnsServerResourceRecordA -Name 480-fw-charlotte -ZoneName charlotte.local -IPv4Address 10.0.17.2 -CreatePtr -ComputerName dc1
-Add-DnsServerResourceRecordA -Name vcenter.charlotte.local -ZoneName charlotte.local -IPv4Address 10.0.17.3 -CreatePtr -ComputerName dc1
+Add-DnsServerResourceRecordA -Name vcenter. -ZoneName charlotte.local -IPv4Address 10.0.17.3 -CreatePtr -ComputerName dc1
 Add-DnsServerResourceRecordA -Name dc1 -ZoneName charlotte.local -IPv4Address 10.0.17.4 -CreatePtr -ComputerName dc1
 ```
 

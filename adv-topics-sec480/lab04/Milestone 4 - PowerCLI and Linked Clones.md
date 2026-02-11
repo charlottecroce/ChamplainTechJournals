@@ -95,3 +95,7 @@ $newvm | new-snapshot -Name "Base"
 $linkedvm | Remove-VM
 ```
 
+## issues
+- creating a snapshot in esxi wont update in vcenter. probably a fix but easier to just snapshot in vcenter
+- forgot to snapshot base xubuntu--- had to recreate one
+

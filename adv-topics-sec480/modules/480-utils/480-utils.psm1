@@ -1,3 +1,8 @@
+#
+# 480-utils.psm1
+# vsphere automation functions for sec480
+#
+
 function Install-PowerCLI(){
     if(Get-Module VMware.PowerCLI -ListAvailable){
         Write-Host "PowerCLI Module already installed"
@@ -12,6 +17,8 @@ function 480Banner(){
     Write-Host "hello sec480!"
 }
 
+# connect to the vcenter server (vcenter.charlotte.local)
+# checks if already connected and authenticated to server
 function 480Connect([string] $server){
 
     $conn = $global:DefaultVIerver
@@ -25,6 +32,7 @@ function 480Connect([string] $server){
 
 }
 
+# gets default congiruations from 480.json file
 Function Get-480Config([string] $config_path)
 {
     Write-Host "Reading " $config_path
@@ -39,7 +47,8 @@ Function Get-480Config([string] $config_path)
     return $conf
 }
 
-
+# returns a vcenter VM object, gives user a selection of VMs to 
+# chose from, depending on which inventory folder is given (e.g. BASEVM folder)
 Function Select-VM([string] $folder){
     $selected_vm=$null
     try{
@@ -62,6 +71,7 @@ Function Select-VM([string] $folder){
 }
 
 
+# creates a new linked clone from base image
 Function New-VMLinkedClone(){
     $conf = Get-480Config -config_path "480.json"
     #Source VM
@@ -77,6 +87,7 @@ Function New-VMLinkedClone(){
     return $linkedvm
 }
 
+# creates a new full clone from base image
 Function New-VMClone(){
     $conf = Get-480Config -config_path "480.json"
     #Source VM
@@ -87,7 +98,6 @@ Function New-VMClone(){
     $linkedname = "{0}.linked" -f $vm.name
     #Create the tempory VM
     $linkedvm = New-VM -LinkedClone -Name $linkedName -VM $vm -ReferenceSnapshot $snapshot -VMHost $vmhost -Datastore $ds
-
     #Create the Full VM
     $clonedvmname = $linkedvm.name.Replace(".linked", ".clone").ToString()
     $newvm = New-VM -Name $clonedvmname -VM $linkedvm -VMHost $vmhost -Datastore $ds

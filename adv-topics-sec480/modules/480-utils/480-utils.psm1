@@ -59,7 +59,10 @@ Function Select-VM([string] $folder){
             $index+=1;
         }
         $pick_index = Read-Host "select an index number [x]"
-        #TODO: errror handling invalid input
+        if ($pick_index -lt 1 -or $pick_index -gt $vms.Count) {
+            Write-Host -ForegroundColor Red "Error: Index must be between 1 and $($vms.Count)"
+            return $null
+        }
         $selected_vm = $vms[$pick_index - 1]
         Write-Host "you selected: " $selected_vm.name
 

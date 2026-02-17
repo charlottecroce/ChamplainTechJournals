@@ -1,0 +1,33 @@
+root:$6$.hYQb1oC3mGrFp.j$/2x0kZqNYgsoLb/J0sRT/s2yo6ClullHkdWoiIWQjJSDCWR4rA0KX6N/4NKx/YeiNqZPODGGOBsBmdgYqM7Ma0:0:0:root:/root:/bin/bash
+bin:*:1:1:bin:/bin:/sbin/nologin
+daemon:*:2:2:daemon:/sbin:/sbin/nologin
+adm:*:3:4:adm:/var/adm:/sbin/nologin
+lp:*:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:*:5:0:sync:/sbin:/bin/sync
+shutdown:*:6:0:shutdown:/sbin:/sbin/shutdown
+halt:*:7:0:halt:/sbin:/sbin/halt
+mail:*:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:*:11:0:operator:/root:/sbin/nologin
+games:*:12:100:games:/usr/games:/sbin/nologin
+ftp:*:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:*:65534:65534:Kernel Overflow User:/:/sbin/nologin
+dbus:!!:81:81:System message bus:/:/sbin/nologin
+systemd-coredump:!!:999:997:systemd Core Dumper:/:/sbin/nologin
+systemd-resolve:!!:193:193:systemd Resolver:/:/sbin/nologin
+tss:!!:59:59:Account used for TPM access:/dev/null:/sbin/nologin
+polkitd:!!:998:996:User for polkitd:/:/sbin/nologin
+libstoragemgmt:!!:997:994:daemon account for libstoragemgmt:/var/run/lsm:/sbin/nologin
+sssd:!!:996:992:User for sssd:/:/sbin/nologin
+cockpit-ws:!!:995:991:User for cockpit web service:/nonexisting:/sbin/nologin
+cockpit-wsinstance:!!:994:990:User for cockpit-ws instances:/nonexisting:/sbin/nologin
+chrony:!!:993:989::/var/lib/chrony:/sbin/nologin
+sshd:!!:74:74:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+apache:!!:48:48:Apache:/usr/share/httpd:/sbin/nologin
+deployer:$6$WdKGWeeC/v3X8UvO$Ex5Y1mLPIjVBrZzmEUGebprZR0q3t9FzamaMMNP6nx5arY3hJ9nq7BpiAMesflevQwWX4WoT.Kkzt3/C7P/Sa/:1000:1000::/home/deployer:/bin/bash
+peregrin.took:$6$qIWlkSUTixsoFc/H$kKz7zMyQm6CAtVi9HN0/a5rYY7YtdQsQPR2UUMsm63BmitXGa1f4UaH3tQBLDeQzbmRcWnEW9S59/n5W8FT9z0:1001:1001::/home/peregrin.took:/bin/bash
+samwise.gamgee:$6$rounds=1000$HlixUNwkSwaHupOU$E.2YaQv7yR4vdA/ggUw9QbAr55w58UzybYh3hXjaSY7H3mNdBqvDK/FranD3iFgxM5hXHG1D8XR3eoyJMrxS8.:1002:1002::/home/samwise.gamgee:/bin/bash
+bilbo.baggins:$6$rounds=1000$zN5Ove6c.4bAM84F$B3nDW29weVqSD3new8PzqCaAjgKzLX7ZpJtdEVBb0HgoxLx4LiKJebyHb5IwUSIRPrJZMNdkBxUrbK9bSUbkC0:1003:1003::/home/bilbo.baggins:/bin/bash
+frodo.baggins:$6$rounds=1000$umRaPwsQTNQ2S2xv$K7KTg537sDsB5q3SfQJJTxrYGPuY0mFxo2Wmcx4ZtY62Gw97y.gbuHt6bxMocQDlN6RAMr3ndakyuJALQHfbQ0:1004:1004::/home/frodo.baggins:/bin/bash
+gandalf.grey:$6$rounds=1000$LneEppAvGXMREfOV$vkOzEXBjXOD0XK3YJUgd5.nfQVq/gM3BEbKbARZu/BNQNi6Uu3cie5JvOIhkJ5A6mKGUIGKpUG3gFi4KE6xXW.:1005:1005::/home/gandalf.grey:/bin/bash
+boromir:$6$rounds=1000$UvKLGar/VWtqFGCE$DcfWOzRolV4T6GABOUOFFXfg4lpmD4mKriKX1n5sN3ugJSY3nnicjuGfbT9hgEeo.b6dpWSitnK3z3jjBQ2w//:1006:1006::/home/boromir:/bin/bash
+galadriel:$6$rounds=1000$poPWvLT/CfA/sxS/$lHbu1oMqRV2aM18fkFPbJw25U2.POqhonSmaUpbzPIPVKl2IxS86Qq8q9v3fYu5Y6qlWwbmqekbL3g1vtPmlQ/:1007:1007::/home/galadriel:/bin/bash

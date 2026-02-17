@@ -22,5 +22,8 @@ john --users=gandalf,boromir,galadriel --worlist=/usr/share/wordlists/rockyou.tx
   - 6 = Hybrid Wordlist + Mask
   - 7 = Hybrid Mask + Wordlist
 ```
-sudo hashcat -m 1800 -a 0 -o cracked.txt unshadowed.txt small.txt
+sudo hashcat -m 1800 -a 0 -o cracked.txt unshadowed.txt wordlist.txt
+
+e.g.
+sudo hashcat -m 1800 -a 0 -o gandalf_password.txt gandalf.grey_hash.txt /usr/share/wordlists/rockyou.txt 
 ```

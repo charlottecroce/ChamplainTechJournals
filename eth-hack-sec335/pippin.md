@@ -42,3 +42,12 @@ MariaDB [mediawiki]> select user_name,user_password from user;
 
 <img width="577" height="62" alt="image" src="https://github.com/user-attachments/assets/cb3f3679-f682-4335-a410-c65a7e998f0a" />
 
+- format the hash to be hashcat-able format
+
+<img width="1032" height="59" alt="image" src="https://github.com/user-attachments/assets/a9c904b1-4203-4730-8174-ad9ef8fd3f81" />
+
+- crack this using hashcat
+```
+sudo hashcat -m 12100 pippin-hash3.txt p-rockyou.txt 
+```
+

@@ -1,0 +1,1 @@
+gandalf.grey:$6$rounds=1000$LneEppAvGXMREfOV$vkOzEXBjXOD0XK3YJUgd5.nfQVq/gM3BEbKbARZu/BNQNi6Uu3cie5JvOIhkJ5A6mKGUIGKpUG3gFi4KE6xXW.:1005:1005::/home/gandalf.grey:/bin/bash

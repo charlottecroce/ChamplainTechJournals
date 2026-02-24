@@ -36,3 +36,9 @@ MariaDB [mediawiki]> select user_name,user_password from user;
 | Inf       | :pbkdf2:sha512:30000:64:JFJwUOwbO8d3VwUiEII+ig==:iREvWYmj5884HrJILCl68yKPBulxA5Mnhr1kexWY0CJ/+YMvQtSXn7dEHS9C7RX+SN0TWQ2hjZ21u7RE3mfC3A== |
 +-----------+-------------------------------------------------------------------------------------------------------------------------------------------+
 ```
+
+- now we have to crack these hashes (probably Pippin is the one of most use)
+- we got a hint that the password starts with 'p', so we create a new wordlist out of rockyou.txt:
+
+<img width="577" height="62" alt="image" src="https://github.com/user-attachments/assets/cb3f3679-f682-4335-a410-c65a7e998f0a" />
+

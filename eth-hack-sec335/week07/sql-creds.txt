@@ -1,0 +1,6 @@
+## Database settings
+$wgDBtype = "mysql";
+$wgDBserver = "localhost";
+$wgDBname = "mediawiki";
+$wgDBuser = "root";
+$wgDBpassword = "1Tookie";

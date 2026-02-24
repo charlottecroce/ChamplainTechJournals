@@ -1,0 +1,8 @@
+MariaDB [mediawiki]> select user_name,user_password from user;
++-----------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| user_name | user_password                                                                                                                             |
++-----------+-------------------------------------------------------------------------------------------------------------------------------------------+
+| Pippin    | :pbkdf2:sha512:30000:64:7zMbdjXKrFDDq4CRF5q9ow==:49ImFWdWRVz2dCDsJPj+P0Xovz153VenjKk7npuK7u5xgo21IUh+eY0QH8fQxdH/Cjx3zxZyQcfNChAnP11GNg== |
+| Dyl       | :pbkdf2:sha512:30000:64:XbRxguyY4MYnH8axmhkcoA==:ST33JfNbNnWY8oDNWPWsxMgCzIg6Dq53XkAaxEe0yk5SvKWPkATGVj9Qs4k1mkPoFa1yfXYCTu7SYOXiTrgy5g== |
+| Inf       | :pbkdf2:sha512:30000:64:JFJwUOwbO8d3VwUiEII+ig==:iREvWYmj5884HrJILCl68yKPBulxA5Mnhr1kexWY0CJ/+YMvQtSXn7dEHS9C7RX+SN0TWQ2hjZ21u7RE3mfC3A== |
++-----------+-------------------------------------------------------------------------------------------------------------------------------------------+

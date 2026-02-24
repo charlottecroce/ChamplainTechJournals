@@ -1,0 +1,15 @@
+┌──(champuser㉿kali)-[~/ChamplainTechJournals/eth-hack-sec335/week07]
+└─$ sudo nmap 10.0.5.25 -sS -sV -p-
+Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-24 10:18 EST
+Nmap scan report for 10.0.5.25
+Host is up (0.00095s latency).
+Not shown: 65383 filtered tcp ports (no-response), 149 filtered tcp ports (host-prohibited)
+PORT   STATE SERVICE VERSION
+21/tcp open  ftp     vsftpd 3.0.2
+22/tcp open  ssh     OpenSSH 7.4 (protocol 2.0)
+80/tcp open  http    Apache httpd 2.4.6 ((CentOS) PHP/7.3.31)
+Service Info: OS: Unix
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 151.29 seconds
+                                                              

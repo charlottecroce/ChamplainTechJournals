@@ -109,3 +109,12 @@ Function New-VMClone(){
     #Cleanup the temporary linked clone
     $linkedvm | Remove-VM
 }
+
+
+function New-Network([string]$switch, [string]$portgroup){
+    $conf = Get-480Config -config_path "480.json"
+    $vmhost = Get-VMHost -Name $conf.esxi_host
+    New-VirtualSwitch -VMHost $vmhost -Name $switch -NumPorts 128
+    New-VirtualPortGroup -VirtualSwitch (Get-VirtualSwitch -Name $switch) -Name $portgroup
+}
+

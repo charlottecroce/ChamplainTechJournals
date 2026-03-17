@@ -18,8 +18,23 @@ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
 22(ssh), 443(https), and 3389(rdp). target is using windows OS
 
 ## Discovered Vulnerability
+<img width="793" height="599" alt="image" src="https://github.com/user-attachments/assets/d31c4953-2227-45a0-952c-ce9db879cd20" />
+
+potentially can use a SQLi attack
+
 ## How you achieved a foothold
+
+```
+1234' or 1=1;
+```
+i tried the simplest SQLi attack (or 1=1 exploit) and it worked
+
+<img width="1050" height="381" alt="image" src="https://github.com/user-attachments/assets/ae6ff32d-756c-4f90-ab11-2a6047be3f0b" />
+
+
 ## How you achieved root/Administrative level compromise
+
+
 ## User Flag
 ## Root Flag
 ## How might the vulnerabilities be mitigated by the systems administrator and developer?

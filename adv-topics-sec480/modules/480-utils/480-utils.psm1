@@ -118,3 +118,45 @@ function New-Network([string]$switch, [string]$portgroup){
     New-VirtualPortGroup -VirtualSwitch (Get-VirtualSwitch -Name $switch) -Name $portgroup
 }
 
+function Get-IP ([string]$vmname){
+#    $vm = Select-VM
+    $vm = Get-VM -Name $vmname
+    $hostname = $vm.Guest.Hostname
+    $ip = $vm.Guest.IPAddress[0]
+    $first_adapter = (Get-NetworkAdapter -VM $vm)[0]
+    $mac = $first_adapter.MacAddress
+
+    Write-Host "VM: $hostname"
+    Write-Host "IP: " $ip
+    Write-Host "MAC: " $mac
+}
+
+function Start-VM2 ([string]$vmname){
+    $vm = Get-VM -Name $vmname
+    Start-VM -VM $vm
+}
+
+function Stop-VM2 ([string]$vmname){
+    $vm = Get-VM -Name $vmname
+    Stop-VM -VM $vm
+}
+
+function Set-Network ([string]$vmname, [string]$networkname){
+    $vm = Get-VM -Name $vmname
+    $adapters = Get-NetworkAdapter -VM $vm 
+
+    $index = 1
+    foreach($adapter in $adapters){
+        Write-Host [$index] $adapter.name
+        $index+=1;
+    }
+    $pick_index = Read-Host "select an index number [x]"
+    if ($pick_index -lt 1 -or $pick_index -gt $adapters.Count) {
+        Write-Host -ForegroundColor Red "Error: Index must be between 1 and $($adapters.Count)"
+        return $null
+    }
+    $selected_adapter = $adapters[$pick_index - 1]
+    Write-Host "you selected: " $selected_adapter.name
+
+    Set-NetworkAdapter -NetworkAdapter $selected_adapter -NetworkName $networkname
+}

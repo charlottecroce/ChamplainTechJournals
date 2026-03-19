@@ -110,7 +110,7 @@ Function New-VMClone(){
     $linkedvm | Remove-VM
 }
 
-
+# create a new virtual network. args: vswitch name and portgroup name
 function New-Network([string]$switch, [string]$portgroup){
     $conf = Get-480Config -config_path "480.json"
     $vmhost = Get-VMHost -Name $conf.esxi_host
@@ -118,8 +118,8 @@ function New-Network([string]$switch, [string]$portgroup){
     New-VirtualPortGroup -VirtualSwitch (Get-VirtualSwitch -Name $switch) -Name $portgroup
 }
 
+# get IP,hostname,mac of first net adapter
 function Get-IP ([string]$vmname){
-#    $vm = Select-VM
     $vm = Get-VM -Name $vmname
     $hostname = $vm.Guest.Hostname
     $ip = $vm.Guest.IPAddress[0]
@@ -131,16 +131,19 @@ function Get-IP ([string]$vmname){
     Write-Host "MAC: " $mac
 }
 
+# custom start VM function
 function Start-VM2 ([string]$vmname){
     $vm = Get-VM -Name $vmname
     Start-VM -VM $vm
 }
 
+# custom stop VM function
 function Stop-VM2 ([string]$vmname){
     $vm = Get-VM -Name $vmname
     Stop-VM -VM $vm
 }
 
+# assign a network adapter from a VM to a network
 function Set-Network ([string]$vmname, [string]$networkname){
     $vm = Get-VM -Name $vmname
     $adapters = Get-NetworkAdapter -VM $vm 
@@ -160,3 +163,4 @@ function Set-Network ([string]$vmname, [string]$networkname){
 
     Set-NetworkAdapter -NetworkAdapter $selected_adapter -NetworkName $networkname
 }
+

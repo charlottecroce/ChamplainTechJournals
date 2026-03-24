@@ -110,11 +110,57 @@ Function New-VMClone(){
     $linkedvm | Remove-VM
 }
 
-
+# create a new virtual network. args: vswitch name and portgroup name
 function New-Network([string]$switch, [string]$portgroup){
     $conf = Get-480Config -config_path "480.json"
     $vmhost = Get-VMHost -Name $conf.esxi_host
     New-VirtualSwitch -VMHost $vmhost -Name $switch -NumPorts 128
     New-VirtualPortGroup -VirtualSwitch (Get-VirtualSwitch -Name $switch) -Name $portgroup
+}
+
+# get IP,hostname,mac of first net adapter
+function Get-IP ([string]$vmname){
+    $vm = Get-VM -Name $vmname
+    $hostname = $vm.Guest.Hostname
+    $ip = $vm.Guest.IPAddress[0]
+    $first_adapter = (Get-NetworkAdapter -VM $vm)[0]
+    $mac = $first_adapter.MacAddress
+
+    Write-Host "VM: $hostname"
+    Write-Host "IP: " $ip
+    Write-Host "MAC: " $mac
+}
+
+# custom start VM function
+function Start-VM2 ([string]$vmname){
+    $vm = Get-VM -Name $vmname
+    Start-VM -VM $vm
+}
+
+# custom stop VM function
+function Stop-VM2 ([string]$vmname){
+    $vm = Get-VM -Name $vmname
+    Stop-VM -VM $vm
+}
+
+# assign a network adapter from a VM to a network
+function Set-Network ([string]$vmname, [string]$networkname){
+    $vm = Get-VM -Name $vmname
+    $adapters = Get-NetworkAdapter -VM $vm 
+
+    $index = 1
+    foreach($adapter in $adapters){
+        Write-Host [$index] $adapter.name
+        $index+=1;
+    }
+    $pick_index = Read-Host "select an index number [x]"
+    if ($pick_index -lt 1 -or $pick_index -gt $adapters.Count) {
+        Write-Host -ForegroundColor Red "Error: Index must be between 1 and $($adapters.Count)"
+        return $null
+    }
+    $selected_adapter = $adapters[$pick_index - 1]
+    Write-Host "you selected: " $selected_adapter.name
+
+    Set-NetworkAdapter -NetworkAdapter $selected_adapter -NetworkName $networkname
 }
 

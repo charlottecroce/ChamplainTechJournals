@@ -1,5 +1,0 @@
-[elastic]
-10.0.17.101 hostname=elastic mac=00:50:56:83:fd:a3 wan_ip_int=10.0.17.200/24 ip=10.0.17.210 nameserver=10.0.17.4 gateway=10.0.17.2
-
-[elastic:vars]
-ansible_python_interpreter=/usr/bin/python3

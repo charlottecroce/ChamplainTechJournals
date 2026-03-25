@@ -1,0 +1,13 @@
+
+vyos:
+  hosts:
+    10.0.17.101:
+      hostname: elastic
+      mac: 00:50:56:83:fd:a3
+      ip: 10.0.17.210
+      nameserver: 10.0.17.4
+      gateway: 10.0.17.2
+
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+    ansible_connection: network_cli

@@ -1,0 +1,7 @@
+# this playbook performs the initial configuration of the blue5-fw
+- name: elastic config
+  hosts: elastic
+  vars_prompt:
+
+
+  tasks:

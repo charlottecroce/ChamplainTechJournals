@@ -132,3 +132,11 @@ python3 -c 'import pty; pty.spawn("/bin/bash")'
 user flag: "82745644-c7f3-4250-acba-aa453abb2249"
 
 
+
+## root flag
+
+once you get gandalf access, simp1y `sudo su` to become root
+
+<img width="790" height="288" alt="image" src="https://github.com/user-attachments/assets/68b4390c-8951-4b08-9646-3709c8e4338f" />
+
+root flag: "22815793-a31c-42e5-ab46-a42241152c26"

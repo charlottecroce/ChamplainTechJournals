@@ -19,14 +19,15 @@ function 480Banner(){
 
 # connect to the vcenter server (vcenter.charlotte.local)
 # checks if already connected and authenticated to server
-function 480Connect([string] $server){
+function 480Connect(){
+    $conf = Get-480Config -config_path "480.json"
 
     $conn = $global:DefaultVIerver
     if ($conn){
         $msg = "already connected to: {0}" -f $conn
         Write-Host -ForegroundColor Green $msg
     }else{
-        $conn = Connect-VIServer -Server $server
+        $conn = Connect-VIServer -Server $conf.vcenter_server
         #if this fails, let Connect-VIServer handles errors
     }
 

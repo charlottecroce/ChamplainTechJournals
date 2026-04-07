@@ -11,7 +11,7 @@
       file:
         path: "/home/{{ ansible_user }}/.ssh/authorized_keys"
         state: touch # creates file if it doesn't exist
-        mode: 0644
+        mode: 0644 # linux permissions: -rw-r--r--
 
     - name: copy over key block and append to authorized_keys
       blockinfile: # inserts/updates a block of text in a file
@@ -20,12 +20,12 @@
 
     - name: create sudoers dropin file for 480
       file:
-        path: /etc/sudoers.d/480
+        path: /etc/sudoers.d/480 # this is where sudo configuration exists. we need to edit it to give deployer sudo privileges. this task is simply making sure the file exists
         state: touch
         mode: 0440
       become: yes # elevate to root via sudo. only applies for this task
 
-    - name: create a drop in entry in /etc/sudoers.d/480
+    - name: create a drop in entry in /etc/sudoers.d/480 # add deployer to sudo group with passwordless login
       blockinfile:
         dest: /etc/sudoers.d/480
         block: "{{ ansible_user}}   All=(ALL)   NOPASSWD: ALL" # grants passwordless sudo to ansible_user
@@ -45,10 +45,10 @@
     - name: run nmcli
       nmcli: # nmcli module, manages networkmanager connections
         conn_name: "{{device}}" # network adapter
-        ip4: "{{lan_ip}}/24"
-        gw4: "{{gateway}}"
+        ip4: "{{lan_ip}}/24" # set static ip
+        gw4: "{{gateway}}" # set default gateway
         state: present # check if connection profile exists
-        type: ethernet
+        type: ethernet # as opposed to wireless or serial
         dns4:
           - "{{name_server}}" # dns server
           - "{{gateway}}" # backup dns is to go to gateway

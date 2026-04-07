@@ -132,6 +132,13 @@ function Get-IP ([string]$vmname){
     Write-Host "MAC: " $mac
 }
 
+function Get-IP-Rocky (){
+    Get-IP "rocky.base.linked-1"
+    Get-IP "rocky.base.linked-2"
+    Get-IP "rocky.base.linked-3"
+}
+
+
 # custom start VM function
 function Start-VM2 ([string]$vmname){
     $vm = Get-VM -Name $vmname

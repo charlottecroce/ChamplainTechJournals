@@ -36,16 +36,18 @@
         line: '127.0.1.1 {{ hostname }}'
       become: yes
     - name: run nmcli
-      nmcli:
-        conn_name: "{{device}}"
+      nmcli: # nmcli module, manages networkmanager connections
+        conn_name: "{{device}}" # network adapter
         ip4: "{{lan_ip}}/24"
         gw4: "{{gateway}}"
-        state: present
+        state: present # check if connection profile exists
         type: ethernet
         dns4:
-          - "{{name_server}}"
-          - "{{gateway}}"
-        method4: manual
+          - "{{name_server}}" # dns server
+          - "{{gateway}}" # backup dns is to go to gateway
+        method4: manual # static ip
+      become: yes 
+
+    - name: bounce the box # reboots the machine to apply network and hostname changes
+      shell: "sleep 5 && shutdown -r" # sleep 5 gives ansible time to finish before the connection drops. if not, asnible will be left hanging
       become: yes
-      async: 10
-      poll: 0

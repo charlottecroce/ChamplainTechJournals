@@ -1,19 +1,19 @@
-linux:
+linux: # top-level group name
   children:
-    rocky:
+    rocky: # subgroup for rocky linux
       hosts:
-        10.0.5.77:
-          hostname: rocky.base.linked-1
-          lan_ip: 10.0.5.10
+        10.0.5.77: # ssh ip of first rocky host, is currently it's dhcp address
+          hostname: rocky.base.linked-1 # hostname to assign to vm
+          lan_ip: 10.0.5.10 # static lan ip to configure via nmcli
         10.0.5.76:
           hostname: rocky.base.linked-2
           lan_ip: 10.0.5.11
         10.0.5.75:
           hostname: rocky.base.linked-3
           lan_ip: 10.0.5.12
-      vars:
-        device: ens33
-    ubuntu:
+      vars: # rocky subgroup variables
+        device: ens33 # interface name on rocky machines
+    ubuntu: # subgroup for ubuntu linux
       hosts:
         10.0.5.78:
           hostname: ubuntu-1
@@ -21,15 +21,15 @@ linux:
         10.0.5.79:
           hostname: ubuntu-2
           lan_ip: 10.0.5.31
-      vars:
-        device: ens192
+      vars: # ubuntu subgroup variables
+        device: ens192 # interface name on ubuntu machines
 
-  vars:
-    public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOA4J7Iunya7x2vfz/7eY4b5k+1hv7mtihUaKmwpTUTz deployer"
-    ansible_user: charlotte
-    prefix: 24
-    gateway: 10.0.5.2
-    name_server: 10.0.5.5
-    domain: blue5.local
+  vars: # variables for all machines
+    public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOA4J7Iunya7x2vfz/7eY4b5k+1hv7mtihUaKmwpTUTz deployer" # public key to append to authorized_keys
+    ansible_user: deployer # user ansible connects with
+    prefix: 24 # 10.0.5.0/24
+    gateway: 10.0.5.2 # blue5-fw
+    name_server: 10.0.5.5 #dns server
+    domain: blue5.local #local domain
 
 

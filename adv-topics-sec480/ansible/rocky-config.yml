@@ -1,54 +1,60 @@
 - name: rocky config 
-  hosts: rocky
+  hosts: rocky # select hosts in rocky subsection in linux.yml
   tasks:
-    - name: create the .ssh directory
-      file:
-        path: "/home/{{ ansible_user }}/.ssh"
-        state: directory
-        mode: 0700
-    - name: creathe authorized_keys file
+    - name: create the .ssh directory # this directory is where the public key needs to be stored
+      file: # ansible file module
+        path: "/home/{{ ansible_user }}/.ssh" # /home/deployer/.ssh
+        state: directory  # checks if directory exists, creates it if not
+        mode: 0700 # linux permissions: -rwx------
+
+    - name: create authorized_keys file
       file:
         path: "/home/{{ ansible_user }}/.ssh/authorized_keys"
-        state: touch
+        state: touch # creates file if it doesn't exist
         mode: 0644
+
     - name: copy over key block and append to authorized_keys
-      blockinfile:
+      blockinfile: # inserts/updates a block of text in a file
         dest: "/home/{{ ansible_user }}/.ssh/authorized_keys"
-        block: "{{ public_key }}"
+        block: "{{ public_key }}" # inserts the public_key variable as a block
+
     - name: create sudoers dropin file for 480
       file:
         path: /etc/sudoers.d/480
         state: touch
         mode: 0440
-      become: yes
+      become: yes # elevate to root via sudo. only applies for this task
+
     - name: create a drop in entry in /etc/sudoers.d/480
       blockinfile:
         dest: /etc/sudoers.d/480
-        block: "{{ ansible_user}}   All=(ALL)   NOPASSWD: ALL"
+        block: "{{ ansible_user}}   All=(ALL)   NOPASSWD: ALL" # grants passwordless sudo to ansible_user
       become: yes
-    - name: set hostname
+
+    - name: set hostname # self explanatory
       hostname:
         name: "{{hostname}}"
       become: yes
-    - name: add host to hosts file
+
+    - name: add host to hosts file # without am /etc/hosts entry, the system can't resolve its own hostname to an ip address
       lineinfile:
         path: /etc/hosts
         line: '127.0.1.1 {{ hostname }}'
       become: yes
+
     - name: run nmcli
-  # nmcli connection modify ens192 ipv4.address 10.0.5.10/24 ipv4.gateway 10.0.5.2 ipv4.dns '10.0.5.5 10.0.5.2' ipv4.method manual
-      nmcli:
-        conn_name: "{{device}}"
+      nmcli: # nmcli module, manages networkmanager connections
+        conn_name: "{{device}}" # network adapter
         ip4: "{{lan_ip}}/24"
         gw4: "{{gateway}}"
-        state: present
+        state: present # check if connection profile exists
         type: ethernet
         dns4:
-          - "{{name_server}}"
-          - "{{gateway}}"
-        method4: manual
-      become: yes
+          - "{{name_server}}" # dns server
+          - "{{gateway}}" # backup dns is to go to gateway
+        method4: manual # static ip
+      become: yes 
 
-    - name: bounce the box
-      shell: "sleep 5 && shutdown -r"
+    - name: bounce the box # reboots the machine to apply network and hostname changes
+      shell: "sleep 5 && shutdown -r" # sleep 5 gives ansible time to finish before the connection drops. if not, asnible will be left hanging
       become: yes

@@ -1,0 +1,12 @@
+- name: Create Deployer User
+  hosts: rocky
+  remote_user: root  # Log in as root first
+  become: yes
+  tasks:
+    - name: ensure deployer user exists
+      ansible.builtin.user:
+        name: deployer
+        state: present
+        shell: /bin/bash
+        groups: wheel # Adds to sudoers group on Rocky
+        append: yes

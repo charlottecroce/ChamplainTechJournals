@@ -1,24 +1,35 @@
 linux:
-  hosts:
-    children:
-      rocky:
-        hosts:
-          10.0.5.77:
-            hostname: rocky.base.linked-1
-            lan_ip: 10.0.5.10
-          10.0.5.76:
-            hostname: rocky.base.linked-2
-            lan_ip: 10.0.5.11
-          10.0.5.75:
-            hostname: rocky.base.linked-3
-            lan_ip: 10.0.5.12
-        vars:
-          device: ens192
+  children:
+    rocky:
+      hosts:
+        10.0.5.77:
+          hostname: rocky.base.linked-1
+          lan_ip: 10.0.5.10
+        10.0.5.76:
+          hostname: rocky.base.linked-2
+          lan_ip: 10.0.5.11
+        10.0.5.75:
+          hostname: rocky.base.linked-3
+          lan_ip: 10.0.5.12
+      vars:
+        device: ens33
+    ubuntu:
+      hosts:
+        10.0.5.78:
+          hostname: ubuntu-1
+          lan_ip: 10.0.5.30
+        10.0.5.79:
+          hostname: ubuntu-2
+          lan_ip: 10.0.5.31
+      vars:
+        device: ens192
 
   vars:
     public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOA4J7Iunya7x2vfz/7eY4b5k+1hv7mtihUaKmwpTUTz deployer"
-    ansible_user: deployer
+    ansible_user: charlotte
     prefix: 24
     gateway: 10.0.5.2
     name_server: 10.0.5.5
     domain: blue5.local
+
+

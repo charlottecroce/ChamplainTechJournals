@@ -138,6 +138,11 @@ function Get-IP-Rocky (){
     Get-IP "rocky.base.linked-3"
 }
 
+function Get-IP-Ubuntu (){
+    Get-IP "ubuntu-1"
+    Get-IP "ubuntu-2"
+}
+
 
 # custom start VM function
 function Start-VM2 ([string]$vmname){

@@ -17,3 +17,26 @@ Create a static route on 480-fw such that 480-WAN traffic destined to the BLUE n
 set protocols static route 10.0.5.0/24 next-hop 10.0.17.200
 ```
 
+### rocky configuration:
+first, need to create deployer users on rocky systems
+```
+PS /home/charlotte/ChamplainTechJournals/adv-topics-sec480/ansible> ansible-playbook -i ./inventories/linux.yml ./create-deployer-user-rocky.yml -u root --ask-pass -K
+```
+then run playbook
+```
+PS /home/charlotte/ChamplainTechJournals/adv-topics-sec480/ansible> ansible-playbook -i ./inventories/linux.yml ./rocky-config.yml --ask-pass -K
+```
+it will take some time and machines will restart. then they will have new static IPs and deployer public key works
+
+
+### ubuntu configuration
+first, need to create deployer users on rocky systems
+```
+PS /home/charlotte/ChamplainTechJournals/adv-topics-sec480/ansible> ansible-playbook -i ./inventories/linux.yml ./create-deployer-user-ubuntu.yml -u root --ask-pass -K
+```
+then run playbook
+```
+PS /home/charlotte/ChamplainTechJournals/adv-topics-sec480/ansible> ansible-playbook -i ./inventories/linux.yml ./ubuntu-config.yml --ask-pass -K
+```
+
+

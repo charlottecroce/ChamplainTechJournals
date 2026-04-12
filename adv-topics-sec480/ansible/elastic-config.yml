@@ -176,12 +176,21 @@
         remote_src: true
 
     - name: wait for kibana to be ready
-      ansible.builtin.pause:
-        seconds: 60
+      ansible.builtin.uri:
+        url: "http://localhost:5601/api/status"
+        method: GET
+        user: elastic
+        password: "{{ elastic_password }}"
+        force_basic_auth: true
+        status_code: 200
+      register: kibana_status
+      until: kibana_status.status == 200
+      retries: 30
+      delay: 10
 
     - name: set fleet server host
       ansible.builtin.uri:
-        url: "https://localhost:5601/api/fleet/fleet_server_hosts"
+        url: "http://localhost:5601/api/fleet/fleet_server_hosts"
         method: POST
         user: elastic
         password: "{{ elastic_password }}"
@@ -201,7 +210,7 @@
 
     - name: set elasticsearch output
       ansible.builtin.uri:
-        url: "https://localhost:5601/api/fleet/outputs"
+        url: "http://localhost:5601/api/fleet/outputs"
         method: POST
         user: elastic
         password: "{{ elastic_password }}"
@@ -239,7 +248,7 @@
 #
     - name: create agent policy
       ansible.builtin.uri:
-        url: "https://localhost:5601/api/fleet/agent_policies"
+        url: "http://localhost:5601/api/fleet/agent_policies"
         method: POST
         user: elastic
         password: "{{ elastic_password }}"
@@ -260,7 +269,7 @@
 
     - name: add system integration to agent policy
       ansible.builtin.uri:
-        url: "https://localhost:5601/api/fleet/package_policies"
+        url: "http://localhost:5601/api/fleet/package_policies"
         method: POST
         user: elastic
         password: "{{ elastic_password }}"
@@ -282,7 +291,7 @@
 
     - name: create agent enrollment token
       ansible.builtin.uri:
-        url: "https://localhost:5601/api/fleet/enrollment_api_keys"
+        url: "http://localhost:5601/api/fleet/enrollment_api_keys"
         method: POST
         user: elastic
         password: "{{ elastic_password }}"

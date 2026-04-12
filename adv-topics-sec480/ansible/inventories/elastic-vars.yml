@@ -1,13 +1,18 @@
 
-vyos:
+elastic:
   hosts:
-    10.0.17.101:
+    10.0.17.210:
       hostname: elastic
-      mac: 00:50:56:83:fd:a3
-      ip: 10.0.17.210
+      lan_ip: 10.0.17.210
       nameserver: 10.0.17.4
       gateway: 10.0.17.2
+    agent:
+      ansible_host: 10.0.17.101
 
   vars:
     ansible_python_interpreter: /usr/bin/python3
-    ansible_connection: network_cli
+    device: ens192
+    prefix: 24 # 10.0.17.0/24
+    gateway: 10.0.17.2 # 480-fw
+    name_server: 10.0.17.4 #dns server
+    domain: charlotte.local #local domain

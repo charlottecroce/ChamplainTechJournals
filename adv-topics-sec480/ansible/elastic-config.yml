@@ -1,7 +1,179 @@
-# this playbook performs the initial configuration of the blue5-fw
 - name: elastic config
   hosts: elastic
-  vars_prompt:
-
+  remote_user: charlotte
+  become: true
 
   tasks:
+#
+# configure elastic repo
+#
+    - name: Install gpg
+      ansible.builtin.apt:
+        name: gpg
+        state: present
+        update_cache: yes
+    - name: Install apt-transport-https
+      ansible.builtin.apt:
+        name: apt-transport-https
+        state: present
+        update_cache: yes
+    - name: download and de-armor GPG key
+      ansible.builtin.shell: |
+        wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+      args:
+        creates: /usr/share/keyrings/elasticsearch-keyring.gpg
+    - name: add keyring to repo list
+      ansible.builtin.shell: |
+        echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/9.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-9.x.list
+    - name: update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+#
+# install elasticsearch
+#
+    - name: install elasticsearch
+      ansible.builtin.apt:
+        name: elasticsearch
+        state: present
+    - name: deploy elasticsearch.yml configuration
+      ansible.builtin.template:
+        src: files/elastic/elasticsearch.yml.j2
+        dest: /etc/elasticsearch/elasticsearch.yml
+        owner: root
+        group: elasticsearch
+        mode: "0640"
+        backup: true
+    - name: reload systemd configuration
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+    - name: enable and start elasticsearch
+      ansible.builtin.systemd_service:
+        name: elasticsearch
+        enabled: true
+        state: started
+
+    - name: run elasticsearch-reset-password tool
+      ansible.builtin.shell: |
+        /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic -b
+      register: reset_output
+      no_log: false
+
+    - name: extract password into a variable
+      ansible.builtin.set_fact:
+        elastic_password: "{{ reset_output.stdout_lines[-1] | regex_replace('^New value: (.*)$', '\\1') }}"
+
+    - name: display the new password
+      ansible.builtin.debug:
+        msg: "the new password is {{ elastic_password }}"
+      no_log: false
+#
+# Install kibana
+#
+    - name: install kibana
+      ansible.builtin.apt:
+        name: kibana
+        state: present
+    - name: deploy kibana.yml configuration
+      ansible.builtin.template:
+        src: files/elastic/kibana.yml.j2
+        dest: /etc/kibana/kibana.yml
+        owner: root
+        group: kibana
+        mode: "0640"
+        backup: true
+    - name: reload systemd configuration
+      ansible.builtin.systemd_service:
+        daemon_reload: true
+    - name: enable and start kibana
+      ansible.builtin.systemd_service:
+        name: kibana
+        enabled: true
+        state: started
+
+    - name: create kibana enrollment token
+      ansible.builtin.shell: |
+        /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
+      register: kibana_enrollment_output
+      no_log: false
+
+    - name: extract enrollment token into a variable
+      ansible.builtin.set_fact:
+        kibana_enrollment_token: "{{ kibana_enrollment_output.stdout }}"
+
+    - name: display the enrollment token
+      ansible.builtin.debug:
+        msg: "the enrollment token is {{ kibana_enrollment_token }}"
+      no_log: false
+
+    - name: enroll kibana with elasticsearch cluster
+      ansible.builtin.shell: |
+        /usr/share/kibana/bin/kibana-setup --enrollment-token {{ kibana_enrollment_token }}
+      environment:
+        KIBANA_SETUP_SKIP_VERIFICATION: "true"
+
+    - name: restart kibana after enrollment
+      ansible.builtin.systemd_service:
+        name: kibana
+        state: restarted
+
+#
+# Fleet server
+#
+    - name: create fleet service token
+      ansible.builtin.uri:
+        url: "https://localhost:9200/_security/service/elastic/fleet-server/credential/token/fleet-token"
+        method: PUT
+        user: elastic
+        password: "{{ elastic_password }}"
+        validate_certs: false
+        headers:
+          Content-Type: "application/json"
+        status_code:
+          - 200
+          - 409
+      register: fleet_token_result
+
+    - name: extract fleet service token
+      ansible.builtin.set_fact:
+        fleet_service_token: "{{ fleet_token_result.json.token.value }}"
+
+    - name: get elasticsearch CA fingerprint
+      ansible.builtin.shell: |
+        openssl x509 -fingerprint -sha256 -in /etc/elasticsearch/certs/http_ca.crt -noout | sed 's/://g' | awk -F= '{print $2}'
+      register: ca_fingerprint_result
+
+    - name: extract CA fingerprint
+      ansible.builtin.set_fact:
+        es_ca_fingerprint: "{{ ca_fingerprint_result.stdout }}"
+
+    - name: download elastic agent
+      ansible.builtin.get_url:
+        url: "https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-9.3.3-linux-x86_64.tar.gz"
+        dest: /tmp/elastic-agent-9.3.3-linux-x86_64.tar.gz
+
+    - name: extract elastic agent
+      ansible.builtin.unarchive:
+        src: /tmp/elastic-agent-9.3.3-linux-x86_64.tar.gz
+        dest: /tmp/
+        remote_src: true
+
+    - name: install fleet server
+      ansible.builtin.shell: |
+        /tmp/elastic-agent-9.3.3-linux-x86_64/elastic-agent install \
+          --fleet-server-es=https://localhost:9200 \
+          --fleet-server-service-token={{ fleet_service_token }} \
+          --fleet-server-policy=fleet-server-policy \
+          --fleet-server-es-ca-trusted-fingerprint={{ es_ca_fingerprint }} \
+          --fleet-server-port=8220 \
+          --non-interactive \
+          --insecure
+      args:
+        creates: /opt/Elastic/Agent/elastic-agent
+
+    - name: display the elastic password (again)
+      ansible.builtin.debug:
+        msg: "the new password is {{ elastic_password }}"
+      no_log: false
+
+# reference: https://oneuptime.com/blog/post/2026-02-21-ansible-install-elasticsearch/view
+

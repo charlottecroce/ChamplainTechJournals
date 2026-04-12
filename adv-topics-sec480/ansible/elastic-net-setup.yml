@@ -1,0 +1,22 @@
+- name: elastic net setup
+  hosts: elastic
+  remote_user: charlotte
+  become: true
+
+  tasks:
+    - name: run nmcli
+      nmcli:
+        conn_name: "{{device}}"
+        ip4: "{{lan_ip}}/24"
+        gw4: "{{gateway}}"
+        state: present
+        type: ethernet
+        dns4:
+          - "{{name_server}}"
+          - "{{gateway}}"
+        method4: manual
+      become: yes 
+
+    - name: bounce the box
+      shell: "sleep 5 && shutdown -r"
+      become: yes

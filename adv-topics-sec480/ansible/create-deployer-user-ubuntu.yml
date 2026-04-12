@@ -1,5 +1,5 @@
 - name: Create Deployer User
-  hosts: ubuntu
+  hosts: elastic
   remote_user: charlotte  # Log in as root first
   become: yes
   tasks:

@@ -1,5 +1,5 @@
 - name: elastic config
-  hosts: elastic
+  hosts: 10.0.17.210
   remote_user: charlotte
   become: true
 
@@ -51,6 +51,13 @@
         name: elasticsearch
         enabled: true
         state: started
+    
+    - name: wait for elasticsearch to be ready
+      ansible.builtin.wait_for:
+        port: 9200
+        host: localhost
+        delay: 10
+        timeout: 120
 
     - name: run elasticsearch-reset-password tool
       ansible.builtin.shell: |
@@ -119,7 +126,18 @@
 #
 # Fleet server
 #
-    - name: create fleet service token
+    - name: delete existing fleet service token # if a fleet server already exists, delete it
+      ansible.builtin.uri:
+        url: "https://localhost:9200/_security/service/elastic/fleet-server/credential/token/fleet-token"
+        method: DELETE
+        user: elastic
+        password: "{{ elastic_password }}"
+        validate_certs: false
+        status_code:
+          - 200
+          - 404
+
+    - name: create fleet server token
       ansible.builtin.uri:
         url: "https://localhost:9200/_security/service/elastic/fleet-server/credential/token/fleet-token"
         method: PUT
@@ -133,7 +151,7 @@
           - 409
       register: fleet_token_result
 
-    - name: extract fleet service token
+    - name: extract fleet server token
       ansible.builtin.set_fact:
         fleet_service_token: "{{ fleet_token_result.json.token.value }}"
 
@@ -157,6 +175,52 @@
         dest: /tmp/
         remote_src: true
 
+    - name: wait for kibana to be ready
+      ansible.builtin.pause:
+        seconds: 60
+
+    - name: set fleet server host
+      ansible.builtin.uri:
+        url: "https://localhost:5601/api/fleet/fleet_server_hosts"
+        method: POST
+        user: elastic
+        password: "{{ elastic_password }}"
+        validate_certs: false
+        headers:
+          kbn-xsrf: "true"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          name: "Default"
+          host_urls:
+            - "https://10.0.17.210:8220"
+          is_default: true
+        status_code:
+          - 200
+          - 409
+
+    - name: set elasticsearch output
+      ansible.builtin.uri:
+        url: "https://localhost:5601/api/fleet/outputs"
+        method: POST
+        user: elastic
+        password: "{{ elastic_password }}"
+        validate_certs: false
+        headers:
+          kbn-xsrf: "true"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          name: "default"
+          type: "elasticsearch"
+          hosts:
+            - "https://10.0.17.210:9200"
+          is_default: true
+          is_default_monitoring: true
+        status_code:
+          - 200
+          - 409
+
     - name: install fleet server
       ansible.builtin.shell: |
         /tmp/elastic-agent-9.3.3-linux-x86_64/elastic-agent install \
@@ -170,9 +234,105 @@
       args:
         creates: /opt/Elastic/Agent/elastic-agent
 
-    - name: display the elastic password (again)
+#
+# create agent policy
+#
+    - name: create agent policy
+      ansible.builtin.uri:
+        url: "https://localhost:5601/api/fleet/agent_policies"
+        method: POST
+        user: elastic
+        password: "{{ elastic_password }}"
+        validate_certs: false
+        headers:
+          kbn-xsrf: "true"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          name: "Linux System Logs"
+          namespace: "default"
+          monitoring_enabled:
+            - logs
+            - metrics
+        status_code:
+          - 200
+      register: agent_policy_result
+
+    - name: add system integration to agent policy
+      ansible.builtin.uri:
+        url: "https://localhost:5601/api/fleet/package_policies"
+        method: POST
+        user: elastic
+        password: "{{ elastic_password }}"
+        validate_certs: false
+        headers:
+          kbn-xsrf: "true"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          name: "system"
+          namespace: "default"
+          policy_id: "{{ agent_policy_result.json.item.id }}"
+          package:
+            name: "system"
+            title: "System"
+            version: ""
+        status_code:
+          - 200
+
+    - name: create agent enrollment token
+      ansible.builtin.uri:
+        url: "https://localhost:5601/api/fleet/enrollment_api_keys"
+        method: POST
+        user: elastic
+        password: "{{ elastic_password }}"
+        validate_certs: false
+        headers:
+          kbn-xsrf: "true"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          policy_id: "{{ agent_policy_result.json.item.id }}"
+        status_code: 200
+      register: agent_enrollment_result
+
+    - name: set agent enrollment token as ansible fact
+      ansible.builtin.set_fact:
+        agent_enrollment_token: "{{ agent_enrollment_result.json.item.api_key }}"
+
+#
+# enrolling linux agent: 10.0.17.106
+#
+- name: enroll linux agent
+  hosts: agent
+  remote_user: charlotte
+  become: true
+  tasks:
+    - name: download elastic agent
+      ansible.builtin.get_url:
+        url: "https://artifacts.elastic.co/downloads/beats/elastic-agent/elastic-agent-9.3.3-linux-x86_64.tar.gz"
+        dest: /tmp/elastic-agent-9.3.3-linux-x86_64.tar.gz
+
+    - name: extract elastic agent
+      ansible.builtin.unarchive:
+        src: /tmp/elastic-agent-9.3.3-linux-x86_64.tar.gz
+        dest: /tmp/
+        remote_src: true
+
+     # hostvars['10.0.17.210'] is how to reach into the first host's facts from the second playbook
+    - name: install and enroll elastic agent
+      ansible.builtin.shell: |
+        /tmp/elastic-agent-9.3.3-linux-x86_64/elastic-agent install \
+          --url=https://10.0.17.210:8220 \
+          --enrollment-token={{ hostvars['10.0.17.210']['agent_enrollment_token'] }} \
+          --non-interactive \
+          --insecure
+      args:
+        creates: /opt/Elastic/Agent/elastic-agent
+
+    - name: display the elastic password
       ansible.builtin.debug:
-        msg: "the new password is {{ elastic_password }}"
+        msg: "the new password is {{ hostvars['10.0.17.210']['elastic_password'] }}"
       no_log: false
 
 # reference: https://oneuptime.com/blog/post/2026-02-21-ansible-install-elasticsearch/view

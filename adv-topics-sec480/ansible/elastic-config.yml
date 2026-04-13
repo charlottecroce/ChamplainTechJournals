@@ -133,6 +133,7 @@
         user: elastic
         password: "{{ elastic_password }}"
         validate_certs: false
+        force_basic_auth: true
         status_code:
           - 200
           - 404
@@ -144,6 +145,7 @@
         user: elastic
         password: "{{ elastic_password }}"
         validate_certs: false
+        force_basic_auth: true
         headers:
           Content-Type: "application/json"
         status_code:
@@ -195,6 +197,7 @@
         user: elastic
         password: "{{ elastic_password }}"
         validate_certs: false
+        force_basic_auth: true
         headers:
           kbn-xsrf: "true"
           Content-Type: "application/json"
@@ -208,24 +211,26 @@
           - 200
           - 409
 
-    - name: set elasticsearch output
+    - name: create fleet server policy
       ansible.builtin.uri:
-        url: "http://localhost:5601/api/fleet/outputs"
+        url: "http://localhost:5601/api/fleet/agent_policies"
         method: POST
         user: elastic
         password: "{{ elastic_password }}"
         validate_certs: false
+        force_basic_auth: true
         headers:
           kbn-xsrf: "true"
           Content-Type: "application/json"
         body_format: json
         body:
-          name: "default"
-          type: "elasticsearch"
-          hosts:
-            - "https://10.0.17.210:9200"
-          is_default: true
-          is_default_monitoring: true
+          id: "fleet-server-policy"
+          name: "Fleet Server Policy"
+          namespace: "default"
+          has_fleet_server: true
+          monitoring_enabled:
+            - logs
+            - metrics
         status_code:
           - 200
           - 409
@@ -253,6 +258,7 @@
         user: elastic
         password: "{{ elastic_password }}"
         validate_certs: false
+        force_basic_auth: true
         headers:
           kbn-xsrf: "true"
           Content-Type: "application/json"
@@ -274,6 +280,7 @@
         user: elastic
         password: "{{ elastic_password }}"
         validate_certs: false
+        force_basic_auth: true
         headers:
           kbn-xsrf: "true"
           Content-Type: "application/json"
@@ -296,6 +303,7 @@
         user: elastic
         password: "{{ elastic_password }}"
         validate_certs: false
+        force_basic_auth: true
         headers:
           kbn-xsrf: "true"
           Content-Type: "application/json"

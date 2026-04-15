@@ -150,7 +150,7 @@
           Content-Type: "application/json"
         status_code:
           - 200
-          - 409
+          - 409 # catches if this action was already completed
       register: fleet_token_result
 
     - name: extract fleet server token
@@ -234,6 +234,10 @@
         status_code:
           - 200
           - 409
+      register: fleet_policy_result
+      until: fleet_policy_result.status in [200, 409]
+      retries: 12
+      delay: 10
 
     - name: install fleet server
       ansible.builtin.shell: |

@@ -1,0 +1,21 @@
+windows:
+  hosts:
+    blue5-ad:
+      ansible_host: 10.0.5.80
+      hostname: blue5-ad
+      lan_ip: 10.0.5.5
+      nameserver: 10.0.17.4
+      gateway: 10.0.5.2
+
+  vars:
+    ansible_python_interpreter: C:\python-manager-26.1\python3.exe
+    discovered_interpreter_python: C:\python-manager-26.1\python3.exe
+    ansible_connection: ssh
+    ansible_user: Administrator
+    ansible_become: no
+    ansible_remote_tmp: 'C:\Users\deployer\AppData\Local\Temp'
+    ansible_shell_type: powershell
+    ansible_shell_executable: powershell
+
+#ansible-config init --disabled > ansible.cfg
+

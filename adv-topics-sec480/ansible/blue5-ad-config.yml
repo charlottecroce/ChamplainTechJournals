@@ -1,0 +1,5 @@
+- name: blue5-ad config 
+  hosts: blue5-ad
+  tasks:
+    - name: Ping Windows hosts
+      ansible.windows.win_ping:

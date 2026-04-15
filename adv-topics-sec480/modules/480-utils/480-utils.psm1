@@ -177,3 +177,20 @@ function Set-Network ([string]$vmname, [string]$networkname){
     Set-NetworkAdapter -NetworkAdapter $selected_adapter -NetworkName $networkname
 }
 
+
+
+function Set-Windows-IP{
+    $vm = "VM1"
+    $iptype = 'IPv4'
+    $ip = '10.0.5.5'
+    $mask = 24
+    $gateway = '10.0.5.2'
+    $dnsserver = '10.0.5.2'
+
+    $GetAdapter = Get-NetAdapter
+    $SetAdapter = $GetAdapter | New-NetIPAddress -AddressFamily $iptype -IPAddress $ip -PrefixLength $mask -DefaultGateway $gateway
+    $GetAdapter | Set-DnsClientServerAddress -ServerAddresses $dnsserver
+
+# https://community.broadcom.com/vmware-cloud-foundation/discussion/invoke-vmscript-to-set-ip-and-dns
+}
+

@@ -1,7 +1,7 @@
 windows:
   hosts:
     blue5-ad:
-      ansible_host: 10.0.5.80
+      ansible_host: 10.0.5.5
       hostname: blue5-ad
       lan_ip: 10.0.5.5
       nameserver: 10.0.17.4

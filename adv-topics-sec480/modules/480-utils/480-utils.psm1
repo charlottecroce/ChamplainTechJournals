@@ -180,7 +180,7 @@ function Set-Network ([string]$vmname, [string]$networkname){
 
 
 function Set-Windows-IP {
-    $vm         = "dc-blue1"
+    $vm         = "blue5-ad"
     $iptype     = "IPv4"
     $ip         = "10.0.5.5"
     $mask       = "255.255.255.0"

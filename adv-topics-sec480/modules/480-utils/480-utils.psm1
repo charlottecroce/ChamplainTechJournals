@@ -179,18 +179,23 @@ function Set-Network ([string]$vmname, [string]$networkname){
 
 
 
-function Set-Windows-IP{
-    $vm = "VM1"
-    $iptype = 'IPv4'
-    $ip = '10.0.5.5'
-    $mask = 24
-    $gateway = '10.0.5.2'
-    $dnsserver = '10.0.5.2'
+function Set-Windows-IP {
+    $vm         = "dc-blue1"
+    $iptype     = "IPv4"
+    $ip         = "10.0.5.5"
+    $mask       = "255.255.255.0"
+    $gateway    = "10.0.5.2"
+    $dnsserver  = "10.0.5.2"
+    $interface  = "Ethernet0"
 
-    $GetAdapter = Get-NetAdapter
-    $SetAdapter = $GetAdapter | New-NetIPAddress -AddressFamily $iptype -IPAddress $ip -PrefixLength $mask -DefaultGateway $gateway
-    $GetAdapter | Set-DnsClientServerAddress -ServerAddresses $dnsserver
+    $pass       = Read-Host "deployer password:" -AsSecureString
+    $passclear  = [System.Net.NetworkCredential]::new("", $pass).Password
 
-# https://community.broadcom.com/vmware-cloud-foundation/discussion/invoke-vmscript-to-set-ip-and-dns
+    $script = @"
+        netsh interface ip set address name="$interface" static $ip $mask $gateway
+        netsh interface ip set dns name="$interface" static $dnsserver
+"@
+
+    Invoke-VMScript -VM $vm -ScriptText $script -GuestUser "deployer" -GuestPassword $passclear -ScriptType "Bat"
+    Write-Host "$vm IP: $ip  GW: $gateway  NS: $dnsserver"
 }
-

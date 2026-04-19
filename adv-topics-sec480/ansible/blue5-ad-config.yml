@@ -1,5 +1,52 @@
 - name: blue5-ad config 
   hosts: blue5-ad
+  vars_prompt:
+    - name: admin_password
+      prompt: "set local Administrator password: "
+      private: yes
+
   tasks:
     - name: Ping Windows hosts
       ansible.windows.win_ping:
+  
+    - name: set local administrator password
+      ansible.windows.win_user:
+        name: Administrator
+        password: "{{ admin_password }}"
+        state: present
+
+    - name: set hostname
+      ansible.windows.win_hostname:
+        name: "{{ hostname }}"
+      register: hostname_set
+
+    - name: reboot after hostname change
+      ansible.windows.win_reboot:
+      when: hostname_set.reboot_required
+
+    - name: create new forest and domain
+      microsoft.ad.domain:
+        dns_domain_name: "{{ domain }}"
+        safe_mode_password: "{{ admin_password }}" # DSRM recovery password
+      register: domain_install
+
+    - name: reboot after domain creation
+      ansible.windows.win_reboot:
+        test_command: 'exit (Get-Service -Name DNS).Status -ne "Running"' # wait until dns is running before moving on
+      when: domain_install.reboot_required
+
+    - name: add dns forwarder
+      ansible.windows.win_shell: |
+        Add-DnsServerForwarder -IPAddress {{ dns_forwarder }}
+
+    - name: create ou structure
+      ansible.windows.win_shell: |
+        Import-Module ActiveDirectory
+
+        New-ADOrganizationalUnit -Name "blue5" -Path "DC=BLUE5,DC=local"
+        New-ADOrganizationalUnit -Name "Accounts" -Path "OU=blue5,DC=BLUE5,DC=local"
+        New-ADOrganizationalUnit -Name "Groups" -Path "OU=Accounts,OU=blue5,DC=BLUE5,DC=local"
+        New-ADOrganizationalUnit -Name "Computers" -Path "OU=blue5,DC=BLUE5,DC=local"
+        New-ADOrganizationalUnit -Name "Servers" -Path "OU=Computers,OU=blue5,DC=BLUE5,DC=local"
+        New-ADOrganizationalUnit -Name "Workstations" -Path "OU=Computers,OU=blue5,DC=BLUE5,DC=local"
+

@@ -6,6 +6,8 @@ windows:
       lan_ip: 10.0.5.5
       nameserver: 10.0.17.4
       gateway: 10.0.5.2
+      domain: blue5.local
+      dns_forwarder: 10.0.17.4
 
   vars:
     ansible_python_interpreter: C:\python-manager-26.1\python3.exe

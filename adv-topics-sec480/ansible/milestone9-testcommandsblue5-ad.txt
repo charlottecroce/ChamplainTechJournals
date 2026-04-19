@@ -1,0 +1,2 @@
+Get-ADGroupMember -Identity "Domain Admins"
+Get-ADOrganizationalUnit -LDAPFilter '(name=*)' -SearchBase 'OU=blue5,DC=BLUE5,DC=LOCAL' | Format-Table Name

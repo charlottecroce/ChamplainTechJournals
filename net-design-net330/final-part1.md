@@ -86,6 +86,7 @@ When complete, your network should look something like this (note that the ISP r
 
 <img width="874" height="645" alt="image" src="https://github.com/user-attachments/assets/8259092a-a3d4-432d-a38d-fe32baffda7e" />
 
+
 Connect devices with cables as required
 Configure IP address
 For routers

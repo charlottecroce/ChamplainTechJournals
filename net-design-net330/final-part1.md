@@ -86,7 +86,6 @@ When complete, your network should look something like this (note that the ISP r
 
 <img width="874" height="645" alt="image" src="https://github.com/user-attachments/assets/8259092a-a3d4-432d-a38d-fe32baffda7e" />
 
-
 Connect devices with cables as required
 Configure IP address
 For routers
@@ -119,7 +118,110 @@ Assign IP addresses from the VLAN to those workstations
 Confirm OSPF is working by pinging between VLANs
 NOTE: "sh ip route" will show you the routing tables on the distribution routers.  
 Submit working Packet Tracer File
-Submission:
 
-Subnet Table
-Packet Tracer File
+
+
+# steps
+
+|||||||
+|-|-|-|-|-|-|
+|VLAN	|#	|hosts	|Network	|GW	|GW IP|
+|Guest	|10	|600	|172.16.0.0/22	|central	|172.16.0.2|
+|Clinic	|20	|600	|172.16.4.0/22	|central	|172.16.4.2|
+|Building Controls	|30	|400	|172.16.8.0/23	|central	|172.16.8.2|
+|Psych	|40	|150	|172.16.10.0/24	|east	|172.16.10.3|
+|Counseling	|50	|150	|172.16.11.0/24	|west	|172.16.11.1|
+|Production Servers|	60	|150	|172.16.12.0/24	|central	|172.16.12.2|
+|Development Servers	|70	|150	|172.16.13.0/24	|central	|172.16.13.2|
+|Health Record Servers	|80	|150	|172.16.14.0/24	|central	|172.16.14.2|
+|Backbone	|90	|150	|172.16.15.0/24	|central	|172.16.15.2|
+
+MLS Vlans
+```
+ip routing
+vlan 10
+name Guest
+vlan 20
+name Clinic
+vlan 30
+name Building_Controls
+vlan 40
+name Psych
+vlan 50
+name Counseling
+vlan 60
+name Production_Servers
+vlan 70
+name Development_Servers
+vlan 80
+name Health_Record_Servers
+vlan 90
+name Backbone
+```
+West VLAN interfaces
+```
+interface vlan 10
+ip address 172.16.0.1 255.255.252.0
+interface vlan 20
+ip address 172.16.4.1 255.255.252.0
+interface vlan 30
+ip address 172.16.8.1 255.255.254.0
+interface vlan 40
+ip address 172.16.10.1 255.255.255.0
+interface vlan 50
+ip address 172.16.11.1 255.255.255.0
+interface vlan 60
+ip address 172.16.12.1 255.255.255.0
+interface vlan 70
+ip address 172.16.13.1 255.255.255.0
+interface vlan 80
+ip address 172.16.14.1 255.255.255.0
+interface vlan 90
+ip address 172.16.15.1 255.255.255.0
+```
+Central VLAN interfaces
+```
+interface vlan 10
+ip address 172.16.0.2 255.255.252.0
+interface vlan 20
+ip address 172.16.4.2 255.255.252.0
+interface vlan 30
+ip address 172.16.8.2 255.255.254.0
+interface vlan 40
+ip address 172.16.10.2 255.255.255.0
+interface vlan 50
+ip address 172.16.11.2 255.255.255.0
+interface vlan 60
+ip address 172.16.12.2 255.255.255.0
+interface vlan 70
+ip address 172.16.13.2 255.255.255.0
+interface vlan 80
+ip address 172.16.14.2 255.255.255.0
+interface vlan 90
+ip address 172.16.15.2 255.255.255.0
+```
+East VLAN interfaces
+```
+interface vlan 10
+ip address 172.16.0.3 255.255.252.0
+interface vlan 20
+ip address 172.16.4.3 255.255.252.0
+interface vlan 30
+ip address 172.16.8.3 255.255.254.0
+interface vlan 40
+ip address 172.16.10.3 255.255.255.0
+interface vlan 50
+ip address 172.16.11.3 255.255.255.0
+interface vlan 60
+ip address 172.16.12.3 255.255.255.0
+interface vlan 70
+ip address 172.16.13.3 255.255.255.0
+interface vlan 80
+ip address 172.16.14.3 255.255.255.0
+interface vlan 90
+ip address 172.16.15.3 255.255.255.0
+```
+
+
+
+

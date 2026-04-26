@@ -224,5 +224,162 @@ ip address 172.16.15.3 255.255.255.0
 ```
 
 
+### trunk ports
+west mls
+```
+interface f0/1
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+interface f0/4
+switchport trunk encapsulation dot1q
+switchport mode trunk
+```
+
+central mls
+```
+interface f0/2
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+interface f0/5
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+interface f0/6
+switchport trunk encapsulation dot1q
+switchport mode trunk
+```
+
+east mls
+```
+interface f0/3
+switchport trunk encapsulation dot1q
+switchport mode trunk
+
+interface f0/7
+switchport trunk encapsulation dot1q
+switchport mode trunk
+```
+
+## core switch
+```
+vlan 10
+name Guest
+vlan 20
+name Clinic
+vlan 30
+name Building_Controls
+vlan 40
+name Psych
+vlan 50
+name Counseling
+vlan 60
+name Production_Servers
+vlan 70
+name Development_Servers
+vlan 80
+name Health_Record_Servers
+vlan 90
+name Backbone
+
+interface range f0/1 - 3
+switchport mode trunk
+
+interface g0/1
+switchport mode access
+switchport access vlan 90
+```
+
+
+border router
+```
+interface g0/0
+ip address 152.16.10.1 255.255.255.0
+no shutdown
+
+# not actually connected to anything
+interface g0/1
+ip address 172.16.15.4 255.255.255.0
+```
+
+
+## edge switches
+
+west edge
+```
+vlan 10
+name Guest
+vlan 20
+name Clinic
+vlan 30
+name Building_Controls
+vlan 50
+name Counseling
+
+interface f0/4
+switchport mode trunk
+
+interface f0/8
+switchport mode access
+switchport access vlan 50
+
+interface f0/9
+switchport mode access
+switchport access vlan 20
+```
+
+central edge
+```
+vlan 10
+name Guest
+vlan 20
+name Clinic
+vlan 30
+name Building_Controls
+
+interface f0/5
+switchport mode trunk
+
+interface f0/10
+switchport mode access
+switchport access vlan 20
+```
+
+data center edge
+```
+vlan 60
+name Production_Servers
+vlan 70
+name Development_Servers
+vlan 80
+name Health_Record_Servers
+
+interface f0/6
+switchport mode trunk
+
+interface f0/11
+switchport mode access
+switchport access vlan 60
+```
+
+east edge
+```
+vlan 10
+name Guest
+vlan 20
+name Clinic
+vlan 30
+name Building_Controls
+vlan 40
+name Psych
+
+interface f0/7
+switchport mode trunk
+
+interface f0/12
+switchport mode access
+switchport access vlan 40
+```
 
 

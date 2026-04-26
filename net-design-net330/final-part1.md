@@ -163,64 +163,91 @@ West VLAN interfaces
 ```
 interface vlan 10
 ip address 172.16.0.1 255.255.252.0
+no shutdown
 interface vlan 20
 ip address 172.16.4.1 255.255.252.0
+no shutdown
 interface vlan 30
 ip address 172.16.8.1 255.255.254.0
+no shutdown
 interface vlan 40
 ip address 172.16.10.1 255.255.255.0
+no shutdown
 interface vlan 50
 ip address 172.16.11.1 255.255.255.0
+no shutdown
 interface vlan 60
 ip address 172.16.12.1 255.255.255.0
+no shutdown
 interface vlan 70
 ip address 172.16.13.1 255.255.255.0
+no shutdown
 interface vlan 80
 ip address 172.16.14.1 255.255.255.0
+no shutdown
 interface vlan 90
 ip address 172.16.15.1 255.255.255.0
+no shutdown
 ```
 Central VLAN interfaces
 ```
 interface vlan 10
 ip address 172.16.0.2 255.255.252.0
+no shutdown
 interface vlan 20
 ip address 172.16.4.2 255.255.252.0
+no shutdown
 interface vlan 30
 ip address 172.16.8.2 255.255.254.0
+no shutdown
 interface vlan 40
 ip address 172.16.10.2 255.255.255.0
+no shutdown
 interface vlan 50
 ip address 172.16.11.2 255.255.255.0
+no shutdown
 interface vlan 60
 ip address 172.16.12.2 255.255.255.0
+no shutdown
 interface vlan 70
 ip address 172.16.13.2 255.255.255.0
+no shutdown
 interface vlan 80
 ip address 172.16.14.2 255.255.255.0
+no shutdown
 interface vlan 90
 ip address 172.16.15.2 255.255.255.0
+no shutdown
 ```
 East VLAN interfaces
 ```
 interface vlan 10
 ip address 172.16.0.3 255.255.252.0
+no shutdown
 interface vlan 20
 ip address 172.16.4.3 255.255.252.0
+no shutdown
 interface vlan 30
 ip address 172.16.8.3 255.255.254.0
+no shutdown
 interface vlan 40
 ip address 172.16.10.3 255.255.255.0
+no shutdown
 interface vlan 50
 ip address 172.16.11.3 255.255.255.0
+no shutdown
 interface vlan 60
 ip address 172.16.12.3 255.255.255.0
+no shutdown
 interface vlan 70
 ip address 172.16.13.3 255.255.255.0
+no shutdown
 interface vlan 80
 ip address 172.16.14.3 255.255.255.0
+no shutdown
 interface vlan 90
 ip address 172.16.15.3 255.255.255.0
+no shutdown
 ```
 
 
@@ -383,3 +410,64 @@ switchport access vlan 40
 ```
 
 
+## ospf
+
+west mls
+```
+router ospf 1
+area 0 authentication message-digest
+network 172.16.0.0 0.0.3.255 area 0
+network 172.16.4.0 0.0.3.255 area 0
+network 172.16.8.0 0.0.1.255 area 0
+network 172.16.10.0 0.0.0.255 area 0
+network 172.16.11.0 0.0.0.255 area 0
+network 172.16.15.0 0.0.0.255 area 0
+
+interface vlan 90
+ip ospf message-digest-key 1 md5 net330
+```
+
+central mls
+```
+router ospf 1
+area 0 authentication message-digest
+network 172.16.0.0 0.0.3.255 area 0
+network 172.16.4.0 0.0.3.255 area 0
+network 172.16.8.0 0.0.1.255 area 0
+network 172.16.10.0 0.0.0.255 area 0
+network 172.16.11.0 0.0.0.255 area 0
+network 172.16.12.0 0.0.0.255 area 0
+network 172.16.13.0 0.0.0.255 area 0
+network 172.16.14.0 0.0.0.255 area 0
+network 172.16.15.0 0.0.0.255 area 0
+
+interface vlan 90
+ip ospf message-digest-key 1 md5 net330
+```
+
+east mls
+```
+router ospf 1
+area 0 authentication message-digest
+network 172.16.0.0 0.0.3.255 area 0
+network 172.16.4.0 0.0.3.255 area 0
+network 172.16.8.0 0.0.1.255 area 0
+network 172.16.10.0 0.0.0.255 area 0
+network 172.16.11.0 0.0.0.255 area 0
+network 172.16.15.0 0.0.0.255 area 0
+
+interface vlan 90
+ip ospf message-digest-key 1 md5 net330
+```
+
+border router
+```
+router ospf 1
+area 0 authentication message-digest
+network 172.16.15.0 0.0.0.255 area 0
+network 152.16.10.0 0.0.0.255 area 0
+default-information originate
+
+interface g0/0
+ip ospf message-digest-key 1 md5 net330
+```

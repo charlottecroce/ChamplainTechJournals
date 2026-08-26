@@ -13,3 +13,27 @@
 |Kali|10.3.10.99|df-3|kali:kali|
 |Ubuntu|10.3.10.117|df-3|champuser:Ch@mpl@1n!26|
 |DC02|10.3.10.211|df-4||
+
+
+## Download Velociraptor
+- https://docs.velociraptor.app/downloads/
+  - download velociraptor-v0.77.2-linux-amd64
+- move to /opt/velociraptor
+- rename to just velociraptor for convienience
+
+```
+chmod +x velociraptor
+sudo ./velocirapto config generate -i
+```
+  - Self-Signed SSL, no registry, set DNS to the IP(10.3.10.117)
+    - Creds: charlotte:FOR440!
+
+```
+./velociraptor --config server.config.yaml debian server
+apt install velociraptor-xyz.deb
+```
+- now velociraptor_server is a service you can control with systemctl
+- you can access the dashboard at https://localhost:8889
+
+
+

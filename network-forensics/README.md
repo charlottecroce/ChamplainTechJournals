@@ -1,5 +1,7 @@
 # Network Forensics
 
+**Remember to stop velociraptor client when not working on a lab**
+
 - https://prox.df.local
 
 |Host|IP|Server|Credentials|

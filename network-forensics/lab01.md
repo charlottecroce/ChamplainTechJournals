@@ -32,6 +32,19 @@ sudo ./velocirapto config generate -i
 ./velociraptor --config server.config.yaml debian server
 apt install velociraptor-xyz.deb
 ```
+
+
+
+create client config file
+
+./velociraptor --config server.config.yaml config client > client.config.yaml
+
+
+
+
+sed -e '/bind_address:/{s/127.0.0.1/10.0.3.117/}' -i /etc/velociraptor/server.config.yaml
+
+
 - now velociraptor_server is a service you can control with systemctl
 - you can access the dashboard at https://localhost:8889
 

@@ -34,19 +34,28 @@ apt install velociraptor-xyz.deb
 ```
 
 
+- now velociraptor_server is a service you can control with systemctl
+- you can access the dashboard at https://localhost:8889
 
-create client config file
+## create client config file
 
 ./velociraptor --config server.config.yaml config client > client.config.yaml
 
+copy this to the windows client
+also on the windows client download the velociraptor exe. server and client use the same downloaded file
 
+./velociraptor-xyz.exe --config ./client.config.yaml service install
 
+## on the ubuntu machine
 
 sed -e '/bind_address:/{s/127.0.0.1/10.0.3.117/}' -i /etc/velociraptor/server.config.yaml
+change GUI bind_address to 0.0.0.0
 
 
-- now velociraptor_server is a service you can control with systemctl
-- you can access the dashboard at https://localhost:8889
+remember now that this is a service the config is in /etc/velociraptor and not opt anymore
+
+
+
 
 
 

@@ -14,6 +14,15 @@
 |Ubuntu|10.3.10.117|df-3|champuser:Ch@mpl@1n!26|
 |DC02|10.3.10.211|df-4||
 
+## Sysmon Config Pusher
+
+on windows 10:
+### Download Sysmon:
+- Visit the official Sysinternals page: https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon.
+    - Download the Sysmon executable and the Sysmon Configuration file:
+    - use this config file (https://raw.githubusercontent.com/olafhartong/sysmon-modular/master/sysmonconfig.xml)
+
+
 
 ## Download Velociraptor
 - https://docs.velociraptor.app/downloads/

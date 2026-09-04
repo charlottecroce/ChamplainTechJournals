@@ -8,7 +8,7 @@ version:
   architecture: amd64
 Client:
   server_urls:
-  - https://10.3.10.117:8000/
+  - https://10.2.10.117:8000/
   ca_certificate: |
     -----BEGIN CERTIFICATE-----
     MIIDSzCCAjOgAwIBAgIQLwmU/gn5ftSpCUHfjkAbATANBgkqhkiG9w0BAQsFADAa

@@ -55,6 +55,12 @@ also on the windows client download the velociraptor exe. server and client use 
 
 ./velociraptor-xyz.exe --config ./client.config.yaml service install
 
+to copy to other windows hosts
+```
+net use \\10.2.10.10\C$ /user:localuser password
+Copy-Item .\Velociraptor \\10.2.10.10\C$\Users\localuser\Documents\ -Recurse
+```
+
 ## on the ubuntu machine
 
 sed -e '/bind_address:/{s/127.0.0.1/10.0.3.117/}' -i /etc/velociraptor/server.config.yaml

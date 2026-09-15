@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for file in extracted_files/*; do
+for file in extract_files/*; do
     fuid=$(basename "$file")
     echo "--- $fuid ---"
     grep -F "$fuid" files.log
